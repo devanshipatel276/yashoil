@@ -40,10 +40,7 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController> extends GetRe
         onWillPop: () async {
           return !await controller.checkAndCloseDrawer();
         },
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: buildDesktopWidget(),
-        ));
+        child: buildDesktopWidget());
   }
 
   @override
@@ -52,10 +49,7 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController> extends GetRe
         onWillPop: () async {
           return !await controller.checkAndCloseDrawer();
         },
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: buildPhoneWidget(),
-        ));
+        child: buildPhoneWidget());
   }
 
   @override
@@ -64,9 +58,6 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController> extends GetRe
         onWillPop: () async {
           return !await controller.checkAndCloseDrawer();
         },
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: buildTabletWidget(),
-        ));
+        child: buildTabletWidget());
   }
 }

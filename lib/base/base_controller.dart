@@ -66,6 +66,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
 
   void showLoader({required bool value}) {
     /// we have to add here code to show and hide loader
+    hideKeyboard();
     if (value) {
       Get.context?.loaderOverlay.show();
     } else {
@@ -75,6 +76,8 @@ abstract class BaseGetxController extends FullLifeCycleController {
 
   void showSnackBar({required String value}) {
     /// here we show snackbar
+    
+    hideKeyboard();
     Get.snackbar("", value,
         messageText: Text(value,
             softWrap: true,
@@ -98,6 +101,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
       switch (state) {
         case AppLifecycleState.paused:
           {
+            hideKeyboard();
             onPagePaused();
             break;
           }
@@ -108,6 +112,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
           }
         case AppLifecycleState.resumed:
           {
+            hideKeyboard();
             updateToolBar();
             onPageResumed();
             break;
@@ -127,20 +132,34 @@ abstract class BaseGetxController extends FullLifeCycleController {
     return Future.value(canPop);
   }
 
+  void hideKeyboard(){
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
   /// below are some extensions on GetNavigation
   /// please only use this methods to do navigation
   /// (if the method you want is not available here only then you can use Get. methods)
 
-  Future<V?>? toNamed<V>(String page,
-      {dynamic arguments, int? id, bool preventDuplicates = true, Map<String, String>? parameters}) async {
-    // add onPause too
-    onPagePaused();
-    shouldObserveLifeCycle = false;
-    V? pageResult = await Get.toNamed<V>(page,
-        arguments: arguments, id: id, preventDuplicates: preventDuplicates, parameters: parameters);
+  void _afterNavigation() {
+    hideKeyboard();
     shouldObserveLifeCycle = true;
     updateToolBar();
     onPageResumed();
+  }
+
+  void _beforeNavigation() {
+    hideKeyboard();
+    onPagePaused();
+    shouldObserveLifeCycle = false;
+  }
+
+  Future<V?>? toNamed<V>(String page,
+      {dynamic arguments, int? id, bool preventDuplicates = true, Map<String, String>? parameters}) async {
+    // add onPause too
+    _beforeNavigation();
+    V? pageResult = await Get.toNamed<V>(page,
+        arguments: arguments, id: id, preventDuplicates: preventDuplicates, parameters: parameters);
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -159,8 +178,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
     bool? popGesture,
     double Function(BuildContext context)? gestureWidth,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.to<V>(page,
         opaque: opaque,
         transition: transition,
@@ -174,9 +192,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         preventDuplicates: preventDuplicates,
         popGesture: popGesture,
         gestureWidth: gestureWidth);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -187,23 +203,17 @@ abstract class BaseGetxController extends FullLifeCycleController {
     bool preventDuplicates = true,
     Map<String, String>? parameters,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offNamed<V>(page,
         arguments: arguments, id: id, preventDuplicates: preventDuplicates, parameters: parameters);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
   Future<V?>? offUntil<V>(Route<V> page, RoutePredicate predicate, {int? id}) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offUntil<V>(page, predicate, id: id);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -214,12 +224,9 @@ abstract class BaseGetxController extends FullLifeCycleController {
     dynamic arguments,
     Map<String, String>? parameters,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offNamedUntil<V>(page, predicate, id: id, parameters: parameters, arguments: arguments);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -230,12 +237,9 @@ abstract class BaseGetxController extends FullLifeCycleController {
     dynamic result,
     Map<String, String>? parameters,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offAndToNamed<V>(page, arguments: arguments, id: id, result: result);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -246,13 +250,10 @@ abstract class BaseGetxController extends FullLifeCycleController {
     int? id,
     Map<String, String>? parameters,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offAllNamed<V>(newRouteName,
         predicate: predicate, arguments: arguments, id: id, parameters: parameters);
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -271,8 +272,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
     Duration? duration,
     double Function(BuildContext context)? gestureWidth,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.off<V>(page,
         opaque: opaque,
         transition: transition,
@@ -287,9 +287,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
 
     return Future.value(pageResult);
   }
@@ -309,8 +307,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
     Duration? duration,
     double Function(BuildContext context)? gestureWidth,
   }) async {
-    onPagePaused();
-    shouldObserveLifeCycle = false;
+    _beforeNavigation();
     V? pageResult = await Get.offAll<V>(page,
         predicate: predicate,
         opaque: opaque,
@@ -325,9 +322,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-    shouldObserveLifeCycle = true;
-    updateToolBar();
-    onPageResumed();
+   _afterNavigation();
 
     return Future.value(pageResult);
   }

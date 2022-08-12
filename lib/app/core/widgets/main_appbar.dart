@@ -1,6 +1,8 @@
 
 
 
+import 'package:flutter_base/app/controller/main_controller.dart';
+
 import '../../../util/exports.dart';
 import '../../../util/toolbar_model.dart';
 
@@ -46,6 +48,8 @@ class MainAppBar extends GetResponsiveView {
       return IconButton(
           onPressed: model.onDrawerIconClick ??
                   () {
+            /// to hide keyboard on click of drawer icon
+            Get.find<MainController>(tag: (MainController).toString()).hideKeyboard();
                 Scaffold.of(Get.context!).openDrawer();
               },
           icon: const Icon(Icons.menu));

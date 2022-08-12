@@ -36,9 +36,6 @@ abstract class BaseGetView<T extends BaseGetxController> extends GetView<T> {
         onWillPop: () async {
           return !await controller.checkAndCloseDrawer();
         },
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: buildView(),
-        ));
+        child: buildView());
   }
 }

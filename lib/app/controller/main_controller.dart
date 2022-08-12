@@ -17,4 +17,8 @@ class MainController extends GetxController {
     }
     this.toolBarModel.value = toolBarModel;
   }
+
+  void hideKeyboard(){
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 }

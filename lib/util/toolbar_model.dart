@@ -1,6 +1,5 @@
-import 'package:flutter_base/base/base_controller.dart';
-
 import '../../../util/exports.dart';
+import '../base/base_controller.dart';
 
 class ToolBarModel {
   bool isToolBarVisible;
@@ -10,7 +9,7 @@ class ToolBarModel {
   bool isBackVisible;
   bool isCrossVisible;
   String title;
-  BaseGetxController? navigator;
+  BaseGetxController? currentController;
 
   /// you can also add more as per your need like below
 
@@ -19,16 +18,17 @@ class ToolBarModel {
   Function()? onBackOrClose;
   Function()? onDrawerIconClick;
 
-  ToolBarModel({this.isToolBarVisible = false,
-    this.isTitleVisible = true,
-    this.isDrawerRequired = false,
-    this.isLogoVisible = false,
-    this.isBackVisible = false,
-    this.isCrossVisible = false,
-    this.navigator,
-    String? title,
-    this.onBackOrClose,
-    this.onDrawerIconClick})
+  ToolBarModel(
+      {this.isToolBarVisible = false,
+      this.isTitleVisible = true,
+      this.isDrawerRequired = false,
+      this.isLogoVisible = false,
+      this.isBackVisible = false,
+      this.isCrossVisible = false,
+      this.currentController,
+      String? title,
+      this.onBackOrClose,
+      this.onDrawerIconClick})
       : title = title ?? AppString.appName.tr;
 
   ToolBarModel copyWith({
@@ -37,10 +37,9 @@ class ToolBarModel {
     bool? isLogoVisible,
     bool? isBackVisible,
     bool? isCrossVisible,
-    BaseGetxController? navigator,
+    BaseGetxController? currentController,
     Function()? onBackOrClose,
     Function()? onDrawerIconClick,
-
   }) {
     var model = ToolBarModel();
     model.isToolBarVisible = isToolBarVisible ?? this.isToolBarVisible;
@@ -48,7 +47,7 @@ class ToolBarModel {
     model.isLogoVisible = isLogoVisible ?? this.isToolBarVisible;
     model.isBackVisible = isBackVisible ?? this.isToolBarVisible;
     model.isCrossVisible = isCrossVisible ?? this.isToolBarVisible;
-    model.navigator = navigator;
+    model.currentController = currentController;
     model.onDrawerIconClick = onDrawerIconClick;
     model.onBackOrClose = onBackOrClose;
     return model;

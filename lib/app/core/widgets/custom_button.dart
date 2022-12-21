@@ -1,104 +1,75 @@
-
+import '../../../util/common_function.dart';
+import '../../../util/common_widget.dart';
 import '../../../util/exports.dart';
 
-class CustomButton extends StatelessWidget {
-  final String title;
-  final String? image;
-  final TextStyle? titleTextStyle;
-  final Function? onTap;
-  final bool isLoading;
+// ignore: must_be_immutable
+class CustomPrimaryButton extends StatelessWidget {
   final Color backgroundColor;
-  final Color? disabledColor;
-  final Color titleColor;
-  final bool hasBorder;
-  final Color borderColor;
-  final double borderWidth;
-  final double borderRadius;
-  final bool isEnabled;
-  final double height;
-  final double width;
-  final double imageWidth;
-  final double imageHeight;
+  final EdgeInsetsGeometry padding;
+  final TextStyle? textStyle;
+  final String text;
+  final Function()? onClick;
+  final double radius;
+  final bool? toCurvedAtStart;
+  final Key? key1;
+  final String? prefixIcon;
+  final Size? prefixIconSize;
+  MaterialStateProperty<OutlinedBorder?>? shape;
 
-  const CustomButton({
-    required this.title,
-    this.image,
-    this.titleTextStyle,
-    this.onTap,
-    this.isLoading = false,
-    this.backgroundColor = AppColors.primaryColor,
-    this.disabledColor = AppColors.primaryColor,
-    this.titleColor = Colors.white,
-    this.hasBorder = false,
-    this.borderColor = AppColors.primaryColor,
-    this.borderWidth = Dimens.border_width_small,
-    this.borderRadius = Dimens.radius_small,
-    this.isEnabled = true,
-    this.height = Dimens.button_size_normal,
-    this.width = double.infinity,
-    this.imageHeight = Dimens.icon_size_xsmall,
-    this.imageWidth = Dimens.icon_size_xsmall,
-    Key? key,
-  }) : super(key: key);
+  CustomPrimaryButton(
+      {this.backgroundColor = AppColors.whiteBackGroundColor,
+      this.padding =
+          const EdgeInsets.only(left: 36, right: 36, top: 18, bottom: 18),
+      this.text = "",
+      this.onClick,
+      this.radius = 40,
+      this.key1,
+      this.textStyle,
+      this.shape,
+      this.toCurvedAtStart = false,
+      this.prefixIcon,
+      this.prefixIconSize =
+          const Size(AppConstant.suffixIconSize, AppConstant.suffixIconSize)})
+      : super(key: key1);
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-              color: borderColor,
-              width: borderWidth,
-              style: hasBorder ? BorderStyle.solid : BorderStyle.none),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        backgroundColor:
-            isEnabled && !isLoading ? backgroundColor : disabledColor,
-        textStyle: (titleTextStyle ?? AppStyles.textNormal).copyWith(color: titleColor),
-      ),
-      onPressed: isEnabled && onTap != null && !isLoading
-          ? onTap as void Function()?
-          : () {},
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: AppConstant.MAX_WIDTH),
-        height: height,
-        width: width,
-        child: Center(
-          child: isLoading
-              ? SizedBox(
-                  width: Dimens.icon_size_normal,
-                  height: Dimens.icon_size_normal,
-                  child: CircularProgressIndicator(
-                    strokeWidth: Dimens.border_width_large,
-                    valueColor:
-                        const AlwaysStoppedAnimation<Color>(Colors.black),
-                    backgroundColor: Colors.black.withOpacity(0.2),
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (image != null) ...[
-                      Container(
-                        width: imageWidth,
-                        height: imageHeight,
-                        child: Image.asset(
-                          image!,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: Dimens.space_normal,
-                      ),
-                    ],
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(title,
-                          style: (titleTextStyle ?? AppStyles.textNormal).apply(color: titleColor)),
-                    ),
-                  ],
-                ),
+    return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          shape: shape ??
+              MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                borderRadius: ((toCurvedAtStart ?? false)
+                    ? const BorderRadiusDirectional.only(
+                        topStart: Radius.circular(18.0),
+                        bottomStart: Radius.circular(18.0),
+                      )
+                    : BorderRadius.circular(radius)),
+              ))),
+      onPressed: () {
+        hideKeyboard();
+        onClick?.call();
+      },
+      child: Padding(
+        padding: padding,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: prefixIcon.isNotNullOrEmpty,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0, left: 0),
+                child: loadAsset(path: prefixIcon ?? "", size: prefixIconSize),
+              ),
+            ),
+            Text(
+              text,
+              style: textStyle ??
+                  AppStyles.textRegular
+                      .copyWith(color: AppColors.purpleTextColor),
+            ),
+          ],
         ),
       ),
     );

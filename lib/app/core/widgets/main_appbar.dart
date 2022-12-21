@@ -1,70 +1,52 @@
-
-
-
-import 'package:flutter_base/app/controller/main_controller.dart';
-
 import '../../../util/exports.dart';
-import '../../../util/toolbar_model.dart';
+import '../../controller/main_controller.dart';
 
 /// use this class to show AppBar at app level(Global or Shared AppBar)
 /// ( to be used in MyApp Widget)
 
 class MainAppBar extends GetResponsiveView {
-  MainAppBar({required this.model, Key? key}) : super(key: key);
-  final ToolBarModel model;
+  MainAppBar({Key? key}) : super(key: key);
 
   @override
-  Widget desktop() {
-    return AppBar(
-      title: model.isTitleVisible
-          ? Text('${model.title} In Desktop')
-          : (model.isLogoVisible ? const FlutterLogo() : null),
-      leading: getLeading()
-    );
-  }
-
-  @override
-  Widget tablet() {
-      return AppBar(
-        title: model.isTitleVisible
-            ? Text('${model.title} In Tablet')
-            : (model.isLogoVisible ? const FlutterLogo() : null),
-        leading: getLeading()
-      );
-  }
+  MainController get controller =>
+      Get.find<MainController>(tag: (MainController).toString());
 
   @override
   Widget phone() {
-    return AppBar(
-      title: model.isTitleVisible
-          ? Text('${model.title} In Phone')
-          : (model.isLogoVisible ? const FlutterLogo() : null),
-      leading: getLeading()
+    return Obx(
+      () => AppBar(
+          title: controller.toolBarModel.value.isTitleVisible
+              ? Text('${controller.toolBarModel.value.title} In Phone')
+              : (controller.toolBarModel.value.isLogoVisible
+                  ? const FlutterLogo()
+                  : null),
+          leading: getLeading()),
     );
   }
 
   Widget? getLeading() {
-    if (model.isDrawerRequired) {
+    if (controller.toolBarModel.value.isDrawerRequired) {
       return IconButton(
-          onPressed: model.onDrawerIconClick ??
-                  () {
-            /// to hide keyboard on click of drawer icon
-            Get.find<MainController>(tag: (MainController).toString()).hideKeyboard();
+          onPressed: controller.toolBarModel.value.onDrawerIconClick ??
+              () {
+                /// to hide keyboard on click of drawer icon
+                Get.find<MainController>(tag: (MainController).toString())
+                    .hideKeyboard();
                 Scaffold.of(Get.context!).openDrawer();
               },
           icon: const Icon(Icons.menu));
-    } else if (model.isBackVisible) {
+    } else if (controller.toolBarModel.value.isBackVisible) {
       return IconButton(
-          onPressed: model.onBackOrClose ??
-                  () {
+          onPressed: controller.toolBarModel.value.onBackOrClose ??
+              () {
                 Get.closeAllSnackbars();
                 Get.back();
               },
           icon: const Icon(Icons.arrow_back_rounded));
-    } else if (model.isCrossVisible) {
+    } else if (controller.toolBarModel.value.isCrossVisible) {
       return IconButton(
-          onPressed: model.onBackOrClose ??
-                  () {
+          onPressed: controller.toolBarModel.value.onBackOrClose ??
+              () {
                 Get.closeAllSnackbars();
                 Get.back();
               },
@@ -73,5 +55,4 @@ class MainAppBar extends GetResponsiveView {
 
     return null;
   }
-
 }

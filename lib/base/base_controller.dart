@@ -1,4 +1,3 @@
-
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../app/controller/main_controller.dart';
@@ -11,23 +10,24 @@ abstract class BaseGetxController extends FullLifeCycleController {
   /// like apiManager
   ApiManager apiManager = Get.find<ApiManager>(tag: (ApiManager).toString());
 
-  MainController mainController = Get.find<MainController>(tag: (MainController).toString());
+  MainController mainController =
+      Get.find<MainController>(tag: (MainController).toString());
 
   bool shouldObserveLifeCycle = true;
 
-  void onControllerInit();
+  void onControllerInit() {}
 
-  void onControllerReady();
+  void onControllerReady() {}
 
-  void onControllerClose();
+  void onControllerClose() {}
 
-  void onPageResumed();
+  void onPageResumed() {}
 
-  void onPagePaused();
+  void onPagePaused() {}
 
-  void onPageInactive();
+  void onPageInactive() {}
 
-  void onPageDetached();
+  void onPageDetached() {}
 
   ToolBarModel? setUpToolbar();
 
@@ -76,7 +76,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
 
   void showSnackBar({required String value}) {
     /// here we show snackbar
-    
+
     hideKeyboard();
     Get.snackbar("", value,
         messageText: Text(value,
@@ -84,12 +84,14 @@ abstract class BaseGetxController extends FullLifeCycleController {
             maxLines: 4,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.start,
-            style: AppStyles.mediumStyle.copyWith(fontSize: 16, color: AppColors.white)),
+            style: AppStyles.mediumStyle
+                .copyWith(fontSize: 16, color: AppColors.white)),
         backgroundColor: AppColors.black,
         // maxWidth: screen.width < 500 ? screen.width : 500,
         margin: const EdgeInsets.all(0),
         isDismissible: true,
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 15),
+        padding:
+            const EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 15),
         snackStyle: SnackStyle.GROUNDED,
         snackPosition: SnackPosition.BOTTOM,
         titleText: const SizedBox());
@@ -97,7 +99,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(shouldObserveLifeCycle){
+    if (shouldObserveLifeCycle) {
       switch (state) {
         case AppLifecycleState.paused:
           {
@@ -122,7 +124,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
             onPageDetached();
             break;
           }
-      }  
+      }
     }
   }
 
@@ -132,7 +134,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
     return Future.value(canPop);
   }
 
-  void hideKeyboard(){
+  void hideKeyboard() {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
@@ -154,12 +156,18 @@ abstract class BaseGetxController extends FullLifeCycleController {
   }
 
   Future<V?>? toNamed<V>(String page,
-      {dynamic arguments, int? id, bool preventDuplicates = true, Map<String, String>? parameters}) async {
+      {dynamic arguments,
+      int? id,
+      bool preventDuplicates = true,
+      Map<String, String>? parameters}) async {
     // add onPause too
     _beforeNavigation();
     V? pageResult = await Get.toNamed<V>(page,
-        arguments: arguments, id: id, preventDuplicates: preventDuplicates, parameters: parameters);
-   _afterNavigation();
+        arguments: arguments,
+        id: id,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters);
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -192,7 +200,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         preventDuplicates: preventDuplicates,
         popGesture: popGesture,
         gestureWidth: gestureWidth);
-   _afterNavigation();
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -205,15 +213,19 @@ abstract class BaseGetxController extends FullLifeCycleController {
   }) async {
     _beforeNavigation();
     V? pageResult = await Get.offNamed<V>(page,
-        arguments: arguments, id: id, preventDuplicates: preventDuplicates, parameters: parameters);
-   _afterNavigation();
+        arguments: arguments,
+        id: id,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters);
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
-  Future<V?>? offUntil<V>(Route<V> page, RoutePredicate predicate, {int? id}) async {
+  Future<V?>? offUntil<V>(Route<V> page, RoutePredicate predicate,
+      {int? id}) async {
     _beforeNavigation();
     V? pageResult = await Get.offUntil<V>(page, predicate, id: id);
-   _afterNavigation();
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -225,8 +237,9 @@ abstract class BaseGetxController extends FullLifeCycleController {
     Map<String, String>? parameters,
   }) async {
     _beforeNavigation();
-    V? pageResult = await Get.offNamedUntil<V>(page, predicate, id: id, parameters: parameters, arguments: arguments);
-   _afterNavigation();
+    V? pageResult = await Get.offNamedUntil<V>(page, predicate,
+        id: id, parameters: parameters, arguments: arguments);
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -238,8 +251,9 @@ abstract class BaseGetxController extends FullLifeCycleController {
     Map<String, String>? parameters,
   }) async {
     _beforeNavigation();
-    V? pageResult = await Get.offAndToNamed<V>(page, arguments: arguments, id: id, result: result);
-   _afterNavigation();
+    V? pageResult = await Get.offAndToNamed<V>(page,
+        arguments: arguments, id: id, result: result);
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -252,8 +266,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
   }) async {
     _beforeNavigation();
     V? pageResult = await Get.offAllNamed<V>(newRouteName,
-        predicate: predicate, arguments: arguments, id: id, parameters: parameters);
-   _afterNavigation();
+        predicate: predicate,
+        arguments: arguments,
+        id: id,
+        parameters: parameters);
+    _afterNavigation();
     return Future.value(pageResult);
   }
 
@@ -287,7 +304,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-   _afterNavigation();
+    _afterNavigation();
 
     return Future.value(pageResult);
   }
@@ -322,7 +339,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-   _afterNavigation();
+    _afterNavigation();
 
     return Future.value(pageResult);
   }

@@ -1,8 +1,7 @@
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/controller/main_controller.dart';
-import 'app/core/widgets/main_appbar.dart';
 import 'util/exports.dart';
 
 void mainDelegate() => Initializer.init(() async {
@@ -20,117 +19,49 @@ class MyApp extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => controller.hideKeyboard(),
-      child: ScreenUtilInit(
-        designSize: Get.size,
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return GlobalLoaderOverlay(
-            useDefaultLoading: false,
-            overlayWidget: Center(
-              child: CircularProgressIndicator(
-                backgroundColor: AppColors.black.withOpacity(0.2),
-              ),
-            ),
-            child: GetMaterialApp(
-              builder: (context, widget) {
-                //add this line
-                ScreenUtil.init(context);
-                return Obx(
-                  () {
-                    if (controller.toolBarModel.value.isDrawerRequired) {
-                      return Scaffold(
-                        key: const ValueKey("MainScaffold"),
-                        drawer: Drawer(
-                          backgroundColor: AppColors.background,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 100,
-                              ),
-                              OutlinedButton(
-                                  onPressed: () {
-                                    Scaffold.of(Get.context!).closeDrawer();
-                                    controller.toolBarModel.value.navigator
-                                        ?.toNamed(AppPages.details);
-                                  },
-                                  child: const Text("Item1"))
-                            ],
-                          ),
-                        ),
-                        body: MediaQuery(
-                          //Setting font does not change with system font size
-                          data: MediaQuery.of(context)
-                              .copyWith(textScaleFactor: 1.0),
-                          child: Column(
-                            key: const ValueKey("MainColumn"),
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Obx(() {
-                                var model = controller.toolBarModel.value;
-                                if (model.isToolBarVisible) {
-                                  return MainAppBar(model: model);
-                                }
-
-                                return Container();
-                              }),
-                              Expanded(
-                                key: const ValueKey("MainExpanded"),
-                                child: widget!,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    return Scaffold(
-                      key: const ValueKey("MainScaffold"),
-                      body: MediaQuery(
-                        //Setting font does not change with system font size
-                        data: MediaQuery.of(context)
-                            .copyWith(textScaleFactor: 1.0),
-                        child: Column(
-                          key: const ValueKey("MainColumn"),
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Obx(() {
-                              var model = controller.toolBarModel.value;
-                              if (model.isToolBarVisible) {
-                                return MainAppBar(model: model);
-                              }
-
-                              return Container();
-                            }),
-                            Expanded(
-                              key: const ValueKey("MainExpanded"),
-                              child: widget!,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              debugShowCheckedModeBanner: false,
-              translations: AppString(),
-              locale: Get.deviceLocale,
-
-              fallbackLocale: const Locale('en', 'US'),
-              initialBinding: ApplicationBindings(),
-              initialRoute: AppPages.INITIAL,
-              getPages: AppPages.routes,
-              title: AppString.appName.tr,
-              // theme: _buildShrineTheme(),
-              theme: MyAppTheme.theme,
-            ),
-          );
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: Get.size,
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        // ScreenUtil.init(context);
+        return GetMaterialApp(
+          builder: EasyLoading.init(
+            builder: (context, widget) {
+              configLoader();
+              //add this line
+              ScreenUtil.init(context);
+              return Scaffold(
+                body: widget!,
+              );
+            },
+          ),
+          debugShowCheckedModeBanner: false,
+          translations: AppString(),
+          locale: const Locale('en', 'US'),
+          //Get.deviceLocale,
+          fallbackLocale: const Locale('en', 'US'),
+          initialBinding: ApplicationBindings(),
+          initialRoute: AppPages.splash,
+          getPages: AppPages.routes,
+          title: AppString.appName.tr,
+          theme: MyAppTheme.theme,
+        );
+      },
     );
+  }
+
+  void configLoader() {
+    EasyLoading.instance
+      ..displayDuration = const Duration(milliseconds: 2000)
+      ..indicatorType = EasyLoadingIndicatorType.circle
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..indicatorSize = 40.0
+      ..radius = 8.0
+      ..textColor = AppColors.purpleTextColor
+      ..backgroundColor = AppColors.whiteBackGroundColor
+      ..indicatorColor = AppColors.mediumPurpleBackGroundColor
+      ..userInteractions = true
+      ..dismissOnTap = false;
   }
 }

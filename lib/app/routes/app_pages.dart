@@ -1,18 +1,28 @@
+import 'package:yash_oil/app/routes/base_routes.dart';
+import 'package:yash_oil/app/ui/splash/splash_page.dart';
 
-import 'details_routes.dart';
-import 'home_routes.dart';
-import 'login_routes.dart';
+import '../ui/splash/splash_binding.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = '/home';
+  static const splash = '/splash';
   static const login = '/login';
   static const details = '/details';
 
   static final routes = [
-    ...HomeRoutes.routes,
-    ...LoginRoutes.routes,
-    ...DetailsRoutes.routes
+    ...SplashPageRoutes.routes,
+  ];
+}
+
+class SplashPageRoutes {
+  SplashPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.splash,
+      page: SplashPage.new,
+      binding: SplashBinding(),
+    ),
   ];
 }

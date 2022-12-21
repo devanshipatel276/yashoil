@@ -29,7 +29,6 @@ abstract class AppColors {
   static const Color appBarTextColor = Color(0xFFFFFFFF);
 
   static const Color whiteGrayColor = Color(0xFFF9F9FD);
-  static const Color darkGrayColor = Color(0xFF666666);
 
   static const Color blue = Color(0xFF30A0E5);
   static const Color red = Color(0xFFFF0000);
@@ -57,27 +56,67 @@ abstract class AppColors {
   static final MaterialColor materialWhite = createMaterialColor(Colors.white);
   static final MaterialColor materialBlack = createMaterialColor(Colors.black);
 
-  static final MaterialColor primary = createMaterialColor(Colors.blue.shade900);
-  static final MaterialColor primaryContainer = createMaterialColor(Colors.blue.shade200);
-  static final MaterialColor onPrimaryContainer = createMaterialColor(Colors.blue.shade800);
-  static final MaterialColor onPrimary = materialWhite;
-  static final MaterialColor secondary = createMaterialColor(Colors.blueGrey.shade700);
-  static final MaterialColor onSecondary = materialWhite;
-  static final MaterialColor onSecondaryContainer = createMaterialColor(materialBlack.shade200);
-  static final MaterialColor secondaryContainer = createMaterialColor(Colors.blue.shade100);
-  static final MaterialColor error = createMaterialColor(Colors.redAccent.shade400);
-  static final MaterialColor onError = materialWhite;
-  static final MaterialColor errorContainer = createMaterialColor(Colors.redAccent.shade100);
-  static final MaterialColor onErrorContainer = createMaterialColor(Colors.red.shade900);
-  static final MaterialColor background = materialWhite;
-  static final MaterialColor onBackground = createMaterialColor(materialBlack.shade200);
-  static final MaterialColor surface = materialWhite;
-  static final MaterialColor onSurface = createMaterialColor(materialBlack.shade400);
-  static final MaterialColor surfaceVariant = createMaterialColor(Colors.blueGrey.shade200);
-  static final MaterialColor onSurfaceVariant = createMaterialColor(Colors.grey.shade800);
-  static final MaterialColor outline = createMaterialColor(Colors.grey.shade600);
-  static final MaterialColor shadow = materialBlack;
-  static final MaterialColor inversePrimary = createMaterialColor(Colors.lightBlue.shade200);
-  static final MaterialColor inverseSurface = createMaterialColor(materialBlack.shade200);
-  static final MaterialColor onInverseSurface = createMaterialColor(Colors.white70);
+  static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color blackColor = Color(0xFF000000);
+  static const Color yellowColor = Color(0xFFFFB300);
+  static const Color darkGrayColor = Color(0xFF757575);
+  static const Color ultraDarkGrayColor = Color(0xFF4D4D4D);
+  static const Color mediumGrayColor = Color(0xFFC2C8C8);
+  static const Color orangeColor = Color(0xFFFD4F57);
+  static const Color redColor = Color(0xFFD6273D);
+  static const Color lightRedColor = Color(0xFFFFADA6);
+  static const Color greenColor = Color(0xFF1DCA7F);
+  static const Color blueColor = Color(0xFF3665FF);
+  static const Color lightBlueColor = Color(0xFF007AFF);
+  static const Color purpleColor = Color(0xFF6C2FB6);
+  static const Color mediumPurpleColor = Color(0xFF843ADD);
+  static const Color lightPurpleColor = Color(0xFF9F71DE);
+  static const Color ultraLightPurpleColor = Color(0xFFE1D2F0);
+  static const Color extraLightPurpleColor = Color(0xFFF2E8F9);
+  static const Color playlistPurpleColor = Color(0xFFC3A5E1);
+  static const Color extraLightRed = Color(0xFFFFD6D1);
+
+  //text colors
+  static const Color whiteTextColor = whiteColor;
+  static const Color blackTextColor = blackColor;
+  static const Color redTextColor = redColor;
+  static const Color purpleTextColor = mediumPurpleColor;
+  static const Color grayTextColor = ultraDarkGrayColor;
+  static const Color lightGrayTextColor = darkGrayColor;
+
+  //appbar colors
+  static const Color purpleAppBarColor = lightPurpleColor;
+  static const Color orangeAppBarColor = orangeColor;
+  static const Color greenAppBarColor = greenColor;
+  static const Color blueAppBarColor = blueColor;
+  static const Color whiteAppBarColor = whiteColor;
+
+  //background colors
+  static const Color blueBackGroundColor = blueColor;
+  static const Color lightBlueBackGroundColor = lightBlueColor;
+  static const Color greenBackGroundColor = greenColor;
+  static const Color orangeBackGroundColor = orangeColor;
+  static const Color lightPurpleBackGroundColor = extraLightPurpleColor;
+  static const Color mediumPurpleBackGroundColor = lightPurpleColor;
+  static const Color purpleBackGroundColor = purpleColor;
+  static const Color whiteBackGroundColor = whiteColor;
+  static const Color lightGrayBackGroundColor = mediumGrayColor;
+  static const Color lightRedBackGroundColor = lightRedColor;
+  static const Color grayBackGroundColor = ultraDarkGrayColor;
+  static const Color blackBackGroundColor = blackColor;
+  static const Color yellowBackGroundColor = yellowColor;
+  static const Color redBackGroundColor = redColor;
+  static const Color ultraLightPurpleBackGroundColor = ultraLightPurpleColor;
+
+  //primary,secondary colors
+  static const Color primaryWhiteColor = whiteColor;
+  static const Color primaryGrayColor = ultraDarkGrayColor;
+  static const Color primaryOrangeColor = orangeColor;
+  static const Color secondaryPurpleColor = lightPurpleColor;
+  static const Color secondaryLightPurpleColor = ultraLightPurpleColor;
+
+  static const Color transparent = Colors.transparent;
+  static const Color redErrorColor = lightRedColor;
+  static const Color lyricsColor = yellowColor;
+  static const Color inactiveDotColor = Colors.white54;
 }

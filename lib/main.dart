@@ -6,7 +6,8 @@ import 'app/core/widgets/main_appbar.dart';
 import 'util/exports.dart';
 
 void mainDelegate() => Initializer.init(() async {
-      Get.put(MainController(), permanent: true, tag: (MainController).toString());
+      Get.put(MainController(),
+          permanent: true, tag: (MainController).toString());
       setPathUrlStrategy();
       runApp(const MyApp());
     });
@@ -52,7 +53,8 @@ class MyApp extends GetView<MainController> {
                               OutlinedButton(
                                   onPressed: () {
                                     Scaffold.of(Get.context!).closeDrawer();
-                                    controller.toolBarModel.value.navigator?.toNamed(AppPages.details);
+                                    controller.toolBarModel.value.navigator
+                                        ?.toNamed(AppPages.details);
                                   },
                                   child: const Text("Item1"))
                             ],
@@ -60,7 +62,8 @@ class MyApp extends GetView<MainController> {
                         ),
                         body: MediaQuery(
                           //Setting font does not change with system font size
-                          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                          data: MediaQuery.of(context)
+                              .copyWith(textScaleFactor: 1.0),
                           child: Column(
                             key: const ValueKey("MainColumn"),
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -87,7 +90,8 @@ class MyApp extends GetView<MainController> {
                       key: const ValueKey("MainScaffold"),
                       body: MediaQuery(
                         //Setting font does not change with system font size
-                        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                        data: MediaQuery.of(context)
+                            .copyWith(textScaleFactor: 1.0),
                         child: Column(
                           key: const ValueKey("MainColumn"),
                           mainAxisAlignment: MainAxisAlignment.start,

@@ -5,7 +5,12 @@ import '../../../util/exports.dart';
 class AppString extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
-        englishKey: {appName: 'GetXBase', login: 'Login', yashOil: 'Yash Oil'},
+        englishKey: {
+          appName: 'GetXBase',
+          login: 'Login',
+          yashOil: 'Yash Oil',
+          tag: 'From earth to your home'
+        },
       };
 
   /// define all the keys here and use it in above may as key and give value of that key
@@ -15,4 +20,5 @@ class AppString extends Translations {
   static const String appName = "appNameKey";
   static const String login = "loginKey";
   static const String yashOil = "yashOilKey";
+  static const String tag = "tagKey";
 }

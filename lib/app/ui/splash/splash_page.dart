@@ -1,4 +1,5 @@
 import 'package:yash_oil/app/ui/splash/splash_controller.dart';
+import 'package:yash_oil/util/common_widget.dart';
 
 import '../../../base/base_responsive_view.dart';
 import '../../../util/exports.dart';
@@ -18,21 +19,28 @@ class SplashPage extends BaseGetResponsiveView<SplashController> {
       backgroundColor: AppColors.orangeBackGroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Spacer(),
+          Container(
+            margin: const EdgeInsets.only(top: 60),
+            child: CustomTextLabel(
+              label: AppString.yashOil.tr,
+              style: AppStyles.textDoubleExtraLargeMTSans,
+              maxLines: 2,
+            ),
+          ),
+          showLogo(),
+
           CustomTextLabel(
-            label: AppString.yashOil.tr,
-            style: AppStyles.textDoubleExtraLargeMTSans,
-            maxLines: 2,
+            label: AppString.tag.tr,
+            style: AppStyles.textExtraLarge,
+            maxLines: 1,
           ),
-          const SizedBox(
-            height: 11.0,
-          ),
-          // CustomTextLabel(
-          //   label: AppString.helloEveryBodyKey.tr,
-          //   style: AppStyles.textExtraLarge,
-          //   maxLines: 1,
+          Expanded(child: Container()),
+          loadAsset(path: Assets.image.peanutOil.path),
+          Expanded(child: Container()),
+
+          //       path: Assets.svgs.icSplashFriends,
+          //       size: const Size(double.infinity, 232)),
           // ),
           // Container(
           //   margin: const EdgeInsets.only(bottom: 89.0, top: 123),

@@ -13,15 +13,16 @@ class MainAppBar extends GetResponsiveView {
 
   @override
   Widget phone() {
-    return Obx(
-      () => AppBar(
-          title: controller.toolBarModel.value.isTitleVisible
-              ? Text('${controller.toolBarModel.value.title} In Phone')
-              : (controller.toolBarModel.value.isLogoVisible
-                  ? const FlutterLogo()
-                  : null),
-          leading: getLeading()),
-    );
+    return Obx(() => Visibility(
+          visible: controller.toolBarModel.value.isToolBarVisible,
+          child: AppBar(
+              title: controller.toolBarModel.value.isTitleVisible
+                  ? Text('${controller.toolBarModel.value.title} In Phone')
+                  : (controller.toolBarModel.value.isLogoVisible
+                      ? const FlutterLogo()
+                      : null),
+              leading: getLeading()),
+        ));
   }
 
   Widget? getLeading() {

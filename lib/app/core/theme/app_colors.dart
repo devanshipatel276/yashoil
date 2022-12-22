@@ -80,6 +80,7 @@ abstract class AppColors {
   static const Color whiteTextColor = whiteColor;
   static const Color blackTextColor = blackColor;
   static const Color redTextColor = redColor;
+  static const Color orangeTextColor = orangeColor;
   static const Color purpleTextColor = mediumPurpleColor;
   static const Color grayTextColor = ultraDarkGrayColor;
   static const Color lightGrayTextColor = darkGrayColor;

@@ -37,11 +37,13 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController>
       onWillPop: () async {
         return !await controller.checkAndCloseDrawer();
       },
-      child: Column(
-        children: [
-          MainAppBar(),
-          Expanded(child: buildPhoneWidget()),
-        ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            MainAppBar(),
+            Expanded(child: buildPhoneWidget()),
+          ],
+        ),
       ),
     );
   }

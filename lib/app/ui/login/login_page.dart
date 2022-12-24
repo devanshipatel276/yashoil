@@ -90,9 +90,10 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                           ),
                           onClick: () {
                             if (controller.formKey.currentState!.validate()) {
-                              FireBaseDB.firebaseLogin(
-                                  email: controller.emailController.text,
-                                  password: controller.passwordController.text);
+                              controller.offNamed(AppPages.dashboard);
+                              // FireBaseDB.firebaseLogin(
+                              //     email: controller.emailController.text,
+                              //     password: controller.passwordController.text);
                             }
                           },
                         ),

@@ -40,7 +40,8 @@ class AppString extends Translations {
           pleaseEnterPriceKey: "Please Enter Price",
           onlineKey: "Online",
           cashKey: "Cash",
-          submittedKey: "Submitted"
+          submittedKey: "Submitted",
+          editOrderKey: "Edit Order"
         },
       };
 
@@ -82,4 +83,5 @@ class AppString extends Translations {
   static const String onlineKey = "onlineKey";
   static const String cashKey = "cashKey";
   static const String submittedKey = "submittedKey";
+  static const String editOrderKey = "editOrderKey";
 }

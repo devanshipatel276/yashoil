@@ -15,10 +15,10 @@ class EditOrderController extends BaseGetxController {
   @override
   ToolBarModel? setUpToolbar() {
     return ToolBarModel(
-      currentController: this,
-      isToolBarVisible: true,
-      isLogoVisible: false,
-      isCrossVisible: true,
-    );
+        currentController: this,
+        isToolBarVisible: true,
+        isTitleVisible: true,
+        title: AppString.editOrderKey,
+        isBackVisible: true);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:yash_oil/app/ui/dashboard/dashboard_controller.dart';
 import 'package:yash_oil/app/ui/main_controller.dart';
 import 'package:yash_oil/app/ui/menu/menu_model.dart';
 
@@ -6,6 +7,8 @@ import '../../../util/exports.dart';
 import '../../../util/toolbar_model.dart';
 
 class MenuController extends BaseGetxController {
+  var dashboardController =
+      Get.find<DashBoardController>(tag: (DashBoardController).toString());
   RxList<MenuModel> menuList = <MenuModel>[
     MenuModel(
       title: AppString.addNewOrderKey.tr,
@@ -29,5 +32,17 @@ class MenuController extends BaseGetxController {
       isLogoVisible: false,
       isCrossVisible: true,
     );
+  }
+
+  void handleLogOut() {
+    offAllNamed(AppPages.login);
+  }
+
+  void handleClick(MenuType menuType) {
+    switch (menuType) {
+      case MenuType.addNewOrder:
+        dashboardController.toNamed(AppPages.addOrder);
+        break;
+    }
   }
 }

@@ -6,8 +6,7 @@ import '../main_controller.dart';
 class SplashController extends BaseGetxController {
   @override
   void onControllerReady() {
-    Future.delayed(
-        Duration(seconds: 2), () async => offNamed(AppPages.addOrder));
+    Future.delayed(Duration(seconds: 2), () async => offNamed(AppPages.login));
   }
 
   MainController? getParentController() {

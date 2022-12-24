@@ -37,8 +37,9 @@ class MenuPage extends BaseGetResponsiveView<MenuController> {
                       subTitle: AppString.logoutDescriptionKey.tr,
                       successLabel: AppString.logOutKey.tr,
                       cancelLabel: AppString.cancelBtnKey.tr,
-                      subTitlePadding: EdgeInsets.zero,
-                      onSuccess: () {});
+                      subTitlePadding: EdgeInsets.zero, onSuccess: () {
+                    controller.handleLogOut();
+                  });
                   // controller.btnLogOutClicked(screen.context);
                 },
               ),
@@ -76,7 +77,9 @@ class MenuPage extends BaseGetResponsiveView<MenuController> {
                 size: 20.0,
                 color: AppColors.whiteBackGroundColor,
               ),
-              onTap: () {},
+              onTap: () {
+                controller.handleClick(menuData.menuType);
+              },
             );
           })),
     );

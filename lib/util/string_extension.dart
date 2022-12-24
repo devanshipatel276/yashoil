@@ -1,7 +1,10 @@
 import 'dart:convert';
 
-import '../util/reg_expressions.dart';
+import 'package:get/get.dart';
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
+import 'package:yash_oil/app/core/config/app_string.dart';
 
+import '../util/reg_expressions.dart';
 
 extension Util on String? {
   bool get isNullOrEmpty => this == null || this!.isEmpty;
@@ -18,7 +21,8 @@ extension Util on String? {
 
   bool get isValidEmail => RegExpressions.email.hasMatch(this ?? '');
 
-  bool get isValidPhoneNumber => RegExpressions.phoneNumber.hasMatch(this ?? '');
+  bool get isValidPhoneNumber =>
+      RegExpressions.phoneNumber.hasMatch(this ?? '');
 
   bool get isValidPassword => RegExpressions.password.hasMatch(this ?? '');
 
@@ -30,4 +34,26 @@ extension Util on String? {
 
 extension ListUtil on List<String> {
   String get joinToString => reduce((curr, next) => '$curr,$next');
+}
+
+extension TextFieldValidator on String {
+  String? validateEmail() {
+    if (isEmpty) {
+      return AppString.pleaseEnterEmailIdKey.tr;
+    } else if (!GetUtils.isEmail(this)) {
+      return AppString.invalidEmailIdKey.tr;
+    } else {
+      return null;
+    }
+  }
+
+  String? validatePassword() {
+    if (isEmpty) {
+      return AppString.pleaseEnterPasswordKey.tr;
+    } else if (!RegExpressions.password.hasMatch(this)) {
+      return AppString.passwordShouldHaveKey.tr;
+    } else {
+      return null;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:loader_overlay/loader_overlay.dart';
 
-import '../app/controller/main_controller.dart';
+import '../app/ui/main_controller.dart';
 import '../service/api/api_manager.dart';
 import '../util/exports.dart';
 import '../util/toolbar_model.dart';

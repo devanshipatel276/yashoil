@@ -1,5 +1,5 @@
 import '../../../util/exports.dart';
-import '../../controller/main_controller.dart';
+import '../../ui/main_controller.dart';
 
 /// use this class to show AppBar at app level(Global or Shared AppBar)
 /// ( to be used in MyApp Widget)

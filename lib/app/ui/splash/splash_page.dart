@@ -28,8 +28,6 @@ class SplashPage extends BaseGetResponsiveView<SplashController> {
               maxLines: 2,
             ),
           ),
-          showLogo(),
-
           CustomTextLabel(
             label: AppString.tag.tr,
             style: AppStyles.textExtraLarge,

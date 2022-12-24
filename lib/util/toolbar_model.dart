@@ -16,6 +16,7 @@ class ToolBarModel {
   // var isSettingVisible = true.obs;
   // var isMenuVisible = true.obs;
   Function()? onBackOrClose;
+  Color appBarColor;
   Function()? onDrawerIconClick;
 
   ToolBarModel(
@@ -25,6 +26,7 @@ class ToolBarModel {
       this.isLogoVisible = false,
       this.isBackVisible = false,
       this.isCrossVisible = false,
+      this.appBarColor = AppColors.orangeAppBarColor,
       this.currentController,
       String? title,
       this.onBackOrClose,
@@ -40,6 +42,7 @@ class ToolBarModel {
     BaseGetxController? currentController,
     Function()? onBackOrClose,
     Function()? onDrawerIconClick,
+    Color? appBarColor,
   }) {
     var model = ToolBarModel();
     model.isToolBarVisible = isToolBarVisible ?? this.isToolBarVisible;
@@ -47,6 +50,7 @@ class ToolBarModel {
     model.isLogoVisible = isLogoVisible ?? this.isToolBarVisible;
     model.isBackVisible = isBackVisible ?? this.isToolBarVisible;
     model.isCrossVisible = isCrossVisible ?? this.isToolBarVisible;
+    model.appBarColor = appBarColor ?? this.appBarColor;
     model.currentController = currentController;
     model.onDrawerIconClick = onDrawerIconClick;
     model.onBackOrClose = onBackOrClose;

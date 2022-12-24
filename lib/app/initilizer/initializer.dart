@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 
 import '../../util/exports.dart';
@@ -39,6 +40,7 @@ abstract class Initializer {
 
   static Future<void> _initStorage() async {
     await GetStorage.init();
+    await Firebase.initializeApp();
     await SharedPref.init();
   }
 
@@ -49,4 +51,3 @@ abstract class Initializer {
     ]);
   }
 }
-

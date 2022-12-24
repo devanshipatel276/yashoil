@@ -1,7 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-import 'app/controller/main_controller.dart';
+import 'app/ui/main_controller.dart';
 import 'util/exports.dart';
 
 void mainDelegate() => Initializer.init(() async {
@@ -60,7 +60,7 @@ class MyApp extends GetView<MainController> {
       ..radius = 8.0
       ..textColor = AppColors.purpleTextColor
       ..backgroundColor = AppColors.whiteBackGroundColor
-      ..indicatorColor = AppColors.mediumPurpleBackGroundColor
+      ..indicatorColor = AppColors.orangeBackGroundColor
       ..userInteractions = true
       ..dismissOnTap = false;
   }

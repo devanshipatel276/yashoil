@@ -1,11 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:yash_oil/app/core/config/app_string.dart';
-import 'package:yash_oil/app/core/widgets/custom_text_label.dart';
-import 'package:yash_oil/util/common_function.dart';
 import 'package:yash_oil/util/exports.dart';
-
-import '../app/core/theme/app_colors.dart';
 
 Widget loadAsset({String path = "", Size? size, Color? color}) {
   return Image.asset(
@@ -28,6 +21,14 @@ void showLoader({required bool value}) {
   }
 }
 
+Widget loadMaterialIcon(IconData icons, {double? size, Color? color}) {
+  return Icon(
+    icons,
+    size: size,
+    color: color,
+  );
+}
+
 Widget showLogo() {
   return Container(
     width: 140,
@@ -46,4 +47,40 @@ Widget showLogo() {
       ),
     ),
   );
+}
+
+Widget loadSvg(
+    {String path = "", Color? color, BoxFit fit = BoxFit.contain, Size? size}) {
+  return path.isNotNullOrEmpty
+      ? SvgPicture.asset(
+          path,
+          height: size?.height,
+          width: size?.width,
+          color: color,
+          fit: fit,
+        )
+      : Container();
+}
+
+void showSnackBar(
+    {String message = "", String buttonText = "", Function()? onButtonClick}) {
+  Get.snackbar("", "",
+      colorText: AppColors.blackTextColor,
+      backgroundColor: AppColors.lightPurpleBackGroundColor,
+      snackPosition: SnackPosition.BOTTOM,
+      margin: const EdgeInsets.all(10),
+      mainButton: buttonText.isNotNullOrEmpty
+          ? TextButton(
+              onPressed: onButtonClick,
+              child: CustomTextLabel(
+                  label: buttonText,
+                  style: AppStyles.regularStyle
+                      .copyWith(color: AppColors.purpleTextColor)),
+            )
+          : null,
+      messageText: Container(),
+      titleText: CustomTextLabel(
+          label: message,
+          style: AppStyles.regularStyle
+              .copyWith(color: AppColors.blackTextColor)));
 }

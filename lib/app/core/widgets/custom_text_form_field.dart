@@ -40,10 +40,12 @@ class CustomTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final Color? fillColor;
   final Color? cursorColor;
+  final TextInputAction? textInputAction;
 
   CustomTextFormField({
     required this.controller,
     this.key1,
+    this.textInputAction,
     this.maxLength,
     this.label = "",
     this.errorStyle,
@@ -86,6 +88,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
         controller: controller,
         validator: validator,
+        textInputAction: textInputAction,
         keyboardType: textInputType,
         onChanged: onChange,
         autofocus: autoFocus,
@@ -117,7 +120,7 @@ class CustomTextFormField extends StatelessWidget {
           prefixIcon: prefixIcon.isNotNullOrEmpty
               ? Padding(
                   padding: const EdgeInsets.only(left: 14.0, right: 8),
-                  child: loadAsset(
+                  child: loadSvg(
                       path: prefixIcon ?? "",
                       size: prefixIconSize,
                       color: prefixIconColor),
@@ -131,7 +134,7 @@ class CustomTextFormField extends StatelessWidget {
                   onTap: suffixOnClick,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 14.0, left: 8),
-                    child: loadAsset(
+                    child: loadSvg(
                         path: suffixIcon ?? "",
                         size: prefixIconSize,
                         color: prefixIconColor),

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 63.1 (101010) - https://sketch.com -->
+    <title>ECA47638-2F91-4FEC-BDEB-E1632FFF7321</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M8.50039247,0.85 C10.8474289,0.85 12.7503925,2.7529636 12.7503925,5.1 C12.7503925,6.32878571 12.2289397,7.43572913 11.3952687,8.21166111 C14.1827287,9.33501061 16.1482848,12.0378931 16.1482848,15.1980001 C16.1482848,15.6674421 15.7677268,16.0480001 15.2982848,16.0480001 L1.7,16.0480001 C1.23055796,16.0480001 0.85,15.6674421 0.85,15.1980001 C0.85,13.0838045 1.73576458,11.1090336 3.26637938,9.69205327 C3.61086616,9.37314155 4.14865691,9.39387424 4.46756862,9.73836102 C4.78648034,10.0828478 4.76574766,10.6206385 4.42126088,10.9395503 C3.44261739,11.8455382 2.80597814,13.040639 2.61240909,14.3480001 L14.3859141,14.3480001 C13.9674812,11.5224271 11.4941463,9.35 8.4991424,9.35 L8.498,9.35 L8.29445326,9.34509951 C6.04262877,9.23769668 4.25,7.37834364 4.25,5.1 C4.25,2.75288774 6.15303946,0.85 8.50039247,0.85 Z M11.0503925,5.1 C11.0503925,3.69184767 9.9085448,2.55 8.50039247,2.55 C7.09189319,2.55 5.95,3.69180215 5.95,5.1 C5.95,6.5084396 7.09174246,7.65 8.50039247,7.65 C9.90869553,7.65 11.0503925,6.50839409 11.0503925,5.1 Z" id="path-1"></path>
+        <rect id="path-3" x="0" y="0" width="17" height="17"></rect>
+    </defs>
+    <g id="📱-iOS-App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1.1A-Log-in---No-SSO" transform="translate(-54.000000, -528.000000)">
+            <g id="Forms" transform="translate(38.000000, 517.000000)">
+                <g id="Form/No-Icon/Empty/Gray" transform="translate(0.000000, -0.000000)">
+                    <g id="Icon/User" transform="translate(16.000000, 11.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#C2C8C8" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Fill/MT-Grays/Light-Gray" mask="url(#mask-2)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <use id="Elevation" fill="#FFFFFF" xlink:href="#path-3"></use>
+                            <rect id="Color" fill="#FFFFFF" mask="url(#mask-4)" x="0" y="0" width="17" height="17"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

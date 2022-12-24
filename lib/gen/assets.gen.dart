@@ -17,10 +17,21 @@ class $AssetsImageGen {
       const AssetGenImage('assets/image/peanut_oil.png');
 }
 
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/ic_key.svg
+  String get icKey => 'assets/svg/ic_key.svg';
+
+  /// File path: assets/svg/ic_user.svg
+  String get icUser => 'assets/svg/ic_user.svg';
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsImageGen image = $AssetsImageGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {

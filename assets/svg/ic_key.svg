@@ -1,0 +1,23 @@
+<svg id="Password" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Mask" d="M1.244,13.9A4.25,4.25,0,0,1,4.886,6.692L7.807,3.757a.849.849,0,0,1,.2-.2L11.3.25a.851.851,0,0,1,1.2,0L15.051,2.8a.85.85,0,0,1-1.2,1.2L11.9,2.053l-2.192,2.2L11.651,6.2a.85.85,0,0,1-1.2,1.2l-1.94-1.94L5.766,8.219a.85.85,0,0,1-.83.219,2.551,2.551,0,1,0,1.8,1.9A.85.85,0,0,1,8.4,9.964,4.25,4.25,0,0,1,1.244,13.9Z" fill="#c2c8c8"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Elevation" width="17" height="17" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_78" data-name="Group 78" transform="translate(0.85 0.85)">
+    <path id="Mask-2" data-name="Mask" d="M1.244,13.9A4.25,4.25,0,0,1,4.886,6.692L7.807,3.757a.849.849,0,0,1,.2-.2L11.3.25a.851.851,0,0,1,1.2,0L15.051,2.8a.85.85,0,0,1-1.2,1.2L11.9,2.053l-2.192,2.2L11.651,6.2a.85.85,0,0,1-1.2,1.2l-1.94-1.94L5.766,8.219a.85.85,0,0,1-.83.219,2.551,2.551,0,1,0,1.8,1.9A.85.85,0,0,1,8.4,9.964,4.25,4.25,0,0,1,1.244,13.9Z" fill="#c2c8c8"/>
+    <g id="Mask_Group_78" data-name="Mask Group 78" clip-path="url(#clip-path)">
+      <g id="White" transform="translate(-0.85 -0.85)">
+        <g id="Group_14" data-name="Group 14">
+          <rect id="Elevation-2" data-name="Elevation" width="17" height="17" fill="#fff"/>
+          <g id="Mask_Group_14" data-name="Mask Group 14" clip-path="url(#clip-path-2)">
+            <rect id="Color" width="17" height="17" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

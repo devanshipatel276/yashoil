@@ -1,4 +1,6 @@
 import 'package:yash_oil/app/routes/base_routes.dart';
+import 'package:yash_oil/app/ui/login/login_binding.dart';
+import 'package:yash_oil/app/ui/login/login_page.dart';
 import 'package:yash_oil/app/ui/splash/splash_page.dart';
 
 import '../ui/splash/splash_binding.dart';
@@ -12,6 +14,7 @@ class AppPages {
 
   static final routes = [
     ...SplashPageRoutes.routes,
+    ...LoginPageRoutes.routes,
   ];
 }
 
@@ -23,6 +26,18 @@ class SplashPageRoutes {
       name: AppPages.splash,
       page: SplashPage.new,
       binding: SplashBinding(),
+    ),
+  ];
+}
+
+class LoginPageRoutes {
+  LoginPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.login,
+      page: LoginPage.new,
+      binding: LoginBinding(),
     ),
   ];
 }

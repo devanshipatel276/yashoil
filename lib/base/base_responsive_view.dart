@@ -1,4 +1,5 @@
 import '../../../util/exports.dart';
+import '../app/core/widgets/colorful_safe_area/colorful_safe_area.dart';
 import '../app/core/widgets/main_appbar.dart';
 import 'base_controller.dart';
 
@@ -37,12 +38,15 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController>
       onWillPop: () async {
         return !await controller.checkAndCloseDrawer();
       },
-      child: SafeArea(
-        child: Column(
-          children: [
-            MainAppBar(),
-            Expanded(child: buildPhoneWidget()),
-          ],
+      child: Obx(
+        () => ColorfulSafeArea(
+          color: controller.mainController.toolBarModel.value.appBarColor,
+          child: Column(
+            children: [
+              MainAppBar(),
+              Expanded(child: buildPhoneWidget()),
+            ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "661721441620",
+    "project_id": "yashoil",
+    "storage_bucket": "yashoil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661721441620:android:c18c57e763d05e910e54c1",
+        "android_client_info": {
+          "package_name": "com.yashoil.yash_oil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661721441620-7ivb8ukpbh34no61b823k3fkjlpc170q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD02zvP-eVZHhyoy4_LwGPThF_SSD5Ic6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661721441620-7ivb8ukpbh34no61b823k3fkjlpc170q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import '../../../util/exports.dart';
 import '../../../util/toolbar_model.dart';
 
 class AddOrderController extends BaseGetxController {
+  TextEditingController dateController = TextEditingController();
   @override
   void onControllerReady() {}
 

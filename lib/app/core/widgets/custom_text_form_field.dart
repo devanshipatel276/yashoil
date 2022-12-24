@@ -40,19 +40,24 @@ class CustomTextFormField extends StatelessWidget {
   final Color? fillColor;
   final Color? cursorColor;
   final TextInputAction? textInputAction;
+  final GestureTapCallback? onTap;
+  final bool enabled;
+  final bool readOnly;
 
   CustomTextFormField({
     required this.controller,
     this.key1,
     this.textInputAction,
     this.maxLength,
+    this.onTap,
     this.label = "",
     this.errorStyle,
     this.radius = 40,
+    this.readOnly = false,
     this.validator,
     this.hintStyle,
     this.prefixIconColor,
-    this.autoFocus = false,
+    this.autoFocus = true,
     this.onChange,
     this.textInputType = TextInputType.text,
     this.prefix,
@@ -67,6 +72,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.borderColor = AppColors.secondaryPurpleColor,
     this.inputFormatters,
+    this.enabled = true,
     this.maxLines = 1,
     this.onTextSubmit,
     this.prefixIconConstraints = const BoxConstraints(
@@ -88,8 +94,10 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         validator: validator,
         textInputAction: textInputAction,
+        onTap: onTap,
         keyboardType: textInputType,
         onChanged: onChange,
+        focusNode: null,
         autofocus: autoFocus,
         onFieldSubmitted: (submit) => onTextSubmit != null
             ? onTextSubmit?.call(submit)
@@ -105,11 +113,13 @@ class CustomTextFormField extends StatelessWidget {
             ]),
         style: style ?? AppStyles.textRegular,
         maxLines: maxLines,
+        readOnly: readOnly,
         enabled: isEditable,
         maxLength: maxLength,
         cursorColor: cursorColor,
         obscureText: obscureText!,
         decoration: InputDecoration(
+          enabled: enabled,
           // counterText: '',
           suffixIconConstraints: suffixIconConstraints,
           prefixIconConstraints: prefixIconConstraints,
@@ -127,16 +137,16 @@ class CustomTextFormField extends StatelessWidget {
               : const SizedBox(width: 0, height: 0),
           fillColor: fillColor,
           filled: true,
-          suffix: suffix,
-          suffixIcon: suffixIcon.isNotNullOrEmpty
+          suffixIcon: suffixIcon.isNotNullOrEmpty || suffix != null
               ? GestureDetector(
                   onTap: suffixOnClick,
                   child: Padding(
                     padding: const EdgeInsets.only(right: 14.0, left: 8),
-                    child: loadSvg(
-                        path: suffixIcon ?? "",
-                        size: prefixIconSize,
-                        color: prefixIconColor),
+                    child: suffix ??
+                        loadSvg(
+                            path: suffixIcon ?? "",
+                            size: prefixIconSize,
+                            color: prefixIconColor),
                   ),
                 )
               : const SizedBox(

@@ -6,7 +6,7 @@ abstract class MyAppTheme {
   static ColorScheme appColorScheme = const ColorScheme(
     brightness: Brightness.light,
     primary: AppColors.primaryWhiteColor,
-    primaryContainer: AppColors.primaryWhiteColor,
+    primaryContainer: AppColors.primaryOrangeColor,
     onPrimaryContainer: AppColors.primaryWhiteColor,
     onPrimary: AppColors.primaryWhiteColor,
     secondary: AppColors.secondaryPurpleColor,
@@ -204,13 +204,13 @@ abstract class MyAppTheme {
         elevation: 2,
       ),
       dialogTheme: DialogTheme(
-          backgroundColor: appColorScheme.background,
+          backgroundColor: AppColors.whiteAppBarColor,
           shape: RoundedRectangleBorder(
             borderRadius: 2.borderRadius,
           ),
           elevation: 2,
-          titleTextStyle: AppStyles.regularStyle
-              .copyWith(color: appColorScheme.onPrimaryContainer),
+          titleTextStyle:
+              AppStyles.regularStyle.copyWith(color: AppColors.orangeTextColor),
           contentTextStyle: AppStyles.regularStyle
               .copyWith(color: appColorScheme.onBackground)),
       bottomSheetTheme: BottomSheetThemeData(

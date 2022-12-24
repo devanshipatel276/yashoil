@@ -164,3 +164,20 @@ Future openAlertDialog(
                   ],
           ));
 }
+
+Future<DateTime?> openDatePicker(BuildContext context) async {
+  return await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime(3000),
+      builder: (context, child) => Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.orangeAppBarColor, // <-- SEE HERE
+              onPrimary: AppColors.whiteAppBarColor, // <-- SEE HERE
+              onSurface: AppColors.blackBackGroundColor, // <-- SEE HERE
+            ),
+          ),
+          child: child!));
+}

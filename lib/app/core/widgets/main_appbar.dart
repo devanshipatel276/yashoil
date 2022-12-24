@@ -17,7 +17,8 @@ class MainAppBar extends GetResponsiveView {
           visible: controller.toolBarModel.value.isToolBarVisible,
           child: AppBar(
               title: controller.toolBarModel.value.isTitleVisible
-                  ? Text('${controller.toolBarModel.value.title} ')
+                  ? CustomTextLabel(
+                      label: '${controller.toolBarModel.value.title} ')
                   : (controller.toolBarModel.value.isLogoVisible
                       ? showLogo()
                       : null),

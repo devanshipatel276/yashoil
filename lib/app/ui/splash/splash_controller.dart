@@ -7,7 +7,7 @@ class SplashController extends BaseGetxController {
   @override
   void onControllerReady() {
     Future.delayed(
-        Duration(seconds: 2), () async => offNamed(AppPages.dashboard));
+        Duration(seconds: 2), () async => offNamed(AppPages.addOrder));
   }
 
   MainController? getParentController() {

@@ -26,6 +26,21 @@ class AppString extends Translations {
           addNewOrderKey: "Add New Order",
           logoutDescriptionKey: "Are you sure you want to logout?",
           cancelBtnKey: "Cancel",
+          orderDateKey: "Order Date",
+          completedDateKey: "Order Completed Date",
+          customerNameKey: "Customer Name",
+          customerAddressKey: "Customer Address",
+          paymentTypeKey: "Payment Type",
+          pleaseEnterCustomerNameKey: "Please enter customer name",
+          pleaseEnterCustomerAddressKey: "Please enter customer address",
+          billNumberKey: "Bill Number",
+          totalAmountKey: "Total Amount",
+          receivedAmountKey: "Received Amount",
+          priceKey: "Price",
+          pleaseEnterPriceKey: "Please Enter Price",
+          onlineKey: "Online",
+          cashKey: "Cash",
+          submittedKey: "Submitted"
         },
       };
 
@@ -51,4 +66,20 @@ class AppString extends Translations {
   static const String passwordNotCorrectKey = "passwordNotCorrectKey";
   static const String addNewOrderKey = "addNewOrderKey";
   static const String cancelBtnKey = "cancelBtnKey";
+  static const String orderDateKey = "orderDateKey";
+  static const String completedDateKey = "completedDateKey";
+  static const String customerNameKey = "customerNameKey";
+  static const String customerAddressKey = "customerAddressKey";
+  static const String paymentTypeKey = "paymentTypeKey";
+  static const String pleaseEnterCustomerNameKey = "pleaseEnterCustomerNameKey";
+  static const String pleaseEnterCustomerAddressKey =
+      "pleaseEnterCustomerAddressKey";
+  static const String billNumberKey = "billNumberKey";
+  static const String totalAmountKey = "totalAmountKey";
+  static const String receivedAmountKey = "receivedAmountKey";
+  static const String priceKey = "priceKey";
+  static const String pleaseEnterPriceKey = "pleaseEnterPriceKey";
+  static const String onlineKey = "onlineKey";
+  static const String cashKey = "cashKey";
+  static const String submittedKey = "submittedKey";
 }

@@ -1,14 +1,12 @@
+import 'package:yash_oil/app/ui/main_controller.dart';
+
 import '../../../base/base_controller.dart';
 import '../../../util/exports.dart';
 import '../../../util/toolbar_model.dart';
-import '../main_controller.dart';
 
-class SplashController extends BaseGetxController {
+class AddOrderController extends BaseGetxController {
   @override
-  void onControllerReady() {
-    Future.delayed(
-        Duration(seconds: 2), () async => offNamed(AppPages.dashboard));
-  }
+  void onControllerReady() {}
 
   MainController? getParentController() {
     return Get.find<MainController>(tag: (MainController).toString());
@@ -16,6 +14,11 @@ class SplashController extends BaseGetxController {
 
   @override
   ToolBarModel? setUpToolbar() {
-    return ToolBarModel(currentController: this, isToolBarVisible: false);
+    return ToolBarModel(
+      currentController: this,
+      isToolBarVisible: true,
+      isLogoVisible: false,
+      isCrossVisible: true,
+    );
   }
 }

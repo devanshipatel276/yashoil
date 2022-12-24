@@ -6,7 +6,7 @@ GetPage basePage(
     Duration? transitionDuration,
     required Bindings binding,
     List<GetMiddleware>? middlewares,
-    Transition transition = Transition.rightToLeft}) {
+    Transition transition = Transition.fadeIn}) {
   return GetPage(
       name: name,
       transitionDuration: transitionDuration,

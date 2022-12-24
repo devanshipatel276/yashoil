@@ -31,11 +31,11 @@ abstract class MyAppTheme {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       }),
-      focusColor: AppColors.secondaryPurpleColor,
+      focusColor: AppColors.whiteBackGroundColor,
       brightness: Brightness.light,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: AppBarTheme(
-        backgroundColor: appColorScheme.secondary,
+        backgroundColor: AppColors.orangeAppBarColor,
         centerTitle: true,
         titleTextStyle: AppStyles.boldStyle.copyWith(
             color: AppColors.whiteTextColor, fontSize: Dimens.fontSize16),
@@ -59,7 +59,7 @@ abstract class MyAppTheme {
       backgroundColor: appColorScheme.background,
       splashColor: appColorScheme.primary.withOpacity(0.14),
       indicatorColor: appColorScheme.primary,
-      iconTheme: IconThemeData(color: appColorScheme.onBackground),
+      iconTheme: const IconThemeData(color: AppColors.whiteBackGroundColor),
       scaffoldBackgroundColor: appColorScheme.background,
       buttonTheme: ButtonThemeData(
         buttonColor: appColorScheme.secondary,

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23.318" height="23.318" viewBox="0 0 23.318 23.318">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Mask" d="M7.238,15.488V9.259H1a1,1,0,1,1,0-2H7.238V1a1,1,0,0,1,2,0v6.26h6.25a1,1,0,1,1,0,2H9.238v6.229a1,1,0,1,1-2,0Z" transform="translate(18.071 4.813) rotate(45)" fill="#fff"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="Elevation" width="20" height="20" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Group_54" data-name="Group 54" transform="translate(-6.412 -4.813)">
+    <path id="Mask-2" data-name="Mask" d="M7.238,15.488V9.259H1a1,1,0,1,1,0-2H7.238V1a1,1,0,0,1,2,0v6.26h6.25a1,1,0,1,1,0,2H9.238v6.229a1,1,0,1,1-2,0Z" transform="translate(18.071 4.813) rotate(45)" fill="#fff"/>
+    <g id="Mask_Group_54" data-name="Mask Group 54" clip-path="url(#clip-path)">
+      <g id="White" transform="translate(33.193 30.255) rotate(180)">
+        <g id="Group_14" data-name="Group 14">
+          <rect id="Elevation-2" data-name="Elevation" width="20" height="20" fill="#fff"/>
+          <g id="Mask_Group_14" data-name="Mask Group 14" clip-path="url(#clip-path-2)">
+            <rect id="Color" width="20" height="20" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

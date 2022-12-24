@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
@@ -84,6 +85,7 @@ abstract class AppColors {
   static const Color purpleTextColor = mediumPurpleColor;
   static const Color grayTextColor = ultraDarkGrayColor;
   static const Color lightGrayTextColor = darkGrayColor;
+  static const Color dialogTextColor = CupertinoColors.activeBlue;
 
   //appbar colors
   static const Color purpleAppBarColor = lightPurpleColor;

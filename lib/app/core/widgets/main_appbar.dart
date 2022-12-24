@@ -17,9 +17,9 @@ class MainAppBar extends GetResponsiveView {
           visible: controller.toolBarModel.value.isToolBarVisible,
           child: AppBar(
               title: controller.toolBarModel.value.isTitleVisible
-                  ? Text('${controller.toolBarModel.value.title} In Phone')
+                  ? Text('${controller.toolBarModel.value.title} ')
                   : (controller.toolBarModel.value.isLogoVisible
-                      ? const FlutterLogo()
+                      ? showLogo()
                       : null),
               leading: getLeading()),
         ));
@@ -30,10 +30,8 @@ class MainAppBar extends GetResponsiveView {
       return IconButton(
           onPressed: controller.toolBarModel.value.onDrawerIconClick ??
               () {
-                /// to hide keyboard on click of drawer icon
-                Get.find<MainController>(tag: (MainController).toString())
-                    .hideKeyboard();
-                Scaffold.of(Get.context!).openDrawer();
+                controller.toolBarModel.value.currentController
+                    ?.toNamed(AppPages.menu);
               },
           icon: const Icon(Icons.menu));
     } else if (controller.toolBarModel.value.isBackVisible) {

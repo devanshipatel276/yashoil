@@ -21,7 +21,11 @@ class AppString extends Translations {
               "password should have one special one upper character one lower character and 7 minimum characters",
           passwordKey: "Password",
           userNotFoundKey: "User doesn't found!",
-          passwordNotCorrectKey: "Please enter correct password"
+          passwordNotCorrectKey: "Please enter correct password",
+          logOutKey: "Log Out",
+          addNewOrderKey: "Add New Order",
+          logoutDescriptionKey: "Are you sure you want to logout?",
+          cancelBtnKey: "Cancel",
         },
       };
 
@@ -34,6 +38,8 @@ class AppString extends Translations {
   static const String yashOil = "yashOilKey";
   static const String tag = "tagKey";
   static const String logInKey = "logInKey";
+  static const String logOutKey = "logOutKey";
+  static const String logoutDescriptionKey = "logoutDescriptionKey";
   static const String loginDescriptionKey = "loginDescriptionKey";
   static const String emailAddressKey = "emailAddressKey";
   static const String pleaseEnterEmailIdKey = "pleaseEnterEmailIdKey";
@@ -43,4 +49,6 @@ class AppString extends Translations {
   static const String passwordKey = "passwordKey";
   static const String userNotFoundKey = "userNotFoundKey";
   static const String passwordNotCorrectKey = "passwordNotCorrectKey";
+  static const String addNewOrderKey = "addNewOrderKey";
+  static const String cancelBtnKey = "cancelBtnKey";
 }

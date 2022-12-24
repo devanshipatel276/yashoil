@@ -1,9 +1,6 @@
 import 'package:yash_oil/app/ui/splash/splash_controller.dart';
-import 'package:yash_oil/util/common_widget.dart';
 
-import '../../../base/base_responsive_view.dart';
 import '../../../util/exports.dart';
-import '../../core/widgets/custom_text_label.dart';
 
 class SplashPage extends BaseGetResponsiveView<SplashController> {
   SplashPage({super.key});

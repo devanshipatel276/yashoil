@@ -1,20 +1,22 @@
-import 'package:yash_oil/app/routes/base_routes.dart';
-import 'package:yash_oil/app/ui/login/login_binding.dart';
-import 'package:yash_oil/app/ui/login/login_page.dart';
-import 'package:yash_oil/app/ui/splash/splash_page.dart';
-
-import '../ui/splash/splash_binding.dart';
+import '../../../util/exports.dart';
 
 class AppPages {
   AppPages._();
 
   static const splash = '/splash';
   static const login = '/login';
-  static const details = '/details';
+  static const dashboard = '/dashboard';
+  static const menu = '/menu';
+  static const addOrder = '/add_order';
+  static const editOrder = '/edit_order';
 
   static final routes = [
     ...SplashPageRoutes.routes,
     ...LoginPageRoutes.routes,
+    ...DashBoardPageRoutes.routes,
+    ...MenuPageRoutes.routes,
+    ...AddOrderPageRoutes.routes,
+    ...EditOrderPageRoutes.routes,
   ];
 }
 
@@ -38,6 +40,54 @@ class LoginPageRoutes {
       name: AppPages.login,
       page: LoginPage.new,
       binding: LoginBinding(),
+    ),
+  ];
+}
+
+class DashBoardPageRoutes {
+  DashBoardPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.dashboard,
+      page: DashBoardPage.new,
+      binding: DashBoardBinding(),
+    ),
+  ];
+}
+
+class MenuPageRoutes {
+  MenuPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.menu,
+      page: MenuPage.new,
+      binding: MenuBinding(),
+    ),
+  ];
+}
+
+class AddOrderPageRoutes {
+  AddOrderPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.addOrder,
+      page: AddOrderPage.new,
+      binding: AddOrderBinding(),
+    ),
+  ];
+}
+
+class EditOrderPageRoutes {
+  EditOrderPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.editOrder,
+      page: EditOrderPage.new,
+      binding: EditOrderBinding(),
     ),
   ];
 }

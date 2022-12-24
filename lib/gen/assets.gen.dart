@@ -20,6 +20,12 @@ class $AssetsImageGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/ic_add_new.svg
+  String get icAddNew => 'assets/svg/ic_add_new.svg';
+
+  /// File path: assets/svg/ic_cross.svg
+  String get icCross => 'assets/svg/ic_cross.svg';
+
   /// File path: assets/svg/ic_key.svg
   String get icKey => 'assets/svg/ic_key.svg';
 

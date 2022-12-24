@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:yash_oil/util/exports.dart';
 
 Widget loadAsset({String path = "", Size? size, Color? color}) {
@@ -83,4 +84,83 @@ void showSnackBar(
           label: message,
           style: AppStyles.regularStyle
               .copyWith(color: AppColors.blackTextColor)));
+}
+
+Future openAlertDialog(
+  BuildContext context, {
+  String title = "",
+  String subTitle = "",
+  String successLabel = "",
+  String cancelLabel = "",
+  VoidCallback? onSuccess,
+  VoidCallback? onCancel,
+  EdgeInsetsGeometry? titlePadding = const EdgeInsets.all(14),
+  EdgeInsetsGeometry? buttonPadding = const EdgeInsets.only(left: 8, right: 8),
+  EdgeInsetsGeometry? subTitlePadding =
+      const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 14),
+}) {
+  return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+            title: CustomTextLabel(
+              label: title,
+              style: AppStyles.textMediumSPPro.copyWith(
+                  color: AppColors.blackTextColor, fontSize: Dimens.fontSize16),
+            ),
+            content: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: CustomTextLabel(
+                      label: subTitle,
+                      style: AppStyles.textRegularSPPro
+                          .copyWith(color: AppColors.blackTextColor)),
+                ),
+              ],
+            ),
+            actions: successLabel.isNotEmpty && cancelLabel.isNotEmpty
+                ? [
+                    CupertinoDialogAction(
+                      onPressed: () {
+                        goBack();
+                        onCancel?.call();
+                      },
+                      child: CustomTextLabel(
+                        label: cancelLabel,
+                        style: AppStyles.textRegularSPPro.copyWith(
+                            color: AppColors.dialogTextColor,
+                            fontSize: Dimens.fontSize16),
+                      ),
+                    ),
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () {
+                        goBack();
+                        onSuccess?.call();
+                      },
+                      child: CustomTextLabel(
+                        label: successLabel,
+                        style: AppStyles.textRegularSPPro.copyWith(
+                            color: AppColors.dialogTextColor,
+                            fontSize: Dimens.fontSize16),
+                      ),
+                    ),
+                  ]
+                : [
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () {
+                        goBack();
+                        onSuccess?.call();
+                      },
+                      child: CustomTextLabel(
+                        label: successLabel,
+                        style: AppStyles.textRegularSPPro.copyWith(
+                            color: AppColors.dialogTextColor,
+                            fontSize: Dimens.fontSize16),
+                      ),
+                    )
+                  ],
+          ));
 }

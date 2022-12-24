@@ -21,7 +21,7 @@ class ToolBarModel {
 
   ToolBarModel(
       {this.isToolBarVisible = false,
-      this.isTitleVisible = true,
+      this.isTitleVisible = false,
       this.isDrawerRequired = false,
       this.isLogoVisible = false,
       this.isBackVisible = false,

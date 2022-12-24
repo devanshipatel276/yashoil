@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:yash_oil/app/core/config/app_string.dart';
 
 import '../util/reg_expressions.dart';

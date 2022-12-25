@@ -41,7 +41,7 @@ class MenuController extends BaseGetxController {
   void handleClick(MenuType menuType) {
     switch (menuType) {
       case MenuType.addNewOrder:
-        dashboardController.toNamed(AppPages.addOrder);
+        toNamed(AppPages.addOrder);
         break;
     }
   }

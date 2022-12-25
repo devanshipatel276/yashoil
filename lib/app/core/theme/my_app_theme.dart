@@ -115,13 +115,13 @@ abstract class MyAppTheme {
         prefixStyle: AppStyles.textRegular,
         hintStyle: AppStyles.textRegular,
         labelStyle: AppStyles.textRegular,
-        enabledBorder: 40.outlineInputBorder(
+        enabledBorder: 8.outlineInputBorder(
           borderSide: 1.5.borderSide(color: AppColors.primaryWhiteColor),
         ),
-        focusedBorder: 40.outlineInputBorder(
+        focusedBorder: 8.outlineInputBorder(
           borderSide: 1.5.borderSide(color: AppColors.primaryWhiteColor),
         ),
-        border: 40.outlineInputBorder(
+        border: 8.outlineInputBorder(
           borderSide: 1.5.borderSide(color: AppColors.primaryWhiteColor),
         ),
         focusColor: AppColors.primaryWhiteColor,
@@ -131,10 +131,10 @@ abstract class MyAppTheme {
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         floatingLabelStyle: AppStyles.textRegular,
-        errorBorder: 40.outlineInputBorder(
+        errorBorder: 8.outlineInputBorder(
           borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
         ),
-        focusedErrorBorder: 40.outlineInputBorder(
+        focusedErrorBorder: 8.outlineInputBorder(
           borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
         ),
         disabledBorder: 4.outlineInputBorder(
@@ -326,7 +326,7 @@ abstract class MyAppTheme {
         overlayColor: MaterialStateProperty.resolveWith(
           (states) {
             if (states.contains(MaterialState.pressed)) {
-              return appColorScheme.primary.withOpacity(0.14);
+              return AppColors.dialogBackGroundColor.withOpacity(0.14);
             }
             return null;
           },
@@ -334,10 +334,10 @@ abstract class MyAppTheme {
         fillColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed) ||
               states.contains(MaterialState.selected)) {
-            return appColorScheme.primary;
+            return AppColors.dialogBackGroundColor;
           }
 
-          return AppColors.primaryWhiteColor;
+          return AppColors.dialogBackGroundColor;
         }),
         splashRadius: 20,
       ),

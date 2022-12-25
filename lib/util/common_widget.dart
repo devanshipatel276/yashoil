@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:yash_oil/app/enums/enums_utils.dart';
 import 'package:yash_oil/util/exports.dart';
 
 Widget loadAsset({String path = "", Size? size, Color? color}) {
@@ -180,4 +181,143 @@ Future<DateTime?> openDatePicker(BuildContext context) async {
             ),
           ),
           child: child!));
+}
+
+showOrderDetailDialog(
+    BuildContext context, List<String> list, TextEditingController controller,
+    {String title = ""}) {
+  Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
+  return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+            title: CustomTextLabel(
+              label: AppString.orderDetailsKey.tr,
+              style: AppStyles.textMediumSPPro.copyWith(
+                  color: AppColors.blackTextColor, fontSize: Dimens.fontSize16),
+            ),
+            content: Theme(
+              data: Theme.of(context).copyWith(
+                inputDecorationTheme: InputDecorationTheme(
+                  fillColor: AppColors.transparent,
+                  prefixStyle: AppStyles.textRegular,
+                  hintStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.blackTextColor),
+                  labelStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.blackTextColor),
+                  focusColor: AppColors.blackBackGroundColor,
+                  hoverColor: AppColors.blackBackGroundColor,
+                  errorStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.blackTextColor),
+                  iconColor: AppColors.blackBackGroundColor,
+                  alignLabelWithHint: true,
+                  enabledBorder: 8.outlineInputBorder(
+                    borderSide:
+                        1.5.borderSide(color: AppColors.blackBackGroundColor),
+                  ),
+                  focusedBorder: 8.outlineInputBorder(
+                    borderSide:
+                        1.5.borderSide(color: AppColors.blackBackGroundColor),
+                  ),
+                  border: 8.outlineInputBorder(
+                    borderSide:
+                        1.5.borderSide(color: AppColors.blackBackGroundColor),
+                  ),
+                  errorBorder: 8.outlineInputBorder(
+                    borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
+                  ),
+                  focusedErrorBorder: 8.outlineInputBorder(
+                    borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
+                  ),
+                  disabledBorder: 4.outlineInputBorder(
+                    borderSide:
+                        1.5.borderSide(color: AppColors.blackBackGroundColor),
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  floatingLabelStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.blackTextColor),
+                ),
+              ),
+              child: Obx(
+                () => Column(
+                  children: [
+                    radioView(
+                        value: ContainerType.fiveLtr,
+                        selection: selected.value,
+                        label: AppString.fiveLtrKey.tr,
+                        onChanged: (value) {
+                          selected.value = value!;
+                        }),
+                    radioView(
+                        value: ContainerType.fifteenKgTin,
+                        selection: selected.value,
+                        label: AppString.fifteenKgTinKey.tr,
+                        onChanged: (value) {
+                          selected.value = value!;
+                        }),
+                    radioView(
+                        value: ContainerType.fifteenKgPlastic,
+                        selection: selected.value,
+                        label: AppString.fifteenKgPlasticKey.tr,
+                        onChanged: (value) {
+                          selected.value = value!;
+                        }),
+                    CustomTextFormField(
+                      controller: controller,
+                      cursorColor: AppColors.blackBackGroundColor,
+                      label: AppString.quantityKey.tr,
+                      fillColor: Colors.transparent,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                onPressed: () {
+                  goBack();
+                },
+                child: CustomTextLabel(
+                  label: AppString.cancelBtnKey.tr,
+                  style: AppStyles.textRegularSPPro.copyWith(
+                      color: AppColors.dialogTextColor,
+                      fontSize: Dimens.fontSize16),
+                ),
+              ),
+              CupertinoDialogAction(
+                isDefaultAction: true,
+                onPressed: () {
+                  goBack();
+                },
+                child: CustomTextLabel(
+                  label: AppString.saveKey.tr,
+                  style: AppStyles.textRegularSPPro.copyWith(
+                      color: AppColors.dialogTextColor,
+                      fontSize: Dimens.fontSize16),
+                ),
+              ),
+            ],
+          ));
+}
+
+Widget radioView(
+    {required dynamic value,
+    required dynamic selection,
+    required String label,
+    ValueChanged<dynamic?>? onChanged}) {
+  return RadioListTile(
+      value: value,
+      dense: true,
+      controlAffinity: ListTileControlAffinity.trailing,
+      groupValue: selection,
+      contentPadding: EdgeInsets.zero,
+      visualDensity: const VisualDensity(
+          horizontal: VisualDensity.minimumDensity,
+          vertical: VisualDensity.minimumDensity),
+      title: CustomTextLabel(
+        label: label,
+        textAlign: TextAlign.start,
+        style: AppStyles.textRegular.copyWith(color: AppColors.blackTextColor),
+      ),
+      onChanged: onChanged);
 }

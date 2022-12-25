@@ -105,6 +105,7 @@ abstract class AppColors {
   static const Color whiteBackGroundColor = whiteColor;
   static const Color lightGrayBackGroundColor = mediumGrayColor;
   static const Color lightRedBackGroundColor = lightRedColor;
+  static const Color dialogBackGroundColor = CupertinoColors.black;
   static const Color grayBackGroundColor = ultraDarkGrayColor;
   static const Color blackBackGroundColor = blackColor;
   static const Color yellowBackGroundColor = yellowColor;

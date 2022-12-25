@@ -41,7 +41,23 @@ class AppString extends Translations {
           onlineKey: "Online",
           cashKey: "Cash",
           submittedKey: "Submitted",
-          editOrderKey: "Edit Order"
+          editOrderKey: "Edit Order",
+          quantityKey: "Quantity",
+          customerMobileNumberKey: "Customer Mobile Number",
+          deliveryStatusKey: "Delivery Status",
+          paymentModeKey: "Payment Mode",
+          submittedDateKey: "Submitted Date",
+          orderFromKey: "Order From",
+          paymentStatusKey: "Payment Status",
+          darshanKey: "Darshan",
+          yashKey: "Yash",
+          addOrderDetailsKey: "Add Order Details",
+          saveKey: "Save",
+          typeKey: "Type",
+          orderDetailsKey: "Order Details",
+          fiveLtrKey: "5 ltr",
+          fifteenKgPlasticKey: "15 Kg Plastic",
+          fifteenKgTinKey: "15 Kg Tin"
         },
       };
 
@@ -84,4 +100,20 @@ class AppString extends Translations {
   static const String cashKey = "cashKey";
   static const String submittedKey = "submittedKey";
   static const String editOrderKey = "editOrderKey";
+  static const String quantityKey = "quantityKey";
+  static const String customerMobileNumberKey = "customerMobileNumberKey";
+  static const String deliveryStatusKey = "deliveryStatusKey";
+  static const String paymentModeKey = "paymentModeKey";
+  static const String submittedDateKey = "submittedDateKey";
+  static const String orderFromKey = "orderFromKey";
+  static const String paymentStatusKey = "paymentStatusKey";
+  static const String darshanKey = "darshanKey";
+  static const String yashKey = "yashKey";
+  static const String saveKey = "saveKey";
+  static const String addOrderDetailsKey = "addOrderDetailsKey";
+  static const String typeKey = "typeKey";
+  static const String orderDetailsKey = "orderDetailsKey";
+  static const String fiveLtrKey = "fiveLtrKey";
+  static const String fifteenKgTinKey = "fifteenKgTinKey";
+  static const String fifteenKgPlasticKey = "fifteenKgPlasticKey";
 }

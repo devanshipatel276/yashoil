@@ -16,6 +16,25 @@ class AddOrderController extends BaseGetxController {
   TextEditingController quantityController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  final deliveryStatusList = [
+    AppString.deliveredKey.tr,
+    AppString.pendingKey.tr
+  ];
+  final paymentModeList = [
+    AppString.cashKey.tr,
+    AppString.onlineKey.tr,
+    AppString.unPaidKey.tr
+  ];
+  final orderDetailList = [
+    AppString.fiveLtrKey.tr,
+    AppString.fifteenKgTinKey.tr,
+    AppString.fifteenKgPlasticKey.tr,
+    AppString.fifteenLtrPlasticKey.tr,
+    AppString.fifteenLtrTinKey.tr
+  ];
+  final RxString selectedDeliveryStatus = AppString.pendingKey.tr.obs;
+  RxString selectedPaymentMode = AppString.unPaidKey.tr.obs;
+
   @override
   void onControllerReady() {}
 

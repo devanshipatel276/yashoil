@@ -184,7 +184,10 @@ Future<DateTime?> openDatePicker(BuildContext context) async {
 }
 
 showOrderDetailDialog(
-    BuildContext context, List<String> list, TextEditingController controller,
+    BuildContext context,
+    List<String> list,
+    TextEditingController quantityController,
+    TextEditingController priceController,
     {String title = ""}) {
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
   return showDialog(
@@ -249,6 +252,20 @@ showOrderDetailDialog(
                           selected.value = value!;
                         }),
                     radioView(
+                        value: ContainerType.fifteenLtrTin,
+                        selection: selected.value,
+                        label: AppString.fifteenLtrTinKey.tr,
+                        onChanged: (value) {
+                          selected.value = value!;
+                        }),
+                    radioView(
+                        value: ContainerType.fifteenLtrPlastic,
+                        selection: selected.value,
+                        label: AppString.fifteenLtrPlasticKey.tr,
+                        onChanged: (value) {
+                          selected.value = value!;
+                        }),
+                    radioView(
                         value: ContainerType.fifteenKgTin,
                         selection: selected.value,
                         label: AppString.fifteenKgTinKey.tr,
@@ -262,10 +279,19 @@ showOrderDetailDialog(
                         onChanged: (value) {
                           selected.value = value!;
                         }),
+                    Container(
+                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: CustomTextFormField(
+                        controller: quantityController,
+                        cursorColor: AppColors.blackBackGroundColor,
+                        label: AppString.quantityKey.tr,
+                        fillColor: Colors.transparent,
+                      ),
+                    ),
                     CustomTextFormField(
-                      controller: controller,
+                      controller: quantityController,
                       cursorColor: AppColors.blackBackGroundColor,
-                      label: AppString.quantityKey.tr,
+                      label: AppString.priceKey.tr,
                       fillColor: Colors.transparent,
                     )
                   ],

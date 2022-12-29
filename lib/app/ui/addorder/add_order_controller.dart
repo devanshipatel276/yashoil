@@ -10,6 +10,7 @@ class AddOrderController extends BaseGetxController {
   TextEditingController orderDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
   TextEditingController customerAddressController = TextEditingController();
+  TextEditingController commentsController = TextEditingController();
   TextEditingController customerNumberController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController billNumberController = TextEditingController();

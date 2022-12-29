@@ -108,6 +108,18 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   ],
                 ),
               ),
+              Visibility(
+                visible: controller.selectedPaymentMode.value ==
+                    AppString.unPaidKey.tr,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: CustomTextFormField(
+                    controller: controller.commentsController,
+                    label: AppString.commentsKey.tr,
+                    maxLines: 5,
+                  ),
+                ),
+              ),
               Row(
                 children: [
                   Expanded(
@@ -141,6 +153,18 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     label: AppString.completedDateKey.tr,
                   ),
                 ),
+              ),
+              Container(
+                width: 120.0,
+                margin: const EdgeInsets.fromLTRB(0.0, 32.0, 0.0, 14.0),
+                child: CustomPrimaryButton(
+                    padding: const EdgeInsets.only(
+                        left: 0, right: 0, top: 16, bottom: 16),
+                    text: AppString.saveKey.tr,
+                    textStyle: AppStyles.textMedium.copyWith(
+                      color: AppColors.redTextColor,
+                    ),
+                    onClick: () {}),
               ),
             ],
           ),

@@ -64,7 +64,8 @@ class AppString extends Translations {
           fifteenLtrPlasticKey: "15 ltr plastic",
           fifteenLtrTinKey: "15 ltr tin",
           onlineKey: "Online",
-          unPaidKey: "UnPaid"
+          unPaidKey: "UnPaid",
+          commentsKey: "Comments"
         },
       };
 
@@ -132,4 +133,5 @@ class AppString extends Translations {
   static const String acKey = "AcKey";
   static const String onLineKey = "onlineKey";
   static const String paymentKey = "paymentKey";
+  static const String commentsKey = "commentsKey";
 }

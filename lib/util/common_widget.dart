@@ -23,10 +23,19 @@ void showLoader({required bool value}) {
   }
 }
 
-Widget loadMaterialIcon(IconData icons, {double? size, Color? color}) {
+Widget loadMaterialIcon(IconData icons,
+    {double? size, Color? color = AppColors.whiteBackGroundColor}) {
   return Icon(
     icons,
     size: size,
+    color: color,
+  );
+}
+
+Widget divider(
+    {Color? color = AppColors.whiteBackGroundColor, double height = 1}) {
+  return Container(
+    height: height,
     color: color,
   );
 }

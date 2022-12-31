@@ -23,10 +23,10 @@ class AddOrderController extends BaseGetxController {
 
   final RxString selectedDeliveryStatus = AppString.pendingKey.tr.obs;
   RxString selectedPaymentMode = AppString.unPaidKey.tr.obs;
-  RxList<ContainerDetailModel> containerDetailList =
-      <ContainerDetailModel>[].obs;
+  RxList<LocalContainerDetailModel> containerDetailList =
+      <LocalContainerDetailModel>[].obs;
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
-  late ContainerDetailModel containerDetailModel;
+  late LocalContainerDetailModel containerDetailModel;
 
   //dropdown and radio list
   final deliveryStatusList = [
@@ -53,15 +53,15 @@ class AddOrderController extends BaseGetxController {
   void onInit() {
     super.onInit();
     orderDateController.text = dateToString(DateTime.now());
-    containerDetailModel = ContainerDetailModel(
-      containerType: selected.value.type,
+    containerDetailModel = LocalContainerDetailModel(
+      type: selected.value,
       price: priceController.text,
       quantity: quantityController.text,
     );
     containerDetailList.listen((p0) {
       for (var element in p0) {
         print(
-            "OrderType ---> ${element.containerType}, Order Quantity--->${element.quantity}, Order Price--> ${element.price}");
+            "OrderType ---> ${element.type}, Order Quantity--->${element.quantity}, Order Price--> ${element.price}");
       }
     });
   }
@@ -71,13 +71,26 @@ class AddOrderController extends BaseGetxController {
   }
 
   void addContainerDetail() {
-    containerDetailModel = ContainerDetailModel(
-      containerType: selected.value.type,
+    containerDetailModel = LocalContainerDetailModel(
+      type: selected.value,
       price: priceController.text,
       quantity: quantityController.text,
     );
     containerDetailList.add(containerDetailModel);
     goBack();
+  }
+
+  void deleteContainerDetail(
+      LocalContainerDetailModel localContainerDetailModel) {
+    containerDetailList.remove(localContainerDetailModel);
+  }
+
+  String getTotalAmount() {
+    var total = 0;
+    for (var element in containerDetailList) {
+      total = total + int.parse(element.price);
+    }
+    return total.toString();
   }
 
   @override

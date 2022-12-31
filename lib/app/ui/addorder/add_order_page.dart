@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:yash_oil/app/ui/addorder/add_order_controller.dart';
 import 'package:yash_oil/util/exports.dart';
 
 import '../../../util/date_utils.dart';
 import '../../enums/enums_utils.dart';
+import '../../model/container_detail_model.dart';
 
 class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
   AddOrderPage({super.key});
@@ -74,14 +76,56 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                       onTap: () {
                         showOrderDetailDialog();
                       },
-                      child: loadMaterialIcon(Icons.add,
-                          color: AppColors.whiteBackGroundColor),
+                      child: loadMaterialIcon(Icons.add),
                     )
                   ],
                 ),
               ),
+              Visibility(
+                visible: controller.containerDetailList.isNotEmpty,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.whiteAppBarColor,
+                      ),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return containerDetailView(
+                              controller.containerDetailList[index]);
+                        },
+                        itemCount: controller.containerDetailList.length,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                        child: divider(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 26),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomTextLabel(
+                                textAlign: TextAlign.start,
+                                label: AppString.totalAmountKey.tr,
+                              ),
+                            ),
+                            CustomTextLabel(
+                              label: controller.getTotalAmount(),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               Container(
-                margin: const EdgeInsets.only(bottom: 20),
+                margin: const EdgeInsets.only(bottom: 20, top: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -194,7 +238,10 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
     );
   }
 
-  showOrderDetailDialog({String title = ""}) {
+  showOrderDetailDialog() {
+    controller.quantityController.text = "";
+    controller.priceController.text = "";
+    controller.selected.value = ContainerType.fiveLtr;
     return showDialog(
         context: screen.context,
         barrierDismissible: true,
@@ -261,6 +308,10 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                           child: CustomTextFormField(
                             controller: controller.quantityController,
                             cursorColor: AppColors.blackBackGroundColor,
+                            textInputType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             label: AppString.quantityKey.tr,
                             style: AppStyles.textRegular
                                 .copyWith(color: AppColors.blackTextColor),
@@ -280,6 +331,10 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                           controller: controller.priceController,
                           cursorColor: AppColors.blackBackGroundColor,
                           label: AppString.priceKey.tr,
+                          textInputType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           errorStyle: AppStyles.textRegular
                               .copyWith(color: AppColors.redTextColor),
                           style: AppStyles.textRegular
@@ -326,5 +381,26 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 ),
               ],
             ));
+  }
+
+  Widget containerDetailView(LocalContainerDetailModel containerDetailModel) {
+    return Row(children: [
+      Expanded(
+          child: CustomTextLabel(
+              textAlign: TextAlign.start,
+              label: getContainerName(containerDetailModel.type))),
+      CustomTextLabel(
+          label:
+              "${containerDetailModel.quantity} x ${containerDetailModel.price}"),
+      GestureDetector(
+        onTap: () {
+          controller.deleteContainerDetail(containerDetailModel);
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: loadMaterialIcon(Icons.delete, size: 18),
+        ),
+      ),
+    ]);
   }
 }

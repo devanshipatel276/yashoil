@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:yash_oil/app/core/config/shared_preference.dart';
 import 'package:yash_oil/app/model/order_detail_model.dart';
 
 import '../../../../util/exports.dart';
@@ -47,13 +48,31 @@ abstract class FireBaseDB {
     }
   }
 
-  static Future<void> addOrderDetails(OrderDetailModel orderDetailModel) async {
+  static Future<void> addOrderDetails(
+      OrderDetailModel orderDetailModel, Function() onSave) async {
     showLoader(value: true);
     await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)
-        .add(orderDetailModel.toJson());
-    showLoader(value: false);
-    showSnackBar(message: "Data Added Successfully");
+        .add(orderDetailModel.toJson())
+        .then((value) async {
+      orderDetailModel.key = value.id;
+      await updateOrderDetails(orderDetailModel, () {
+        onSave.call();
+      });
+    });
+  }
+
+  static Future<void> updateOrderDetails(
+      OrderDetailModel orderDetailModel, Function() onSave) async {
+    showLoader(value: true);
+    await _firebaseDataBaseInstance
+        .collection(AppConstant.orderPath)
+        .doc(orderDetailModel.key)
+        .update(orderDetailModel.toJson())
+        .then((value) {
+      showLoader(value: false);
+      onSave.call();
+    });
   }
 
   static void logout() async {

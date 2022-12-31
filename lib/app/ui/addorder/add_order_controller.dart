@@ -124,8 +124,10 @@ class AddOrderController extends BaseGetxController {
         totalQuantity: getTotalAmount()[1],
         billNumber: billNumberController.text,
         deliveryStatus: selectedDeliveryStatus.value,
-        containerList: []);
-    FireBaseDB.addOrderDetails(orderDetail);
+        containerList: containerList);
+    FireBaseDB.addOrderDetails(orderDetail, () {
+      goBack();
+    });
   }
 
   @override

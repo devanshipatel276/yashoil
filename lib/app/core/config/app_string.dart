@@ -45,6 +45,7 @@ class AppString extends Translations {
           pleaseEnterQuantityKey: "Please Enter Quantity",
           onlineKey: "Online",
           cashKey: "Cash",
+          orderAddedKey: "Order Added SuccessFully!",
           paymentKey: "Payment",
           submittedKey: "Submitted",
           editOrderKey: "Edit Order",
@@ -148,4 +149,5 @@ class AppString extends Translations {
   static const String onLineKey = "onlineKey";
   static const String paymentKey = "paymentKey";
   static const String commentsKey = "commentsKey";
+  static const String orderAddedKey = "orderAddedKey";
 }

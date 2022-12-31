@@ -123,11 +123,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 child: Container(
                   margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.whiteAppBarColor,
-                      ),
-                      borderRadius: BorderRadius.circular(8)),
+                  decoration: MyAppTheme.thinBorderTheme(),
                   child: Column(
                     children: [
                       ListView.builder(

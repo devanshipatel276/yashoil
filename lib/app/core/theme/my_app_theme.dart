@@ -485,4 +485,11 @@ abstract class MyAppTheme {
         shape: RoundedRectangleBorder(borderRadius: 2.borderRadius),
         textStyle: AppStyles.regularStyle);
   }
+
+  static thinBorderTheme(
+      {Color borderColor = AppColors.whiteAppBarColor, double thinSize = 1}) {
+    return BoxDecoration(
+        border: Border.all(color: borderColor, width: thinSize),
+        borderRadius: BorderRadius.circular(8));
+  }
 }

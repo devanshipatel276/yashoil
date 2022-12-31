@@ -27,6 +27,7 @@ class AddOrderController extends BaseGetxController {
       <LocalContainerDetailModel>[].obs;
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
   late LocalContainerDetailModel containerDetailModel;
+  RxBool isShowValidation = false.obs;
 
   //dropdown and radio list
   final deliveryStatusList = [
@@ -85,12 +86,20 @@ class AddOrderController extends BaseGetxController {
     containerDetailList.remove(localContainerDetailModel);
   }
 
-  String getTotalAmount() {
+  List<String> getTotalAmount() {
     var total = 0;
+    var totalQuantity = 0;
     for (var element in containerDetailList) {
-      total = total + int.parse(element.price);
+      var quantity = int.parse(element.quantity);
+      var price = int.parse(element.price);
+      total = total + (quantity * price);
+      totalQuantity = totalQuantity + quantity;
     }
-    return total.toString();
+    return [total.toString(), totalQuantity.toString()];
+  }
+
+  bool checkOrderDetailValidation() {
+    return isShowValidation.value = orderDetailList.isNotEmpty;
   }
 
   @override

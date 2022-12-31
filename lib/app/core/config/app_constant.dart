@@ -9,6 +9,7 @@ class AppConstant {
   static const int splashTime = 2;
   static const double MAX_WIDTH = 400;
   static const double prefixIconSize = 16;
+  static const String countryCode = "+91";
   static const double suffixIconSize = 16;
   static const String serverNotRespond = "Server not Respond";
   static const String internetNotConnected = "Internet not connected";

@@ -25,19 +25,45 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 child: CustomTextFormField(
                   controller: controller.customerNameController,
                   label: AppString.customerNameKey.tr,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return AppString.pleaseEnterCustomerNameKey.tr;
+                    }
+                  },
                 ),
               ),
               CustomTextFormField(
-                controller: controller.customerAddressController,
-                label: AppString.customerAddressKey.tr,
-                maxLines: 5,
-              ),
+                  controller: controller.customerAddressController,
+                  label: AppString.customerAddressKey.tr,
+                  maxLines: 5,
+                  contentPadding: const EdgeInsets.only(
+                    top: 20,
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return AppString.pleaseEnterCustomerAddressKey.tr;
+                    }
+                  }),
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: CustomTextFormField(
-                  controller: controller.customerNumberController,
-                  label: AppString.customerMobileNumberKey.tr,
-                ),
+                    controller: controller.customerNumberController,
+                    textInputType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    label: AppString.customerMobileNumberKey.tr,
+                    prefix: const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: CustomTextLabel(
+                        label: AppConstant.countryCode,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value != null && value.isEmpty) {
+                        return AppString.pleaseEnterCustomerNumberKey.tr;
+                      } else if (value != null && !value.isValidPhoneNumber) {
+                        return AppString.pleaseEnterValidCustomerNumberKey.tr;
+                      }
+                    }),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -52,7 +78,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   },
                   readOnly: true,
                   controller: controller.orderDateController,
-                  suffix: loadMaterialIcon(Icons.calendar_today),
+                  suffix: loadMaterialIcon(Icons.calendar_month_outlined),
                   label: AppString.orderDateKey.tr,
                 ),
               ),
@@ -64,7 +90,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20, bottom: 20),
+                margin: const EdgeInsets.only(top: 20),
                 child: Row(
                   children: [
                     Expanded(
@@ -82,8 +108,20 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 ),
               ),
               Visibility(
+                  visible: controller.isShowValidation.value,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 4),
+                    child: CustomTextLabel(
+                      textAlign: TextAlign.start,
+                      style: AppStyles.textRegular
+                          .copyWith(color: AppColors.lightRedColor),
+                      label: AppString.pleaseAddOrderDetailsKey.tr,
+                    ),
+                  )),
+              Visibility(
                 visible: controller.containerDetailList.isNotEmpty,
                 child: Container(
+                  margin: const EdgeInsets.only(top: 20),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -111,11 +149,12 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                             Expanded(
                               child: CustomTextLabel(
                                 textAlign: TextAlign.start,
-                                label: AppString.totalAmountKey.tr,
+                                label: AppString.totalKey.tr,
                               ),
                             ),
                             CustomTextLabel(
-                              label: controller.getTotalAmount(),
+                              label:
+                                  " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
                             ),
                           ],
                         ),
@@ -169,7 +208,9 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 visible: controller.selectedDeliveryStatus.value ==
                     AppString.deliveredKey.tr,
                 child: Container(
-                  margin: const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(
+                    top: 20,
+                  ),
                   child: CustomTextFormField(
                     onTap: () {
                       openDatePicker(screen.context).then((value) {
@@ -181,8 +222,16 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     },
                     readOnly: true,
                     controller: controller.orderCompleteDateController,
-                    suffix: loadMaterialIcon(Icons.calendar_today),
+                    suffix: loadMaterialIcon(Icons.calendar_month_outlined),
                     label: AppString.completedDateKey.tr,
+                    validator: (value) {
+                      if (controller.selectedDeliveryStatus.value ==
+                          AppString.deliveredKey.tr) {
+                        if (value != null && value.isEmpty) {
+                          return AppString.pleaseEnterOrderCompletedDateKey.tr;
+                        }
+                      }
+                    },
                   ),
                 ),
               ),
@@ -196,7 +245,12 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     textStyle: AppStyles.textMedium.copyWith(
                       color: AppColors.redTextColor,
                     ),
-                    onClick: () {}),
+                    onClick: () {
+                      if (controller.formKey.currentState!.validate() &&
+                          !controller.checkOrderDetailValidation()) {
+                        showSnackBar(message: "Success------>");
+                      }
+                    }),
               ),
             ],
           ),
@@ -256,12 +310,10 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 data: Theme.of(context).copyWith(
                     inputDecorationTheme: MyAppTheme.inputDecorationTheme(
                   fillColor: AppColors.transparent,
+                  errorBorderColor: AppColors.redBackGroundColor,
                   labelStyle: AppStyles.textRegular
                       .copyWith(color: AppColors.blackTextColor),
-                  errorStyle: AppStyles.textRegular
-                      .copyWith(color: AppColors.redTextColor),
                   borderColor: AppColors.blackBackGroundColor,
-                  errorBorderColor: AppColors.redBackGroundColor,
                 )),
                 child: Obx(
                   () => Form(
@@ -312,17 +364,15 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
                             ],
+                            errorStyle: AppStyles.textRegular
+                                .copyWith(color: AppColors.redTextColor),
                             label: AppString.quantityKey.tr,
                             style: AppStyles.textRegular
                                 .copyWith(color: AppColors.blackTextColor),
                             fillColor: Colors.transparent,
-                            errorStyle: AppStyles.textRegular
-                                .copyWith(color: AppColors.redTextColor),
                             validator: (value) {
                               if (value != null && value.isEmpty) {
                                 return AppString.pleaseEnterQuantityKey.tr;
-                              } else {
-                                return null;
                               }
                             },
                           ),
@@ -343,8 +393,6 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                           validator: (value) {
                             if (value != null && value.isEmpty) {
                               return AppString.pleaseEnterPriceKey.tr;
-                            } else {
-                              return null;
                             }
                           },
                         )

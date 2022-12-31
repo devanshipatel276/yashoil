@@ -181,7 +181,8 @@ abstract class MyAppTheme {
       ),
       focusColor: borderColor ?? AppColors.primaryWhiteColor,
       hoverColor: borderColor ?? AppColors.primaryWhiteColor,
-      errorStyle: errorStyle ?? AppStyles.textRegular,
+      errorStyle: errorStyle ??
+          AppStyles.textRegular.copyWith(color: AppColors.lightRedTextColor),
       iconColor: borderColor ?? AppColors.primaryWhiteColor,
       alignLabelWithHint: true,
       floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -33,8 +33,12 @@ class AppString extends Translations {
           paymentTypeKey: "Payment Type",
           pleaseEnterCustomerNameKey: "Please enter customer name",
           pleaseEnterCustomerAddressKey: "Please enter customer address",
+          pleaseEnterCustomerNumberKey: "Please enter customer mobile number",
+          pleaseEnterValidCustomerNumberKey: "Please enter valid mobile number",
+          pleaseAddOrderDetailsKey: "Please add order details",
+          pleaseEnterOrderCompletedDateKey: "Please enter order completed date",
           billNumberKey: "Bill Number",
-          totalAmountKey: "Total Amount",
+          totalKey: "Total",
           receivedAmountKey: "Received Amount",
           priceKey: "Price",
           pleaseEnterPriceKey: "Please Enter Price",
@@ -98,10 +102,18 @@ class AppString extends Translations {
   static const String customerAddressKey = "customerAddressKey";
   static const String paymentTypeKey = "paymentTypeKey";
   static const String pleaseEnterCustomerNameKey = "pleaseEnterCustomerNameKey";
+  static const String pleaseEnterCustomerNumberKey =
+      "pleaseEnterCustomerNumberKey";
+  static const String pleaseEnterValidCustomerNumberKey =
+      "pleaseEnterValidCustomerNumberKey";
   static const String pleaseEnterCustomerAddressKey =
       "pleaseEnterCustomerAddressKey";
+  static const String pleaseAddOrderDetailsKey = "pleaseAddOrderDetailsKey";
+  static const String pleaseEnterOrderCompletedDateKey =
+      "pleaseEnterOrderCompletedDateKey";
+
   static const String billNumberKey = "billNumberKey";
-  static const String totalAmountKey = "totalAmountKey";
+  static const String totalKey = "totalAmountKey";
   static const String receivedAmountKey = "receivedAmountKey";
   static const String priceKey = "priceKey";
   static const String pleaseEnterPriceKey = "pleaseEnterPriceKey";

@@ -124,9 +124,9 @@ class CustomTextFormField extends StatelessWidget {
           suffixIconConstraints: suffixIconConstraints,
           prefixIconConstraints: prefixIconConstraints,
           prefix: prefix,
-          errorStyle: errorStyle ?? AppStyles.textRegular,
+          errorStyle: errorStyle,
           contentPadding: contentPadding,
-          prefixIcon: prefixIcon.isNotNullOrEmpty
+          prefixIcon: prefixIcon.isNotNullOrEmpty || suffix != null
               ? Padding(
                   padding: const EdgeInsets.only(left: 14.0, right: 8),
                   child: loadSvg(

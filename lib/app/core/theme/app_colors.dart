@@ -85,6 +85,7 @@ abstract class AppColors {
   static const Color purpleTextColor = mediumPurpleColor;
   static const Color grayTextColor = ultraDarkGrayColor;
   static const Color lightGrayTextColor = darkGrayColor;
+  static const Color lightRedTextColor = lightRedColor;
   static const Color dialogTextColor = CupertinoColors.activeBlue;
 
   //appbar colors

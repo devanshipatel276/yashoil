@@ -20,17 +20,17 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
           key: controller.formKey,
           child: ListView(
             children: [
-              CustomTextFormField(
-                controller: controller.customerNameController,
-                label: AppString.customerNameKey.tr,
-              ),
               Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20, bottom: 20),
                 child: CustomTextFormField(
-                  controller: controller.customerAddressController,
-                  label: AppString.customerAddressKey.tr,
-                  maxLines: 5,
+                  controller: controller.customerNameController,
+                  label: AppString.customerNameKey.tr,
                 ),
+              ),
+              CustomTextFormField(
+                controller: controller.customerAddressController,
+                label: AppString.customerAddressKey.tr,
+                maxLines: 5,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -105,7 +105,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                         child: divider(),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 26),
+                        padding: const EdgeInsets.only(right: 33),
                         child: Row(
                           children: [
                             Expanded(
@@ -397,7 +397,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
           controller.deleteContainerDetail(containerDetailModel);
         },
         child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.all(8.0),
           child: loadMaterialIcon(Icons.delete, size: 18),
         ),
       ),

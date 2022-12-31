@@ -7,6 +7,8 @@ void hideKeyboard() {
 }
 
 void goBack({dynamic result}) {
+  hideKeyboard();
+
   if (Get.isSnackbarOpen) {
     Get.closeAllSnackbars();
   } else {

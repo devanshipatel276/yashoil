@@ -57,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.hintStyle,
     this.prefixIconColor,
-    this.autoFocus = true,
+    this.autoFocus = false,
     this.onChange,
     this.textInputType = TextInputType.text,
     this.prefix,

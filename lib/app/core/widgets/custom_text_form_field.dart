@@ -7,7 +7,7 @@ import '../../../util/exports.dart';
 class CustomTextFormField extends StatelessWidget {
   final String label;
   final double radius;
-  final FormFieldValidator? validator;
+  final FormFieldValidator<String>? validator;
   final bool autoFocus;
   final TextEditingController controller;
   final ValueChanged<String>? onChange;

@@ -1,4 +1,3 @@
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'app/ui/main_controller.dart';

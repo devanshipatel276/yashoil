@@ -1,17 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:yash_oil/app/core/config/app_string.dart';
-import 'package:yash_oil/app/core/config/db/firebase_db.dart';
-import 'package:yash_oil/app/core/theme/app_colors.dart';
-import 'package:yash_oil/app/core/widgets/custom_text_form_field.dart';
-import 'package:yash_oil/app/core/widgets/custom_text_label.dart';
 import 'package:yash_oil/app/ui/addorder/add_order_controller.dart';
-import 'package:yash_oil/util/common_widget.dart';
 import 'package:yash_oil/util/exports.dart';
 
-import '../../../base/base_responsive_view.dart';
 import '../../../util/date_utils.dart';
-import '../../core/theme/app_styles.dart';
+import '../../enums/enums_utils.dart';
 
 class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
   AddOrderPage({super.key});
@@ -80,11 +72,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     )),
                     InkWell(
                       onTap: () {
-                        showOrderDetailDialog(
-                            screen.context,
-                            controller.orderDetailList,
-                            controller.quantityController,
-                            controller.priceController);
+                        showOrderDetailDialog();
                       },
                       child: loadMaterialIcon(Icons.add,
                           color: AppColors.whiteBackGroundColor),
@@ -204,5 +192,139 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
             selection.value = e!;
           }),
     );
+  }
+
+  showOrderDetailDialog({String title = ""}) {
+    return showDialog(
+        context: screen.context,
+        barrierDismissible: true,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+              title: CustomTextLabel(
+                label: AppString.orderDetailsKey.tr,
+                style: AppStyles.textMediumSPPro.copyWith(
+                    color: AppColors.blackTextColor,
+                    fontSize: Dimens.fontSize16),
+              ),
+              content: Theme(
+                data: Theme.of(context).copyWith(
+                    inputDecorationTheme: MyAppTheme.inputDecorationTheme(
+                  fillColor: AppColors.transparent,
+                  labelStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.blackTextColor),
+                  errorStyle: AppStyles.textRegular
+                      .copyWith(color: AppColors.redTextColor),
+                  borderColor: AppColors.blackBackGroundColor,
+                  errorBorderColor: AppColors.redBackGroundColor,
+                )),
+                child: Obx(
+                  () => Form(
+                    key: controller.dialogFormKey,
+                    child: Column(
+                      children: [
+                        radioView(
+                            value: ContainerType.fiveLtr,
+                            selection: controller.selected.value,
+                            label: AppString.fiveLtrKey.tr,
+                            onChanged: (value) {
+                              controller.selected.value = value!;
+                            }),
+                        radioView(
+                            value: ContainerType.fifteenLtrTin,
+                            selection: controller.selected.value,
+                            label: AppString.fifteenLtrTinKey.tr,
+                            onChanged: (value) {
+                              controller.selected.value = value!;
+                            }),
+                        radioView(
+                            value: ContainerType.fifteenLtrPlastic,
+                            selection: controller.selected.value,
+                            label: AppString.fifteenLtrPlasticKey.tr,
+                            onChanged: (value) {
+                              controller.selected.value = value!;
+                            }),
+                        radioView(
+                            value: ContainerType.fifteenKgTin,
+                            selection: controller.selected.value,
+                            label: AppString.fifteenKgTinKey.tr,
+                            onChanged: (value) {
+                              controller.selected.value = value!;
+                            }),
+                        radioView(
+                            value: ContainerType.fifteenKgPlastic,
+                            selection: controller.selected.value,
+                            label: AppString.fifteenKgPlasticKey.tr,
+                            onChanged: (value) {
+                              controller.selected.value = value!;
+                            }),
+                        Container(
+                          margin: const EdgeInsets.only(top: 8, bottom: 8),
+                          child: CustomTextFormField(
+                            controller: controller.quantityController,
+                            cursorColor: AppColors.blackBackGroundColor,
+                            label: AppString.quantityKey.tr,
+                            style: AppStyles.textRegular
+                                .copyWith(color: AppColors.blackTextColor),
+                            fillColor: Colors.transparent,
+                            errorStyle: AppStyles.textRegular
+                                .copyWith(color: AppColors.redTextColor),
+                            validator: (value) {
+                              if (value != null && value.isEmpty) {
+                                return AppString.pleaseEnterQuantityKey.tr;
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                        CustomTextFormField(
+                          controller: controller.priceController,
+                          cursorColor: AppColors.blackBackGroundColor,
+                          label: AppString.priceKey.tr,
+                          errorStyle: AppStyles.textRegular
+                              .copyWith(color: AppColors.redTextColor),
+                          style: AppStyles.textRegular
+                              .copyWith(color: AppColors.blackTextColor),
+                          fillColor: Colors.transparent,
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return AppString.pleaseEnterPriceKey.tr;
+                            } else {
+                              return null;
+                            }
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              actions: [
+                CupertinoDialogAction(
+                  onPressed: () {
+                    goBack();
+                  },
+                  child: CustomTextLabel(
+                    label: AppString.cancelBtnKey.tr,
+                    style: AppStyles.textRegularSPPro.copyWith(
+                        color: AppColors.dialogTextColor,
+                        fontSize: Dimens.fontSize16),
+                  ),
+                ),
+                CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    if (controller.dialogFormKey.currentState!.validate()) {
+                      controller.addContainerDetail();
+                    }
+                  },
+                  child: CustomTextLabel(
+                    label: AppString.saveKey.tr,
+                    style: AppStyles.textRegularSPPro.copyWith(
+                        color: AppColors.dialogTextColor,
+                        fontSize: Dimens.fontSize16),
+                  ),
+                ),
+              ],
+            ));
   }
 }

@@ -1,7 +1,0 @@
-//
-// class TypeModel(
-//
-// ContainerType? containerType
-//
-//
-// );

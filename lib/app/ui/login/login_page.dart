@@ -49,7 +49,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                           textInputAction: TextInputAction.next,
                           textInputType: TextInputType.emailAddress,
                           validator: (value) {
-                            return value.toString().validateEmail();
+                            return value?.validateEmail();
                           },
                         ),
                       ),
@@ -75,7 +75,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                                 )),
                             textInputAction: TextInputAction.done,
                             validator: (value) {
-                              return value.toString().validatePassword();
+                              return value?.validatePassword();
                             }),
                       ),
                       Container(
@@ -90,10 +90,12 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                           ),
                           onClick: () {
                             if (controller.formKey.currentState!.validate()) {
-                              controller.offNamed(AppPages.dashboard);
-                              // FireBaseDB.firebaseLogin(
-                              //     email: controller.emailController.text,
-                              //     password: controller.passwordController.text);
+                              FireBaseDB.firebaseLogin(
+                                  email: controller.emailController.text,
+                                  password: controller.passwordController.text,
+                                  onLogin: () {
+                                    controller.offNamed(AppPages.dashboard);
+                                  });
                             }
                           },
                         ),

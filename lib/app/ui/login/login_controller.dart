@@ -8,9 +8,9 @@ class LoginController extends BaseGetxController {
   final formKey = GlobalKey<FormState>();
   final isObscureText = true.obs;
   TextEditingController emailController =
-      TextEditingController(text: "test@gmail.com");
+      TextEditingController(text: "darshan504patel@gmail.com");
   TextEditingController passwordController =
-      TextEditingController(text: "Brain@2022");
+      TextEditingController(text: "Darshan@123");
 
   @override
   void onControllerReady() {}

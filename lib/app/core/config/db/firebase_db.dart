@@ -21,12 +21,15 @@ abstract class FireBaseDB {
   }
 
   static void firebaseLogin(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      Function? onLogin}) async {
     try {
       showLoader(value: true);
       var user = await firebaseInstance.signInWithEmailAndPassword(
           email: email, password: password);
-      print("Success--------->");
+      showLoader(value: false);
+      onLogin?.call();
     } on FirebaseAuthException catch (e) {
       showLoader(value: false);
       print(e.code);

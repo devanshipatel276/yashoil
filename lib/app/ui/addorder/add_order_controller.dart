@@ -6,6 +6,7 @@ import '../../../util/date_utils.dart';
 import '../../../util/exports.dart';
 import '../../../util/toolbar_model.dart';
 import '../../enums/enums_utils.dart';
+import '../../model/order_detail_model.dart';
 
 class AddOrderController extends BaseGetxController {
   //variable keys and controllers
@@ -99,7 +100,32 @@ class AddOrderController extends BaseGetxController {
   }
 
   bool checkOrderDetailValidation() {
-    return isShowValidation.value = orderDetailList.isNotEmpty;
+    return isShowValidation.value = containerDetailList.isEmpty;
+  }
+
+  void saveDetails() {
+    //conversion from one type to another tye
+    var containerList = <ContainerDetailModel>[];
+    for (var element in containerDetailList) {
+      containerList.add(ContainerDetailModel(
+          price: element.price,
+          type: getContainerIndex(element.type),
+          quantity: element.quantity));
+    }
+
+    var orderDetail = OrderDetailModel(
+        customerName: customerNameController.text,
+        customerAddress: customerAddressController.text,
+        customerMobileNumber: customerNumberController.text,
+        orderDate: orderDateController.text,
+        paymentStatus: selectedPaymentMode.value,
+        comments: commentsController.text,
+        totalAmount: getTotalAmount()[0],
+        totalQuantity: getTotalAmount()[1],
+        billNumber: billNumberController.text,
+        deliveryStatus: selectedDeliveryStatus.value,
+        containerList: []);
+    FireBaseDB.addOrderDetails(orderDetail);
   }
 
   @override

@@ -184,6 +184,9 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     controller: controller.commentsController,
                     label: AppString.commentsKey.tr,
                     maxLines: 5,
+                    contentPadding: const EdgeInsets.only(
+                      top: 20,
+                    ),
                   ),
                 ),
               ),
@@ -244,7 +247,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     onClick: () {
                       if (controller.formKey.currentState!.validate() &&
                           !controller.checkOrderDetailValidation()) {
-                        showSnackBar(message: "Success------>");
+                        controller.saveDetails();
                       }
                     }),
               ),

@@ -1,6 +1,7 @@
 # This is a generated file; do not edit or check into version control.
 app_settings=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\app_settings-4.1.6\\
-cloud_firestore_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-3.2.0\\
+cloud_firestore=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-4.3.1\\
+cloud_firestore_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-3.2.1\\
 connectivity=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity-3.0.6\\
 connectivity_for_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity_for_web-0.4.0+1\\
 connectivity_macos=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity_macos-0.2.1+2\\
@@ -9,10 +10,10 @@ connectivity_plus_linux=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\
 connectivity_plus_macos=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity_plus_macos-1.2.2\\
 connectivity_plus_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity_plus_web-1.2.1\\
 connectivity_plus_windows=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\connectivity_plus_windows-1.2.1\\
-firebase_auth=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-4.2.3\\
-firebase_auth_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth_web-5.2.3\\
-firebase_core=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-2.4.0\\
-firebase_core_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-2.0.2\\
+firebase_auth=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-4.2.4\\
+firebase_auth_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth_web-5.2.4\\
+firebase_core=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core-2.4.1\\
+firebase_core_web=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_core_web-2.1.0\\
 fluttertoast=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\fluttertoast-8.0.8\\
 path_provider=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-2.0.10\\
 path_provider_android=D:\\flutter_sdk\\flutter_sdk_3.3.8\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_android-2.0.14\\

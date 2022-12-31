@@ -11,6 +11,7 @@ class AppConstant {
   static const double prefixIconSize = 16;
   static const String countryCode = "+91";
   static const double suffixIconSize = 16;
+  static const String orderPath = "orders";
   static const String serverNotRespond = "Server not Respond";
   static const String internetNotConnected = "Internet not connected";
   static const String poorInternetConnection = "Poor internet connection";

@@ -52,7 +52,7 @@ class AddOrderController extends BaseGetxController {
   void onControllerReady() {}
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     orderDateController.text = dateToString(DateTime.now());
     containerDetailModel = LocalContainerDetailModel(
@@ -60,12 +60,6 @@ class AddOrderController extends BaseGetxController {
       price: priceController.text,
       quantity: quantityController.text,
     );
-    containerDetailList.listen((p0) {
-      for (var element in p0) {
-        print(
-            "OrderType ---> ${element.type}, Order Quantity--->${element.quantity}, Order Price--> ${element.price}");
-      }
-    });
   }
 
   MainController? getParentController() {
@@ -103,6 +97,28 @@ class AddOrderController extends BaseGetxController {
     return isShowValidation.value = containerDetailList.isEmpty;
   }
 
+  void editOrder(String path) async {
+    var orderDetail = await FireBaseDB.getOrderDetails(path);
+
+    customerNameController.text = orderDetail.customerName ?? "";
+    customerAddressController.text = orderDetail.customerAddress ?? "";
+    customerNumberController.text = orderDetail.customerMobileNumber ?? "";
+    orderDateController.text = orderDetail.orderDate ?? "";
+    billNumberController.text = orderDetail.billNumber ?? "";
+    commentsController.text = orderDetail.comments ?? "";
+    orderCompleteDateController.text = orderDetail.orderCompleteDate ?? "";
+    selectedPaymentMode.value =
+        orderDetail.paymentStatus ?? AppString.unPaidKey.tr;
+    selectedDeliveryStatus.value =
+        orderDetail.deliveryStatus ?? AppString.pendingKey.tr;
+    orderDetail.containerList?.forEach((element) {
+      containerDetailList.add(LocalContainerDetailModel(
+          price: element.price ?? "",
+          type: getContainerType(element.type!)!,
+          quantity: element.quantity ?? ""));
+    });
+  }
+
   void saveDetails() {
     //conversion from one type to another tye
     var containerList = <ContainerDetailModel>[];
@@ -119,6 +135,7 @@ class AddOrderController extends BaseGetxController {
         customerMobileNumber: customerNumberController.text,
         orderDate: orderDateController.text,
         paymentStatus: selectedPaymentMode.value,
+        orderCompleteDate: orderCompleteDateController.text,
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
         totalQuantity: getTotalAmount()[1],

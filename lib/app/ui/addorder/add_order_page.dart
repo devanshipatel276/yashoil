@@ -245,10 +245,11 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                       color: AppColors.redTextColor,
                     ),
                     onClick: () {
-                      if (controller.formKey.currentState!.validate() &&
-                          !controller.checkOrderDetailValidation()) {
-                        controller.saveDetails();
-                      }
+                      controller.save();
+                      // if (controller.formKey.currentState!.validate() &&
+                      //     !controller.checkOrderDetailValidation()) {
+                      //   controller.saveDetails();
+                      // }
                     }),
               ),
             ],

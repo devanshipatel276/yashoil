@@ -75,6 +75,20 @@ abstract class FireBaseDB {
     });
   }
 
+  static Future<OrderDetailModel> getOrderDetails(String path) async {
+    showLoader(value: true);
+    return await _firebaseDataBaseInstance
+        .collection(AppConstant.orderPath)
+        .doc(path)
+        .get()
+        .then((event) {
+      showLoader(value: false);
+      if (event.data() != null) {
+        return OrderDetailModel.fromJson(event.data()!);
+      }
+    });
+  }
+
   static void logout() async {
     await FirebaseAuth.instance.signOut();
   }

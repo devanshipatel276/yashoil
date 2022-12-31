@@ -45,3 +45,19 @@ int getContainerIndex(ContainerType type) {
       return ContainerType.fifteenLtrPlastic.type;
   }
 }
+
+ContainerType? getContainerType(int index) {
+  if (index == ContainerType.fifteenLtrTin.type) {
+    return ContainerType.fifteenLtrTin;
+  } else if (index == ContainerType.fifteenLtrPlastic.type) {
+    return ContainerType.fifteenLtrPlastic;
+  } else if (index == ContainerType.fiveLtr.type) {
+    return ContainerType.fiveLtr;
+  } else if (index == ContainerType.fifteenKgTin.type) {
+    return ContainerType.fifteenKgTin;
+  } else if (index == ContainerType.fifteenKgPlastic.type) {
+    return ContainerType.fifteenKgPlastic;
+  } else {
+    return null;
+  }
+}

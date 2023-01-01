@@ -24,11 +24,13 @@ class AddOrderController extends BaseGetxController {
 
   final RxString selectedDeliveryStatus = AppString.pendingKey.tr.obs;
   RxString selectedPaymentMode = AppString.unPaidKey.tr.obs;
-  RxList<LocalContainerDetailModel> containerDetailList =
-      <LocalContainerDetailModel>[].obs;
+  RxString toolBarTitle = AppString.addOrderDetailsKey.tr.obs;
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
   late LocalContainerDetailModel containerDetailModel;
   RxBool isShowValidation = false.obs;
+  bool isAddFlow = true;
+  RxList<LocalContainerDetailModel> containerDetailList =
+      <LocalContainerDetailModel>[].obs;
 
   //dropdown and radio list
   final deliveryStatusList = [
@@ -54,12 +56,14 @@ class AddOrderController extends BaseGetxController {
   @override
   void onInit() async {
     super.onInit();
-    orderDateController.text = dateToString(DateTime.now());
-    containerDetailModel = LocalContainerDetailModel(
-      type: selected.value,
-      price: priceController.text,
-      quantity: quantityController.text,
-    );
+    isAddFlow = Get.arguments == null;
+
+    if (isAddFlow) {
+      handleAddOrderFlow();
+    } else {
+      toolBarTitle.value = AppString.editOrderKey.tr;
+      handleEditOrderFlow(Get.arguments);
+    }
   }
 
   MainController? getParentController() {
@@ -97,26 +101,35 @@ class AddOrderController extends BaseGetxController {
     return isShowValidation.value = containerDetailList.isEmpty;
   }
 
-  void editOrder(String path) async {
+  void handleEditOrderFlow(String path) async {
     var orderDetail = await FireBaseDB.getOrderDetails(path);
 
-    customerNameController.text = orderDetail.customerName ?? "";
-    customerAddressController.text = orderDetail.customerAddress ?? "";
-    customerNumberController.text = orderDetail.customerMobileNumber ?? "";
-    orderDateController.text = orderDetail.orderDate ?? "";
-    billNumberController.text = orderDetail.billNumber ?? "";
-    commentsController.text = orderDetail.comments ?? "";
-    orderCompleteDateController.text = orderDetail.orderCompleteDate ?? "";
+    customerNameController.text = orderDetail?.customerName ?? "";
+    customerAddressController.text = orderDetail?.customerAddress ?? "";
+    customerNumberController.text = orderDetail?.customerMobileNumber ?? "";
+    orderDateController.text = orderDetail?.orderDate ?? "";
+    billNumberController.text = orderDetail?.billNumber ?? "";
+    commentsController.text = orderDetail?.comments ?? "";
+    orderCompleteDateController.text = orderDetail?.orderCompleteDate ?? "";
     selectedPaymentMode.value =
-        orderDetail.paymentStatus ?? AppString.unPaidKey.tr;
+        orderDetail?.paymentStatus ?? AppString.unPaidKey.tr;
     selectedDeliveryStatus.value =
-        orderDetail.deliveryStatus ?? AppString.pendingKey.tr;
-    orderDetail.containerList?.forEach((element) {
+        orderDetail?.deliveryStatus ?? AppString.pendingKey.tr;
+    orderDetail?.containerList?.forEach((element) {
       containerDetailList.add(LocalContainerDetailModel(
           price: element.price ?? "",
           type: getContainerType(element.type!)!,
           quantity: element.quantity ?? ""));
     });
+  }
+
+  void handleAddOrderFlow() {
+    orderDateController.text = dateToString(DateTime.now());
+    containerDetailModel = LocalContainerDetailModel(
+      type: selected.value,
+      price: priceController.text,
+      quantity: quantityController.text,
+    );
   }
 
   void saveDetails() {
@@ -138,13 +151,21 @@ class AddOrderController extends BaseGetxController {
         orderCompleteDate: orderCompleteDateController.text,
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
+        key: isAddFlow ? null : Get.arguments,
         totalQuantity: getTotalAmount()[1],
         billNumber: billNumberController.text,
         deliveryStatus: selectedDeliveryStatus.value,
         containerList: containerList);
-    FireBaseDB.addOrderDetails(orderDetail, () {
-      goBack();
-    });
+
+    if (isAddFlow) {
+      FireBaseDB.addOrderDetails(orderDetail, () {
+        goBack();
+      });
+    } else {
+      FireBaseDB.updateOrderDetails(orderDetail, () {
+        goBack();
+      });
+    }
   }
 
   @override
@@ -153,7 +174,7 @@ class AddOrderController extends BaseGetxController {
         currentController: this,
         isToolBarVisible: true,
         isTitleVisible: true,
-        title: AppString.addNewOrderKey.tr,
+        title: toolBarTitle.value,
         isBackVisible: true);
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:yash_oil/app/core/config/shared_preference.dart';
@@ -75,7 +77,7 @@ abstract class FireBaseDB {
     });
   }
 
-  static Future<OrderDetailModel> getOrderDetails(String path) async {
+  static Future<OrderDetailModel?> getOrderDetails(String path) async {
     showLoader(value: true);
     return await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)

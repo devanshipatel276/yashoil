@@ -13,8 +13,17 @@ abstract class FireBaseDB {
   static final FirebaseAuth _firebaseAuthInstance = FirebaseAuth.instance;
   static final FirebaseFirestore _firebaseDataBaseInstance =
       FirebaseFirestore.instance;
+  static var isOrderAdded = false.obs;
 
+  // static void firebaseC
   static void firebaseConfig() {
+    final docRef = _firebaseDataBaseInstance.collection(AppConstant.orderPath);
+    docRef.snapshots().listen(
+      (event) {
+        isOrderAdded.value = true;
+      },
+      onError: (error) => print("Listen failed: $error"),
+    );
     _firebaseAuthInstance.authStateChanges().listen((User? user) {
       if (user == null) {
         SharedPref.setValue(PrefsKey.isLoggedIn, false);

@@ -128,7 +128,8 @@ class AddOrderController extends BaseGetxController {
         containerList: containerList);
 
     FireBaseDB.addOrderDetails(orderDetail, () {
-      goBack();
+      // goBack();
+      offNamedUntil(AppPages.dashboard, (Route<dynamic> route) => false);
     });
   }
 

@@ -58,15 +58,20 @@ abstract class AppColors {
   static final MaterialColor materialBlack = createMaterialColor(Colors.black);
 
   static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color brownColor = Color(0xFF842D2D);
   static const Color blackColor = Color(0xFF000000);
   static const Color yellowColor = Color(0xFFFFB300);
+  static const Color darkYellowColor = Color(0xFFC08806);
   static const Color darkGrayColor = Color(0xFF757575);
   static const Color ultraDarkGrayColor = Color(0xFF4D4D4D);
   static const Color mediumGrayColor = Color(0xFFC2C8C8);
-  static const Color orangeColor = Color(0xFFFD4F57);
+
+  // static const Color orangeColor = Color(0xFFFD4F57);
+  static const Color orangeColor = Color(0xFF842D2D);
   static const Color redColor = Color(0xFFD6273D);
   static const Color lightRedColor = Color(0xFFFFADA6);
   static const Color greenColor = Color(0xFF1DCA7F);
+  static const Color darkGreenColor = Color(0xFF023C21);
   static const Color blueColor = Color(0xFF3665FF);
   static const Color lightBlueColor = Color(0xFF007AFF);
   static const Color purpleColor = Color(0xFF6C2FB6);
@@ -97,6 +102,8 @@ abstract class AppColors {
 
   //background colors
   static const Color blueBackGroundColor = blueColor;
+  static const Color darkYellowBackGroundColor = darkYellowColor;
+  static const Color darkGreenBackGroundColor = darkGreenColor;
   static const Color lightBlueBackGroundColor = lightBlueColor;
   static const Color greenBackGroundColor = greenColor;
   static const Color orangeBackGroundColor = orangeColor;

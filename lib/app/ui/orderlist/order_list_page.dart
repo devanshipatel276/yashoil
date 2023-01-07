@@ -32,11 +32,14 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                 },
                 itemCount: controller.orderList.length,
               )
-            : Center(
-                child: CustomTextLabel(
-                  label: AppString.orderNotAvailableKey.tr,
-                  style: AppStyles.textLarge
-                      .copyWith(color: AppColors.orangeTextColor),
+            : Visibility(
+                visible: controller.isFromApi,
+                child: Center(
+                  child: CustomTextLabel(
+                    label: AppString.orderNotAvailableKey.tr,
+                    style: AppStyles.textLarge
+                        .copyWith(color: AppColors.orangeTextColor),
+                  ),
                 ),
               ));
   }
@@ -68,14 +71,20 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                         child: iconTitleView(
                             color: getColor(
                                 controller.orderList[index].deliveryStatus),
-                            path: Assets.svg.icUser,
-                            isSvg: true,
-                            title: controller.orderList[index].customerName),
+                            path: Icons.content_paste_rounded,
+                            isSvg: false,
+                            title: controller.orderList[index].billNumber),
                       ),
                       showStatus(controller.orderList[index].deliveryStatus,
                           controller.orderList[index].userMail)
                     ],
                   ),
+                  iconTitleView(
+                      color:
+                          getColor(controller.orderList[index].deliveryStatus),
+                      path: Assets.svg.icUser,
+                      isSvg: true,
+                      title: controller.orderList[index].customerName),
                   iconTitleView(
                       path: Assets.svg.icPhone,
                       isSvg: true,
@@ -88,7 +97,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                       path: getOrderStatus(
                                   controller.orderList[index].deliveryStatus) ==
                               OrderStatus.delivered
-                          ? Icons.beenhere_rounded
+                          ? Icons.verified
                           : Icons.watch_later_outlined,
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
@@ -98,18 +107,26 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                               OrderStatus.delivered
                           ? controller.orderList[index].orderCompleteDate
                           : controller.orderList[index].orderDate),
-                  iconTitleView(
-                      path: Icons.maps_home_work_rounded,
-                      isSvg: false,
-                      color:
-                          getColor(controller.orderList[index].deliveryStatus),
-                      title: controller.orderList[index].customerAddress),
-                  iconTitleView(
-                      path: Icons.message,
-                      isSvg: false,
-                      color:
-                          getColor(controller.orderList[index].deliveryStatus),
-                      title: controller.orderList[index].comments),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: iconTitleView(
+                            path: Icons.maps_home_work_rounded,
+                            isSvg: false,
+                            color: getColor(
+                                controller.orderList[index].deliveryStatus),
+                            title: controller.orderList[index].customerAddress),
+                      ),
+                      CustomTextLabel(
+                          style: AppStyles.textRegular.copyWith(
+                              color: getColor(
+                                  controller.orderList[index].deliveryStatus)),
+                          textAlign: TextAlign.start,
+                          maxLines: 4,
+                          label:
+                              controller.orderList[index].paymentStatus ?? "")
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -204,10 +221,10 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
 
     switch (getOrderStatus(status)) {
       case OrderStatus.pending:
-        color = AppColors.yellowBackGroundColor;
+        color = AppColors.darkYellowBackGroundColor;
         break;
       case OrderStatus.delivered:
-        color = AppColors.greenBackGroundColor;
+        color = AppColors.darkGreenBackGroundColor;
         break;
     }
     return color;

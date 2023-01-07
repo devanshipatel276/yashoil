@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:yash_oil/app/ui/login/login_controller.dart';
 
 import '../../../util/exports.dart';
@@ -31,27 +32,29 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                 children: [
                   showLogo(),
                   Expanded(
-                    child: Column(
+                    child: ListView(
+                      physics: const BouncingScrollPhysics(),
                       children: [
                         Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 16.0),
+                          margin: const EdgeInsets.only(bottom: 16, top: 40),
                           child: CustomTextLabel(
                             label: AppString.logInKey.tr,
                             style: AppStyles.textDoubleExtraLarge,
                           ),
                         ),
-                        CustomTextLabel(
-                          label: AppString.loginDescriptionKey.tr,
-                          style: AppStyles.textRegular.copyWith(
-                            letterSpacing: 0.5,
-                            height: 1.5,
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          child: CustomTextLabel(
+                            label: AppString.loginDescriptionKey.tr,
+                            style: AppStyles.textRegular.copyWith(
+                              letterSpacing: 0.5,
+                              height: 1.5,
+                            ),
+                            maxLines: 3,
                           ),
-                          maxLines: 3,
                         ),
                         Container(
-                          margin:
-                              const EdgeInsets.fromLTRB(0.0, 36.0, 0.0, 12.0),
+                          margin: const EdgeInsets.only(bottom: 16),
                           child: CustomTextFormField(
                             controller: controller.emailController,
                             cursorColor: AppColors.whiteAppBarColor,

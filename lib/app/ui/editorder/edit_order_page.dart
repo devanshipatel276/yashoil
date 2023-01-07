@@ -19,7 +19,15 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
         child: Form(
           key: controller.formKey,
           child: ListView(
+            physics: const BouncingScrollPhysics(),
             children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: CustomTextFormField(
+                  controller: controller.billNumberController,
+                  label: AppString.billNumberKey.tr,
+                ),
+              ),
               Container(
                 margin: const EdgeInsets.only(top: 20, bottom: 20),
                 child: CustomTextFormField(
@@ -52,8 +60,13 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                     maxLength: 10,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     label: AppString.customerMobileNumberKey.tr,
+                    prefixIconConstraints: const BoxConstraints(
+                        minWidth: 25,
+                        minHeight: 25,
+                        maxWidth: 25,
+                        maxHeight: 25),
                     prefix: Padding(
-                      padding: EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(right: 8.0),
                       child: CustomTextLabel(
                         label: AppConstant.countryCode,
                         style: AppStyles.textRegular
@@ -84,13 +97,6 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                   suffix: loadMaterialIcon(Icons.calendar_month_outlined,
                       color: AppColors.orangeBackGroundColor),
                   label: AppString.orderDateKey.tr,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: CustomTextFormField(
-                  controller: controller.billNumberController,
-                  label: AppString.billNumberKey.tr,
                 ),
               ),
               addOrderView(),

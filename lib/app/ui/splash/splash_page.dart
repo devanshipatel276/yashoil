@@ -15,9 +15,9 @@ class SplashPage extends BaseGetResponsiveView<SplashController> {
     return Scaffold(
       backgroundColor: AppColors.orangeBackGroundColor,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
+            alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 60),
             child: CustomTextLabel(
               label: AppString.yashOil.tr,
@@ -25,25 +25,26 @@ class SplashPage extends BaseGetResponsiveView<SplashController> {
               maxLines: 2,
             ),
           ),
-          CustomTextLabel(
-            label: AppString.tag.tr,
-            style: AppStyles.textExtraLarge,
-            maxLines: 1,
+          Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: CustomTextLabel(
+              label: "INDUSTRIES",
+              style: AppStyles.textExtraLarge.copyWith(letterSpacing: 2.6),
+              maxLines: 1,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 6),
+            child: CustomTextLabel(
+              label: AppString.tag.tr,
+              style: AppStyles.textSmall.copyWith(fontStyle: FontStyle.italic),
+              maxLines: 1,
+            ),
           ),
           Expanded(child: Container()),
-          loadAsset(path: Assets.image.peanutOil.path),
-          Expanded(child: Container()),
-
-          //       path: Assets.svgs.icSplashFriends,
-          //       size: const Size(double.infinity, 232)),
-          // ),
-          // Container(
-          //   margin: const EdgeInsets.only(bottom: 89.0, top: 123),
-          //   // color: Colors.white,
-          //   child: loadSvg(
-          //       path: Assets.svgs.icSplashFriends,
-          //       size: const Size(double.infinity, 232)),
-          // ),
+          Expanded(
+              flex: 2, child: loadMaterialIcon(Icons.water_drop, size: 250)),
+          Expanded(flex: 2, child: Container())
         ],
       ),
     );

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yashoil.yash_oil">
    <application
-        android:label="yash_oil"
+        android:label="Yash Oil"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

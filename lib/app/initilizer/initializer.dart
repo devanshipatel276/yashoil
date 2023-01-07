@@ -42,6 +42,7 @@ abstract class Initializer {
     await GetStorage.init();
     await Firebase.initializeApp();
     await SharedPref.init();
+    FireBaseDB.firebaseConfig();
   }
 
   static void _initScreenPreference() {

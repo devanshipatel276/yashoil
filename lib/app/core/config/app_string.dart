@@ -12,7 +12,7 @@ class AppString extends Translations {
           tag: 'From earth to your home',
           logInKey: "Log In",
           emailAddressKey: "Email Address",
-          orderNotAvailableKey:"Oder Not Available !!",
+          orderNotAvailableKey: "Order Not Available !!",
           loginDescriptionKey:
               "Access yash oil business by logging in to your account",
           pleaseEnterEmailIdKey: "Please enter email id",

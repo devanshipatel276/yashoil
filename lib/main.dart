@@ -57,8 +57,9 @@ class MyApp extends GetView<MainController> {
       ..loadingStyle = EasyLoadingStyle.custom
       ..indicatorSize = 40.0
       ..radius = 8.0
+      ..maskColor = AppColors.transparent
       ..textColor = AppColors.purpleTextColor
-      ..backgroundColor = AppColors.whiteBackGroundColor
+      ..backgroundColor = AppColors.transparent
       ..indicatorColor = AppColors.orangeBackGroundColor
       ..userInteractions = true
       ..dismissOnTap = false;

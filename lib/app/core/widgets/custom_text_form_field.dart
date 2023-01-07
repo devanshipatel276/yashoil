@@ -61,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChange,
     this.textInputType = TextInputType.text,
     this.prefix,
-    this.cursorColor = AppColors.orangeAppBarColor,
+    this.cursorColor = AppColors.brownAppBarColor,
     this.input,
     this.isEditable,
     this.prefixIcon,
@@ -112,7 +112,7 @@ class CustomTextFormField extends StatelessWidget {
               LengthLimitingTextInputFormatter(maxLength)
             ]),
         style: style ??
-            AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+            AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
         maxLines: maxLines,
         readOnly: readOnly,
         enabled: isEditable,

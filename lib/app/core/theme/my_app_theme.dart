@@ -6,7 +6,7 @@ abstract class MyAppTheme {
   static ColorScheme appColorScheme = const ColorScheme(
     brightness: Brightness.light,
     primary: AppColors.primaryWhiteColor,
-    primaryContainer: AppColors.primaryOrangeColor,
+    primaryContainer: AppColors.primaryBrownColor,
     onPrimaryContainer: AppColors.primaryWhiteColor,
     onPrimary: AppColors.primaryWhiteColor,
     secondary: AppColors.secondaryPurpleColor,
@@ -31,7 +31,7 @@ abstract class MyAppTheme {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       }),
-      focusColor: AppColors.orangeBackGroundColor,
+      focusColor: AppColors.brownBackGroundColor,
       brightness: Brightness.light,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: _appBarTheme(),
@@ -75,7 +75,7 @@ abstract class MyAppTheme {
   //handle appbar theme
   static AppBarTheme? _appBarTheme() {
     return AppBarTheme(
-      backgroundColor: AppColors.orangeAppBarColor,
+      backgroundColor: AppColors.brownAppBarColor,
       centerTitle: true,
       titleTextStyle: AppStyles.boldStyle.copyWith(
           color: AppColors.whiteTextColor, fontSize: Dimens.fontSize16),
@@ -166,30 +166,30 @@ abstract class MyAppTheme {
       fillColor: fillColor ?? AppColors.whiteBackGroundColor,
       prefixStyle: AppStyles.textRegular,
       hintStyle: labelStyle ??
-          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+          AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
       labelStyle: labelStyle ??
-          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+          AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
       enabledBorder: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryBrownColor),
       ),
       focusedBorder: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryBrownColor),
       ),
       border: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryBrownColor),
       ),
-      focusColor: borderColor ?? AppColors.primaryOrangeColor,
-      hoverColor: borderColor ?? AppColors.primaryOrangeColor,
+      focusColor: borderColor ?? AppColors.primaryBrownColor,
+      hoverColor: borderColor ?? AppColors.primaryBrownColor,
       errorStyle: errorStyle ??
           AppStyles.textRegular.copyWith(color: AppColors.lightRedTextColor),
-      iconColor: borderColor ?? AppColors.primaryOrangeColor,
+      iconColor: borderColor ?? AppColors.primaryBrownColor,
       alignLabelWithHint: true,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       floatingLabelStyle: labelStyle ??
-          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+          AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
       errorBorder: 8.outlineInputBorder(
         borderSide:
             1.5.borderSide(color: errorBorderColor ?? AppColors.redErrorColor),
@@ -200,7 +200,7 @@ abstract class MyAppTheme {
       ),
       disabledBorder: 4.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryBrownColor),
       ),
     );
   }
@@ -292,7 +292,7 @@ abstract class MyAppTheme {
         ),
         elevation: 2,
         titleTextStyle:
-            AppStyles.regularStyle.copyWith(color: AppColors.orangeTextColor),
+            AppStyles.regularStyle.copyWith(color: AppColors.brownTextColor),
         contentTextStyle: AppStyles.regularStyle
             .copyWith(color: appColorScheme.onBackground));
   }

@@ -70,7 +70,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                       child: CustomTextLabel(
                         label: AppConstant.countryCode,
                         style: AppStyles.textRegular
-                            .copyWith(color: AppColors.orangeTextColor),
+                            .copyWith(color: AppColors.brownTextColor),
                       ),
                     ),
                     validator: (value) {
@@ -95,7 +95,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   readOnly: true,
                   controller: controller.orderDateController,
                   suffix: loadMaterialIcon(Icons.calendar_month_outlined,
-                      color: AppColors.orangeBackGroundColor),
+                      color: AppColors.brownBackGroundColor),
                   label: AppString.orderDateKey.tr,
                 ),
               ),
@@ -110,7 +110,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                         left: 0, right: 0, top: 16, bottom: 16),
                     text: AppString.saveKey.tr,
                     textStyle: AppStyles.textMedium,
-                    backgroundColor: AppColors.orangeBackGroundColor,
+                    backgroundColor: AppColors.brownBackGroundColor,
                     onClick: () {
                       if (controller.formKey.currentState!.validate() &&
                           !controller.checkOrderDetailValidation()) {
@@ -130,7 +130,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
     return Container(
       decoration: BoxDecoration(
           color: AppColors.whiteAppBarColor,
-          border: Border.all(color: AppColors.orangeBackGroundColor),
+          border: Border.all(color: AppColors.brownBackGroundColor),
           borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.all(4),
       child: DropdownButton(
@@ -139,14 +139,14 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
           underline: Container(),
           isDense: true,
           icon: loadMaterialIcon(Icons.arrow_drop_down,
-              color: AppColors.orangeBackGroundColor),
+              color: AppColors.brownBackGroundColor),
           items: list
               .map((e) => DropdownMenuItem(
                   value: e,
                   child: CustomTextLabel(
                     label: e,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                   )))
               .toList(),
           onChanged: (e) {
@@ -306,14 +306,14 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 textAlign: TextAlign.start,
                 label: AppString.addOrderDetailsKey.tr,
                 style: AppStyles.textRegular
-                    .copyWith(color: AppColors.orangeTextColor),
+                    .copyWith(color: AppColors.brownTextColor),
               )),
               InkWell(
                 onTap: () {
                   showOrderDetailDialog();
                 },
                 child: loadMaterialIcon(Icons.add,
-                    color: AppColors.orangeBackGroundColor),
+                    color: AppColors.brownBackGroundColor),
               )
             ],
           ),
@@ -335,7 +335,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.all(16),
             decoration: MyAppTheme.thinBorderTheme(
-                borderColor: AppColors.orangeBackGroundColor),
+                borderColor: AppColors.brownBackGroundColor),
             child: Column(
               children: [
                 ListView.builder(
@@ -348,7 +348,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                  child: divider(color: AppColors.orangeBackGroundColor),
+                  child: divider(color: AppColors.brownBackGroundColor),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 33),
@@ -359,12 +359,12 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                           textAlign: TextAlign.start,
                           label: AppString.totalKey.tr,
                           style: AppStyles.textRegular
-                              .copyWith(color: AppColors.orangeTextColor),
+                              .copyWith(color: AppColors.brownTextColor),
                         ),
                       ),
                       CustomTextLabel(
                         style: AppStyles.textRegular
-                            .copyWith(color: AppColors.orangeTextColor),
+                            .copyWith(color: AppColors.brownTextColor),
                         label:
                             " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
                       ),
@@ -385,11 +385,11 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
           child: CustomTextLabel(
               textAlign: TextAlign.start,
               style: AppStyles.textRegular
-                  .copyWith(color: AppColors.orangeTextColor),
+                  .copyWith(color: AppColors.brownTextColor),
               label: getContainerName(containerDetailModel.type))),
       CustomTextLabel(
           style:
-              AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+              AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
           label:
               "${containerDetailModel.quantity} x ${containerDetailModel.price}"),
       GestureDetector(
@@ -399,7 +399,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: loadMaterialIcon(Icons.delete,
-              size: 18, color: AppColors.orangeBackGroundColor),
+              size: 18, color: AppColors.brownBackGroundColor),
         ),
       ),
     ]);
@@ -417,7 +417,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     label: AppString.paymentKey.tr,
                     textAlign: TextAlign.start,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor)),
+                        .copyWith(color: AppColors.brownTextColor)),
               ),
               dropDownView(
                   list: controller.paymentModeList,
@@ -454,7 +454,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   label: AppString.deliveryStatusKey.tr,
                   textAlign: TextAlign.start,
                   style: AppStyles.textRegular
-                      .copyWith(color: AppColors.orangeTextColor)),
+                      .copyWith(color: AppColors.brownTextColor)),
             ),
             dropDownView(
                 list: controller.deliveryStatusList,
@@ -480,7 +480,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
               readOnly: true,
               controller: controller.orderCompleteDateController,
               suffix: loadMaterialIcon(Icons.calendar_month_outlined,
-                  color: AppColors.orangeBackGroundColor),
+                  color: AppColors.brownBackGroundColor),
               label: AppString.completedDateKey.tr,
               validator: (value) {
                 if (controller.selectedDeliveryStatus.value ==

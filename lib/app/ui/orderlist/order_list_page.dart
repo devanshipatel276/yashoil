@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../util/exports.dart';
 import '../../enums/enums_utils.dart';
 import 'order_list_controller.dart';
@@ -38,7 +40,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                   child: CustomTextLabel(
                     label: AppString.orderNotAvailableKey.tr,
                     style: AppStyles.textLarge
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                   ),
                 ),
               ));
@@ -88,6 +90,15 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                   iconTitleView(
                       path: Assets.svg.icPhone,
                       isSvg: true,
+                      onTap: () async {
+                        var url =
+                            "${AppConstant.countryCode} ${controller.orderList[index].customerMobileNumber}";
+                        final Uri launchUri = Uri(
+                          scheme: 'tel',
+                          path: url,
+                        );
+                        await launchUrl(launchUri);
+                      },
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
                       title:
@@ -140,31 +151,37 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
       {required dynamic path,
       required isSvg,
       required String? title,
-      Color color = AppColors.orangeBackGroundColor}) {
+      Function()? onTap,
+      Color color = AppColors.brownBackGroundColor}) {
     double iconSize = 18;
-    return Container(
-      margin: const EdgeInsets.only(bottom: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-              width: iconSize,
-              height: iconSize,
-              child: isSvg
-                  ? loadSvg(
-                      path: path, size: Size(iconSize, iconSize), color: color)
-                  : loadMaterialIcon(path, size: iconSize, color: color)),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(left: 16, right: 16),
-              child: CustomTextLabel(
-                  style: AppStyles.textRegular.copyWith(color: color),
-                  textAlign: TextAlign.start,
-                  maxLines: 4,
-                  label: title ?? ""),
-            ),
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+                width: iconSize,
+                height: iconSize,
+                child: isSvg
+                    ? loadSvg(
+                        path: path,
+                        size: Size(iconSize, iconSize),
+                        color: color)
+                    : loadMaterialIcon(path, size: iconSize, color: color)),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(left: 16, right: 16),
+                child: CustomTextLabel(
+                    style: AppStyles.textRegular.copyWith(color: color),
+                    textAlign: TextAlign.start,
+                    maxLines: 4,
+                    label: title ?? ""),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -212,7 +229,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
     } else if (user == AppConstant.yashEmail) {
       return AppColors.blueBackGroundColor;
     } else {
-      return AppColors.orangeBackGroundColor;
+      return AppColors.brownBackGroundColor;
     }
   }
 

@@ -21,9 +21,9 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
               inputDecorationTheme: MyAppTheme.inputDecorationTheme(
             fillColor: AppColors.whiteBackGroundColor,
             errorBorderColor: AppColors.redBackGroundColor,
-            labelStyle: AppStyles.textRegular
-                .copyWith(color: AppColors.orangeTextColor),
-            borderColor: AppColors.orangeBackGroundColor,
+            labelStyle:
+                AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
+            borderColor: AppColors.brownBackGroundColor,
           )),
           child: Container(
             margin: const EdgeInsets.only(left: 30, right: 30),
@@ -36,7 +36,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     readOnly: true,
                     fillColor: AppColors.whiteBackGroundColor,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                     controller: controller.billNumberController,
                     label: AppString.billNumberKey.tr,
                   ),
@@ -49,7 +49,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     controller: controller.customerNameController,
                     fillColor: AppColors.whiteBackGroundColor,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                   ),
                 ),
                 CustomTextFormField(
@@ -59,7 +59,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                   label: AppString.customerAddressKey.tr,
                   maxLines: 5,
                   style: AppStyles.textRegular
-                      .copyWith(color: AppColors.orangeTextColor),
+                      .copyWith(color: AppColors.brownTextColor),
                   contentPadding: const EdgeInsets.only(
                     top: 20,
                   ),
@@ -70,7 +70,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     readOnly: true,
                     fillColor: AppColors.whiteBackGroundColor,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                     controller: controller.customerNumberController,
                     label: AppString.customerMobileNumberKey.tr,
                     prefixIconConstraints: const BoxConstraints(
@@ -82,7 +82,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: CustomTextLabel(
                         style: AppStyles.textRegular
-                            .copyWith(color: AppColors.orangeTextColor),
+                            .copyWith(color: AppColors.brownTextColor),
                         label: AppConstant.countryCode,
                       ),
                     ),
@@ -94,10 +94,10 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     readOnly: true,
                     fillColor: AppColors.whiteBackGroundColor,
                     style: AppStyles.textRegular
-                        .copyWith(color: AppColors.orangeTextColor),
+                        .copyWith(color: AppColors.brownTextColor),
                     controller: controller.orderDateController,
                     suffix: loadMaterialIcon(Icons.calendar_month_outlined,
-                        color: AppColors.orangeBackGroundColor),
+                        color: AppColors.brownBackGroundColor),
                     label: AppString.orderDateKey.tr,
                   ),
                 ),
@@ -106,7 +106,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     child: CustomTextLabel(
                       textAlign: TextAlign.start,
                       style: AppStyles.textRegular
-                          .copyWith(color: AppColors.orangeTextColor),
+                          .copyWith(color: AppColors.brownTextColor),
                       label: AppString.orderDetailsKey.tr,
                     )),
                 Visibility(
@@ -115,7 +115,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(16),
                     decoration: MyAppTheme.thinBorderTheme(
-                        borderColor: AppColors.orangeBackGroundColor),
+                        borderColor: AppColors.brownBackGroundColor),
                     child: Column(
                       children: [
                         ListView.builder(
@@ -135,14 +135,14 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                             Expanded(
                               child: CustomTextLabel(
                                 style: AppStyles.textRegular
-                                    .copyWith(color: AppColors.orangeTextColor),
+                                    .copyWith(color: AppColors.brownTextColor),
                                 textAlign: TextAlign.start,
                                 label: AppString.totalKey.tr,
                               ),
                             ),
                             CustomTextLabel(
                               style: AppStyles.textRegular
-                                  .copyWith(color: AppColors.orangeTextColor),
+                                  .copyWith(color: AppColors.brownTextColor),
                               label:
                                   " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
                             ),
@@ -159,14 +159,14 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                       Expanded(
                         child: CustomTextLabel(
                           style: AppStyles.textRegular
-                              .copyWith(color: AppColors.orangeTextColor),
+                              .copyWith(color: AppColors.brownTextColor),
                           label: AppString.paymentKey.tr,
                           textAlign: TextAlign.start,
                         ),
                       ),
                       CustomTextLabel(
                         style: AppStyles.textRegular
-                            .copyWith(color: AppColors.orangeTextColor),
+                            .copyWith(color: AppColors.brownTextColor),
                         label: controller.selectedPaymentMode.value,
                         textAlign: TextAlign.start,
                       ),
@@ -180,14 +180,14 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                       Expanded(
                         child: CustomTextLabel(
                           style: AppStyles.textRegular
-                              .copyWith(color: AppColors.orangeTextColor),
+                              .copyWith(color: AppColors.brownTextColor),
                           label: AppString.deliveryStatusKey.tr,
                           textAlign: TextAlign.start,
                         ),
                       ),
                       CustomTextLabel(
                         style: AppStyles.textRegular
-                            .copyWith(color: AppColors.orangeTextColor),
+                            .copyWith(color: AppColors.brownTextColor),
                         label: controller.selectedDeliveryStatus.value,
                         textAlign: TextAlign.start,
                       ),
@@ -203,10 +203,10 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                       readOnly: true,
                       fillColor: AppColors.whiteBackGroundColor,
                       style: AppStyles.textRegular
-                          .copyWith(color: AppColors.orangeTextColor),
+                          .copyWith(color: AppColors.brownTextColor),
                       controller: controller.orderCompleteDateController,
                       suffix: loadMaterialIcon(Icons.calendar_month_outlined,
-                          color: AppColors.orangeBackGroundColor),
+                          color: AppColors.brownBackGroundColor),
                       label: AppString.completedDateKey.tr,
                     ),
                   ),
@@ -223,7 +223,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                       readOnly: true,
                       fillColor: AppColors.whiteBackGroundColor,
                       style: AppStyles.textRegular
-                          .copyWith(color: AppColors.orangeTextColor),
+                          .copyWith(color: AppColors.brownTextColor),
                       contentPadding: const EdgeInsets.only(
                         top: 20,
                       ),
@@ -243,12 +243,12 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
       Expanded(
           child: CustomTextLabel(
               style: AppStyles.textRegular
-                  .copyWith(color: AppColors.orangeTextColor),
+                  .copyWith(color: AppColors.brownTextColor),
               textAlign: TextAlign.start,
               label: getContainerName(containerDetailModel.type))),
       CustomTextLabel(
           style:
-              AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+              AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
           label:
               "${containerDetailModel.quantity} x ${containerDetailModel.price}"),
     ]);

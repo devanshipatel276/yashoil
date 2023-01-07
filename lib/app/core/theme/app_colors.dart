@@ -67,7 +67,6 @@ abstract class AppColors {
   static const Color mediumGrayColor = Color(0xFFC2C8C8);
 
   // static const Color orangeColor = Color(0xFFFD4F57);
-  static const Color orangeColor = Color(0xFF842D2D);
   static const Color redColor = Color(0xFFD6273D);
   static const Color lightRedColor = Color(0xFFFFADA6);
   static const Color greenColor = Color(0xFF1DCA7F);
@@ -86,7 +85,7 @@ abstract class AppColors {
   static const Color whiteTextColor = whiteColor;
   static const Color blackTextColor = blackColor;
   static const Color redTextColor = redColor;
-  static const Color orangeTextColor = orangeColor;
+  static const Color brownTextColor = brownColor;
   static const Color purpleTextColor = mediumPurpleColor;
   static const Color grayTextColor = ultraDarkGrayColor;
   static const Color lightGrayTextColor = darkGrayColor;
@@ -95,7 +94,7 @@ abstract class AppColors {
 
   //appbar colors
   static const Color purpleAppBarColor = lightPurpleColor;
-  static const Color orangeAppBarColor = orangeColor;
+  static const Color brownAppBarColor = brownColor;
   static const Color greenAppBarColor = greenColor;
   static const Color blueAppBarColor = blueColor;
   static const Color whiteAppBarColor = whiteColor;
@@ -106,7 +105,7 @@ abstract class AppColors {
   static const Color darkGreenBackGroundColor = darkGreenColor;
   static const Color lightBlueBackGroundColor = lightBlueColor;
   static const Color greenBackGroundColor = greenColor;
-  static const Color orangeBackGroundColor = orangeColor;
+  static const Color brownBackGroundColor = brownColor;
   static const Color lightPurpleBackGroundColor = extraLightPurpleColor;
   static const Color mediumPurpleBackGroundColor = lightPurpleColor;
   static const Color purpleBackGroundColor = purpleColor;
@@ -123,7 +122,7 @@ abstract class AppColors {
   //primary,secondary colors
   static const Color primaryWhiteColor = whiteColor;
   static const Color primaryGrayColor = ultraDarkGrayColor;
-  static const Color primaryOrangeColor = orangeColor;
+  static const Color primaryBrownColor = brownColor;
   static const Color secondaryPurpleColor = lightPurpleColor;
   static const Color secondaryLightPurpleColor = ultraLightPurpleColor;
 

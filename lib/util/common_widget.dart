@@ -56,7 +56,7 @@ Widget showLogo() {
         label: AppString.yashOil.tr,
         style: AppStyles.textDoubleExtraLargeMTSans.copyWith(
             fontSize: Dimens.fontSize18,
-            color: AppColors.orangeTextColor,
+            color: AppColors.brownTextColor,
             letterSpacing: 1.4),
       ),
     ),
@@ -187,7 +187,7 @@ Future<DateTime?> openDatePicker(BuildContext context) async {
       builder: (context, child) => Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: AppColors.orangeAppBarColor, // <-- SEE HERE
+              primary: AppColors.brownAppBarColor, // <-- SEE HERE
               onPrimary: AppColors.whiteAppBarColor, // <-- SEE HERE
               onSurface: AppColors.blackBackGroundColor, // <-- SEE HERE
             ),

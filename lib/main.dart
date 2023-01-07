@@ -60,7 +60,7 @@ class MyApp extends GetView<MainController> {
       ..maskColor = AppColors.transparent
       ..textColor = AppColors.purpleTextColor
       ..backgroundColor = AppColors.transparent
-      ..indicatorColor = AppColors.orangeBackGroundColor
+      ..indicatorColor = AppColors.brownBackGroundColor
       ..userInteractions = true
       ..dismissOnTap = false;
   }

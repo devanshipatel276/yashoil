@@ -48,7 +48,7 @@ class OrderListController extends BaseGetxController {
   ToolBarModel? setUpToolbar() {
     return ToolBarModel(
         currentController: this,
-        appBarColor: AppColors.orangeBackGroundColor,
+        appBarColor: AppColors.brownBackGroundColor,
         isToolBarVisible: true,
         isLogoVisible: true,
         isDrawerRequired: true);

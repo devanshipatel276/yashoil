@@ -28,7 +28,7 @@ class ToolBarModel {
       this.isLogoVisible = false,
       this.isBackVisible = false,
       this.isCrossVisible = false,
-      this.appBarColor = AppColors.orangeAppBarColor,
+      this.appBarColor = AppColors.brownAppBarColor,
       this.currentController,
       String? title,
       this.endTitle = "",

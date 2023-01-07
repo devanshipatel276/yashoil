@@ -14,7 +14,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
 
   Widget _phoneAndTabletView() {
     return Scaffold(
-        backgroundColor: AppColors.orangeBackGroundColor,
+        backgroundColor: AppColors.brownBackGroundColor,
         body: Theme(
           data: Theme.of(screen.context).copyWith(
               inputDecorationTheme: MyAppTheme.inputDecorationTheme(
@@ -61,7 +61,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                             label: AppString.emailAddressKey.tr,
                             prefixIcon: Assets.svg.icUser,
                             textInputAction: TextInputAction.next,
-                            fillColor: AppColors.orangeTextColor,
+                            fillColor: AppColors.brownTextColor,
                             style: AppStyles.textRegular
                                 .copyWith(color: AppColors.whiteTextColor),
                             textInputType: TextInputType.emailAddress,
@@ -76,7 +76,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                               controller: controller.passwordController,
                               label: AppString.passwordKey.tr,
                               prefixIcon: Assets.svg.icKey,
-                              fillColor: AppColors.orangeTextColor,
+                              fillColor: AppColors.brownTextColor,
                               cursorColor: AppColors.whiteAppBarColor,
                               style: AppStyles.textRegular
                                   .copyWith(color: AppColors.whiteTextColor),

@@ -15,7 +15,7 @@ class MenuPage extends BaseGetResponsiveView<MenuController> {
   Widget _phoneAndTabletView() {
     return Obx(() {
       return Scaffold(
-        backgroundColor: AppColors.orangeBackGroundColor,
+        backgroundColor: AppColors.brownBackGroundColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class MenuPage extends BaseGetResponsiveView<MenuController> {
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
                 text: AppString.logOutKey.tr,
                 textStyle: AppStyles.textRegular.copyWith(
-                  color: AppColors.redTextColor,
+                  color: AppColors.brownBackGroundColor,
                 ),
                 onClick: () {
                   openAlertDialog(screen.context,

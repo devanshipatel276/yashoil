@@ -13,7 +13,7 @@ class SplashPage extends BaseGetResponsiveView<SplashController> {
 
   Widget _phoneAndTabletView() {
     return Scaffold(
-      backgroundColor: AppColors.orangeBackGroundColor,
+      backgroundColor: AppColors.brownBackGroundColor,
       body: Column(
         children: [
           Container(

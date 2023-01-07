@@ -49,12 +49,15 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                 child: CustomTextFormField(
                     controller: controller.customerNumberController,
                     textInputType: TextInputType.number,
+                    maxLength: 10,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     label: AppString.customerMobileNumberKey.tr,
-                    prefix: const Padding(
+                    prefix: Padding(
                       padding: EdgeInsets.only(right: 8.0),
                       child: CustomTextLabel(
                         label: AppConstant.countryCode,
+                        style: AppStyles.textRegular
+                            .copyWith(color: AppColors.orangeTextColor),
                       ),
                     ),
                     validator: (value) {

@@ -61,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChange,
     this.textInputType = TextInputType.text,
     this.prefix,
-    this.cursorColor,
+    this.cursorColor = AppColors.orangeAppBarColor,
     this.input,
     this.isEditable,
     this.prefixIcon,

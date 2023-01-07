@@ -12,6 +12,7 @@ class AppString extends Translations {
           tag: 'From earth to your home',
           logInKey: "Log In",
           emailAddressKey: "Email Address",
+          orderNotAvailableKey:"Oder Not Available !!",
           loginDescriptionKey:
               "Access yash oil business by logging in to your account",
           pleaseEnterEmailIdKey: "Please enter email id",
@@ -154,4 +155,5 @@ class AppString extends Translations {
   static const String orderAddedKey = "orderAddedKey";
   static const String inProgressKey = "inProgressKey";
   static const String editKey = "editKey";
+  static const String orderNotAvailableKey = "orderNotAvailableKey";
 }

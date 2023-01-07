@@ -4,6 +4,7 @@ import '../../../util/exports.dart';
 
 abstract class PrefsKey {
   static const isLoggedIn = "key_IsLoggedIn";
+  static const userEmail = "key_userEmail";
 }
 
 abstract class SharedPref {

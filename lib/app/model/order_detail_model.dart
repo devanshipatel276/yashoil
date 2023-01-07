@@ -14,6 +14,7 @@ class OrderDetailModel {
   String? deliveryStatus;
   String? totalAmount;
   String? totalQuantity;
+  String? userMail;
 
   OrderDetailModel(
       {required this.customerName,
@@ -26,6 +27,7 @@ class OrderDetailModel {
       required this.totalAmount,
       required this.totalQuantity,
       this.orderCompleteDate,
+      this.userMail,
       this.key,
       this.billNumber,
       this.comments});
@@ -34,6 +36,7 @@ class OrderDetailModel {
     customerName = json["customer_name"];
     key = json["key"];
     customerAddress = json["customer_address"];
+    userMail = json["user_email"];
     customerMobileNumber = json["customer_mobile_number"];
     orderDate = json["order_date"];
     billNumber = json["bill_number"];
@@ -57,6 +60,7 @@ class OrderDetailModel {
       data['container_list'] = containerList?.map((v) => v.toJson()).toList();
     }
     data["customer_name"] = customerName;
+    data["user_email"] = userMail;
     data["key"] = key;
     data["customer_address"] = customerAddress;
     data["customer_mobile_number"] = customerMobileNumber;

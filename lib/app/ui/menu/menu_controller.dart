@@ -36,7 +36,8 @@ class MenuController extends BaseGetxController {
   }
 
   void handleLogOut() {
-    offAllNamed(AppPages.login);
+    FireBaseDB.logout();
+    dashboardController.offAllNamed(AppPages.login);
   }
 
   @override

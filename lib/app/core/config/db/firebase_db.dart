@@ -34,6 +34,7 @@ abstract class FireBaseDB {
       showLoader(value: true);
       var user = await _firebaseAuthInstance.signInWithEmailAndPassword(
           email: email, password: password);
+      SharedPref.setValue(PrefsKey.userEmail, email);
       showLoader(value: false);
       onLogin?.call();
     } on FirebaseAuthException catch (e) {
@@ -52,6 +53,7 @@ abstract class FireBaseDB {
 
   static Future<void> addOrderDetails(
       OrderDetailModel orderDetailModel, Function() onSave) async {
+    orderDetailModel.userMail = SharedPref.getString(PrefsKey.userEmail);
     showLoader(value: true);
     await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)
@@ -67,6 +69,7 @@ abstract class FireBaseDB {
   static Future<void> updateOrderDetails(
       OrderDetailModel orderDetailModel, Function() onSave) async {
     showLoader(value: true);
+    orderDetailModel.userMail = SharedPref.getString(PrefsKey.userEmail);
     await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)
         .doc(orderDetailModel.key)
@@ -112,6 +115,8 @@ abstract class FireBaseDB {
   }
 
   static void logout() async {
+    SharedPref.setValue(PrefsKey.isLoggedIn, false);
+    SharedPref.setValue(PrefsKey.userEmail, "");
     await FirebaseAuth.instance.signOut();
   }
 }

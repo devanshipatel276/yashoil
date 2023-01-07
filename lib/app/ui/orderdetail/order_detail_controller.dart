@@ -1,3 +1,4 @@
+import 'package:yash_oil/app/model/order_detail_model.dart';
 import 'package:yash_oil/app/ui/main_controller.dart';
 
 import '../../../base/base_controller.dart';
@@ -28,6 +29,7 @@ class OrderDetailController extends BaseGetxController {
   bool isAddFlow = true;
   RxList<LocalContainerDetailModel> containerDetailList =
       <LocalContainerDetailModel>[].obs;
+  OrderDetailModel? orderDetail;
 
   @override
   void onControllerReady() {}
@@ -48,19 +50,28 @@ class OrderDetailController extends BaseGetxController {
         currentController: this,
         isToolBarVisible: true,
         isTitleVisible: true,
+        onBackOrClose: () {
+          goBack(result: orderDetail);
+        },
         title: AppString.orderDetailsKey.tr,
         endTitle: AppString.editKey.tr,
         endTitleClick: () {
           toNamed(AppPages.editOrder, arguments: Get.arguments)?.then((value) {
-            if (value != null) {}
+            if (value != null) {
+              orderDetail = value;
+              setValue();
+            }
           });
         },
         isBackVisible: true);
   }
 
   void handleEditOrderFlow(String path) async {
-    var orderDetail = await FireBaseDB.getOrderDetails(path);
+    orderDetail = await FireBaseDB.getOrderDetails(path);
+    setValue();
+  }
 
+  void setValue() {
     customerNameController.text = orderDetail?.customerName ?? "";
     customerAddressController.text = orderDetail?.customerAddress ?? "";
     customerNumberController.text = orderDetail?.customerMobileNumber ?? "";

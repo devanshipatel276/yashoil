@@ -15,36 +15,30 @@ class MainAppBar extends GetResponsiveView {
   Widget phone() {
     return Obx(() => Visibility(
         visible: controller.toolBarModel.value.isToolBarVisible,
-        child: Column(
-          children: [
-            AppBar(
-                title:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  controller.toolBarModel.value.isTitleVisible
-                      ? Expanded(
-                          child: CustomTextLabel(
-                              label: '${controller.toolBarModel.value.title} '),
-                        )
-                      : (controller.toolBarModel.value.isLogoVisible)
-                          ? showLogo()
-                          : Container(),
-                  Visibility(
-                    visible:
-                        controller.toolBarModel.value.endTitle.isNotNullOrEmpty,
-                    child: GestureDetector(
-                      onTap: controller.toolBarModel.value.endTitleClick,
+        child: AppBar(
+            title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              controller.toolBarModel.value.isTitleVisible
+                  ? Expanded(
                       child: CustomTextLabel(
-                          label: '${controller.toolBarModel.value.endTitle} '),
-                    ),
-                  )
-                ]),
-                leading: getLeading()),
-            Visibility(
-                visible: controller.toolBarModel.value.isTitleVisible,
-                child: divider(
-                    color: AppColors.whiteBackGroundColor.withOpacity(0.5)))
-          ],
-        )));
+                          label: '${controller.toolBarModel.value.title} '),
+                    )
+                  : (controller.toolBarModel.value.isLogoVisible)
+                      ? showLogo()
+                      : Container(),
+              Visibility(
+                replacement: Container(
+                  width: 30,
+                ),
+                visible:
+                    controller.toolBarModel.value.endTitle.isNotNullOrEmpty,
+                child: GestureDetector(
+                  onTap: controller.toolBarModel.value.endTitleClick,
+                  child: CustomTextLabel(
+                      label: '${controller.toolBarModel.value.endTitle} '),
+                ),
+              )
+            ]),
+            leading: getLeading())));
   }
 
   Widget? getLeading() {
@@ -63,7 +57,7 @@ class MainAppBar extends GetResponsiveView {
                 Get.closeAllSnackbars();
                 Get.back();
               },
-          icon: const Icon(Icons.arrow_back_rounded));
+          icon: const Icon(Icons.arrow_back_ios_new));
     } else if (controller.toolBarModel.value.isCrossVisible) {
       return IconButton(
           onPressed: controller.toolBarModel.value.onBackOrClose ??

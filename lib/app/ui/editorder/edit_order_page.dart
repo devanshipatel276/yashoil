@@ -13,114 +13,106 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
   @override
   Widget buildPhoneWidget() {
     return Scaffold(
-      backgroundColor: AppColors.orangeBackGroundColor,
-      body: Theme(
-        data: Theme.of(screen.context).copyWith(
-            inputDecorationTheme: MyAppTheme.inputDecorationTheme(
-          fillColor: AppColors.whiteBackGroundColor,
-          errorBorderColor: AppColors.redBackGroundColor,
-          labelStyle:
-              AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
-          borderColor: AppColors.orangeBackGroundColor,
-        )),
-        child: Padding(
-          padding:
-              const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 8),
-          child: Form(
-            key: controller.formKey,
-            child: ListView(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 20, bottom: 20),
-                  child: CustomTextFormField(
-                    controller: controller.customerNameController,
-                    label: AppString.customerNameKey.tr,
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return AppString.pleaseEnterCustomerNameKey.tr;
-                      }
-                    },
-                  ),
+      backgroundColor: AppColors.whiteAppBarColor,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 8),
+        child: Form(
+          key: controller.formKey,
+          child: ListView(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 20, bottom: 20),
+                child: CustomTextFormField(
+                  controller: controller.customerNameController,
+                  label: AppString.customerNameKey.tr,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return AppString.pleaseEnterCustomerNameKey.tr;
+                    }
+                  },
                 ),
-                CustomTextFormField(
-                    controller: controller.customerAddressController,
-                    label: AppString.customerAddressKey.tr,
-                    maxLines: 5,
-                    contentPadding: const EdgeInsets.only(
-                      top: 20,
+              ),
+              CustomTextFormField(
+                  controller: controller.customerAddressController,
+                  label: AppString.customerAddressKey.tr,
+                  maxLines: 5,
+                  contentPadding: const EdgeInsets.only(
+                    top: 20,
+                  ),
+                  validator: (value) {
+                    if (value != null && value.isEmpty) {
+                      return AppString.pleaseEnterCustomerAddressKey.tr;
+                    }
+                  }),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: CustomTextFormField(
+                    controller: controller.customerNumberController,
+                    textInputType: TextInputType.number,
+                    maxLength: 10,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    label: AppString.customerMobileNumberKey.tr,
+                    prefix: Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: CustomTextLabel(
+                        label: AppConstant.countryCode,
+                        style: AppStyles.textRegular
+                            .copyWith(color: AppColors.orangeTextColor),
+                      ),
                     ),
                     validator: (value) {
                       if (value != null && value.isEmpty) {
-                        return AppString.pleaseEnterCustomerAddressKey.tr;
+                        return AppString.pleaseEnterCustomerNumberKey.tr;
+                      } else if (value != null && !value.isValidPhoneNumber) {
+                        return AppString.pleaseEnterValidCustomerNumberKey.tr;
                       }
                     }),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: CustomTextFormField(
-                      controller: controller.customerNumberController,
-                      textInputType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      label: AppString.customerMobileNumberKey.tr,
-                      prefix: const Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: CustomTextLabel(
-                          label: AppConstant.countryCode,
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return AppString.pleaseEnterCustomerNumberKey.tr;
-                        } else if (value != null && !value.isValidPhoneNumber) {
-                          return AppString.pleaseEnterValidCustomerNumberKey.tr;
-                        }
-                      }),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: CustomTextFormField(
+                  onTap: () {
+                    openDatePicker(screen.context).then((value) {
+                      if (value != null) {
+                        controller.orderDateController.text =
+                            dateToString(value);
+                      }
+                    });
+                  },
+                  readOnly: true,
+                  controller: controller.orderDateController,
+                  suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                      color: AppColors.orangeBackGroundColor),
+                  label: AppString.orderDateKey.tr,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: CustomTextFormField(
-                    onTap: () {
-                      openDatePicker(screen.context).then((value) {
-                        if (value != null) {
-                          controller.orderDateController.text =
-                              dateToString(value);
-                        }
-                      });
-                    },
-                    readOnly: true,
-                    controller: controller.orderDateController,
-                    suffix: loadMaterialIcon(Icons.calendar_month_outlined),
-                    label: AppString.orderDateKey.tr,
-                  ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: CustomTextFormField(
+                  controller: controller.billNumberController,
+                  label: AppString.billNumberKey.tr,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: CustomTextFormField(
-                    controller: controller.billNumberController,
-                    label: AppString.billNumberKey.tr,
-                  ),
-                ),
-                addOrderView(),
-                paymentView(),
-                deliveryView(),
-                Container(
-                  width: 120.0,
-                  margin: const EdgeInsets.fromLTRB(0.0, 32.0, 0.0, 14.0),
-                  child: CustomPrimaryButton(
-                      padding: const EdgeInsets.only(
-                          left: 0, right: 0, top: 16, bottom: 16),
-                      text: AppString.saveKey.tr,
-                      textStyle: AppStyles.textMedium.copyWith(
-                        color: AppColors.redTextColor,
-                      ),
-                      onClick: () {
-                        if (controller.formKey.currentState!.validate() &&
-                            !controller.checkOrderDetailValidation()) {
-                          controller.saveDetails();
-                        }
-                      }),
-                ),
-              ],
-            ),
+              ),
+              addOrderView(),
+              paymentView(),
+              deliveryView(),
+              Container(
+                width: 120.0,
+                margin: const EdgeInsets.fromLTRB(0.0, 32.0, 0.0, 14.0),
+                child: CustomPrimaryButton(
+                    padding: const EdgeInsets.only(
+                        left: 0, right: 0, top: 16, bottom: 16),
+                    text: AppString.saveKey.tr,
+                    textStyle: AppStyles.textMedium,
+                    backgroundColor: AppColors.orangeBackGroundColor,
+                    onClick: () {
+                      if (controller.formKey.currentState!.validate() &&
+                          !controller.checkOrderDetailValidation()) {
+                        controller.saveDetails();
+                      }
+                    }),
+              ),
+            ],
           ),
         ),
       ),
@@ -131,8 +123,8 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
       {required List<String> list, required RxString selection}) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.whiteBackGroundColor,
-          border: Border.all(color: AppColors.whiteAppBarColor),
+          color: AppColors.whiteAppBarColor,
+          border: Border.all(color: AppColors.orangeBackGroundColor),
           borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.all(4),
       child: DropdownButton(
@@ -307,12 +299,15 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                   child: CustomTextLabel(
                 textAlign: TextAlign.start,
                 label: AppString.addOrderDetailsKey.tr,
+                style: AppStyles.textRegular
+                    .copyWith(color: AppColors.orangeTextColor),
               )),
               InkWell(
                 onTap: () {
                   showOrderDetailDialog();
                 },
-                child: loadMaterialIcon(Icons.add),
+                child: loadMaterialIcon(Icons.add,
+                    color: AppColors.orangeBackGroundColor),
               )
             ],
           ),
@@ -333,7 +328,8 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
           child: Container(
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.all(16),
-            decoration: MyAppTheme.thinBorderTheme(),
+            decoration: MyAppTheme.thinBorderTheme(
+                borderColor: AppColors.orangeBackGroundColor),
             child: Column(
               children: [
                 ListView.builder(
@@ -346,7 +342,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                  child: divider(),
+                  child: divider(color: AppColors.orangeBackGroundColor),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 33),
@@ -356,9 +352,13 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                         child: CustomTextLabel(
                           textAlign: TextAlign.start,
                           label: AppString.totalKey.tr,
+                          style: AppStyles.textRegular
+                              .copyWith(color: AppColors.orangeTextColor),
                         ),
                       ),
                       CustomTextLabel(
+                        style: AppStyles.textRegular
+                            .copyWith(color: AppColors.orangeTextColor),
                         label:
                             " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
                       ),
@@ -378,8 +378,12 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
       Expanded(
           child: CustomTextLabel(
               textAlign: TextAlign.start,
+              style: AppStyles.textRegular
+                  .copyWith(color: AppColors.orangeTextColor),
               label: getContainerName(containerDetailModel.type))),
       CustomTextLabel(
+          style:
+              AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
           label:
               "${containerDetailModel.quantity} x ${containerDetailModel.price}"),
       GestureDetector(
@@ -388,7 +392,8 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: loadMaterialIcon(Icons.delete, size: 18),
+          child: loadMaterialIcon(Icons.delete,
+              size: 18, color: AppColors.orangeBackGroundColor),
         ),
       ),
     ]);
@@ -403,9 +408,10 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
             children: [
               Expanded(
                 child: CustomTextLabel(
-                  label: AppString.paymentKey.tr,
-                  textAlign: TextAlign.start,
-                ),
+                    label: AppString.paymentKey.tr,
+                    textAlign: TextAlign.start,
+                    style: AppStyles.textRegular
+                        .copyWith(color: AppColors.orangeTextColor)),
               ),
               dropDownView(
                   list: controller.paymentModeList,
@@ -439,9 +445,10 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
           children: [
             Expanded(
               child: CustomTextLabel(
-                label: AppString.deliveryStatusKey.tr,
-                textAlign: TextAlign.start,
-              ),
+                  label: AppString.deliveryStatusKey.tr,
+                  textAlign: TextAlign.start,
+                  style: AppStyles.textRegular
+                      .copyWith(color: AppColors.orangeTextColor)),
             ),
             dropDownView(
                 list: controller.deliveryStatusList,
@@ -466,7 +473,8 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
               },
               readOnly: true,
               controller: controller.orderCompleteDateController,
-              suffix: loadMaterialIcon(Icons.calendar_month_outlined),
+              suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                  color: AppColors.orangeBackGroundColor),
               label: AppString.completedDateKey.tr,
               validator: (value) {
                 if (controller.selectedDeliveryStatus.value ==

@@ -17,4 +17,6 @@ class AppConstant {
   static const String poorInternetConnection = "Poor internet connection";
   static const String unauthorized = "Unauthorized";
   static const String somethingWentWrong = "Something Went Wrong";
+  static const String darshanEmail = "darshan504patel@gmail.com";
+  static const String yashEmail = "yashpatel30197@gmail.com";
 }

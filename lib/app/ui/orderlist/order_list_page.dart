@@ -14,17 +14,31 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
   Widget _phoneAndTabletView() {
     return Scaffold(
         backgroundColor: AppColors.whiteBackGroundColor,
-        body: ListView.builder(
-          itemBuilder: (context, index) {
-            return GestureDetector(
-                onTap: () {
-                  controller.toNamed(AppPages.orderDetail,
-                      arguments: controller.orderList[index].key);
+        body: controller.orderList.isNotEmpty
+            ? ListView.builder(
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                      onTap: () {
+                        controller
+                            .toNamed(AppPages.orderDetail,
+                                arguments: controller.orderList[index].key)
+                            ?.then((value) {
+                          if (value != null) {
+                            controller.orderList[index] = value;
+                          }
+                        });
+                      },
+                      child: listItem(index));
                 },
-                child: listItem(index));
-          },
-          itemCount: controller.orderList.length,
-        ));
+                itemCount: controller.orderList.length,
+              )
+            : Center(
+                child: CustomTextLabel(
+                  label: AppString.orderNotAvailableKey.tr,
+                  style: AppStyles.textLarge
+                      .copyWith(color: AppColors.orangeTextColor),
+                ),
+              ));
   }
 
   Widget listItem(int index) {
@@ -58,7 +72,8 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                             isSvg: true,
                             title: controller.orderList[index].customerName),
                       ),
-                      showStatus(controller.orderList[index].deliveryStatus)
+                      showStatus(controller.orderList[index].deliveryStatus,
+                          controller.orderList[index].userMail)
                     ],
                   ),
                   iconTitleView(
@@ -66,14 +81,23 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                       isSvg: true,
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
-                      title: controller.orderList[index].customerMobileNumber),
+                      title:
+                          "${AppConstant.countryCode} ${controller.orderList[index].customerMobileNumber}"),
                   iconTitleView(
                       // path: Icons.watch_later_outlined,
-                      path: Icons.beenhere_rounded,
+                      path: getOrderStatus(
+                                  controller.orderList[index].deliveryStatus) ==
+                              OrderStatus.delivered
+                          ? Icons.beenhere_rounded
+                          : Icons.watch_later_outlined,
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
                       isSvg: false,
-                      title: "27/06/2022"),
+                      title: getOrderStatus(
+                                  controller.orderList[index].deliveryStatus) ==
+                              OrderStatus.delivered
+                          ? controller.orderList[index].orderCompleteDate
+                          : controller.orderList[index].orderDate),
                   iconTitleView(
                       path: Icons.maps_home_work_rounded,
                       isSvg: false,
@@ -128,7 +152,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
     );
   }
 
-  Widget showStatus(String? status) {
+  Widget showStatus(String? status, String? user) {
     return Visibility(
       visible: status.isNotNullOrEmpty,
       child: Card(
@@ -141,15 +165,38 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
         child: Padding(
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 6.0, bottom: 6.0),
-          child: CustomTextLabel(
-            label: status ?? "",
-            style: AppStyles.textRegular.copyWith(
-              color: AppColors.whiteTextColor,
-            ),
+          child: Row(
+            children: [
+              CustomTextLabel(
+                label: status ?? "",
+                style: AppStyles.textRegular.copyWith(
+                  color: AppColors.whiteTextColor,
+                ),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(left: 6),
+                  height: 8,
+                  width: 8,
+                  alignment: Alignment.centerRight,
+                  decoration: BoxDecoration(
+                      color: getColorForUser(user),
+                      border: Border.all(color: getColorForUser(user)),
+                      borderRadius: BorderRadius.circular(32))),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  Color getColorForUser(String? user) {
+    if (user == AppConstant.darshanEmail) {
+      return AppColors.whiteBackGroundColor;
+    } else if (user == AppConstant.yashEmail) {
+      return AppColors.blueBackGroundColor;
+    } else {
+      return AppColors.orangeBackGroundColor;
+    }
   }
 
   Color getColor(status) {

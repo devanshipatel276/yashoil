@@ -54,6 +54,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                               const EdgeInsets.fromLTRB(0.0, 36.0, 0.0, 12.0),
                           child: CustomTextFormField(
                             controller: controller.emailController,
+                            cursorColor: AppColors.whiteAppBarColor,
                             label: AppString.emailAddressKey.tr,
                             prefixIcon: Assets.svg.icUser,
                             textInputAction: TextInputAction.next,
@@ -73,6 +74,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                               label: AppString.passwordKey.tr,
                               prefixIcon: Assets.svg.icKey,
                               fillColor: AppColors.orangeTextColor,
+                              cursorColor: AppColors.whiteAppBarColor,
                               style: AppStyles.textRegular
                                   .copyWith(color: AppColors.whiteTextColor),
                               suffixOnClick: () {},
@@ -107,13 +109,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                             ),
                             onClick: () {
                               if (controller.formKey.currentState!.validate()) {
-                                FireBaseDB.firebaseLogin(
-                                    email: controller.emailController.text,
-                                    password:
-                                        controller.passwordController.text,
-                                    onLogin: () {
-                                      controller.offNamed(AppPages.dashboard);
-                                    });
+                                controller.handleLogin();
                               }
                             },
                           ),

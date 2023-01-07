@@ -1,3 +1,4 @@
+import 'package:yash_oil/app/core/config/shared_preference.dart';
 import 'package:yash_oil/app/ui/main_controller.dart';
 
 import '../../../base/base_controller.dart';
@@ -22,5 +23,15 @@ class LoginController extends BaseGetxController {
   @override
   ToolBarModel? setUpToolbar() {
     return ToolBarModel(currentController: this, isToolBarVisible: false);
+  }
+
+  handleLogin() {
+    FireBaseDB.firebaseLogin(
+        email: emailController.text,
+        password: passwordController.text,
+        onLogin: () {
+          SharedPref.setValue(PrefsKey.isLoggedIn, true);
+          offNamed(AppPages.dashboard);
+        });
   }
 }

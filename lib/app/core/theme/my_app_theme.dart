@@ -31,7 +31,7 @@ abstract class MyAppTheme {
         TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       }),
-      focusColor: AppColors.whiteBackGroundColor,
+      focusColor: AppColors.orangeBackGroundColor,
       brightness: Brightness.light,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: _appBarTheme(),

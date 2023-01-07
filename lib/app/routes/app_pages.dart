@@ -2,6 +2,7 @@ import 'package:yash_oil/app/ui/orderdetail/order_detail_page.dart';
 
 import '../../../util/exports.dart';
 import '../ui/orderdetail/order_detail_binding.dart';
+import 'authentication_middelware.dart';
 
 class AppPages {
   AppPages._();
@@ -45,6 +46,7 @@ class LoginPageRoutes {
       name: AppPages.login,
       page: LoginPage.new,
       binding: LoginBinding(),
+      middlewares: [AuthMiddleWare()],
     ),
   ];
 }

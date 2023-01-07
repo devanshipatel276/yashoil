@@ -51,6 +51,7 @@ class EditOrderController extends BaseGetxController {
   @override
   void onInit() {
     super.onInit();
+    handleEditOrderFlow();
   }
 
   @override
@@ -101,8 +102,8 @@ class EditOrderController extends BaseGetxController {
     return isShowValidation.value = containerDetailList.isEmpty;
   }
 
-  void handleEditOrderFlow(String path) async {
-    var orderDetail = await FireBaseDB.getOrderDetails(path);
+  void handleEditOrderFlow() async {
+    var orderDetail = await FireBaseDB.getOrderDetails(Get.arguments);
 
     customerNameController.text = orderDetail?.customerName ?? "";
     customerAddressController.text = orderDetail?.customerAddress ?? "";
@@ -158,7 +159,7 @@ class EditOrderController extends BaseGetxController {
         containerList: containerList);
 
     FireBaseDB.updateOrderDetails(orderDetail, () {
-      goBack();
+      goBack(result: orderDetail);
     });
   }
 }

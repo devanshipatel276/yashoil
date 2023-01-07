@@ -85,7 +85,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIconSize =
         const Size(AppConstant.suffixIconSize, AppConstant.suffixIconSize),
     this.suffixOnClick,
-    this.fillColor = AppColors.orangeBackGroundColor,
+    this.fillColor,
   }) : super(key: key1);
 
   @override
@@ -111,7 +111,8 @@ class CustomTextFormField extends StatelessWidget {
               FilteringTextInputFormatter.singleLineFormatter,
               LengthLimitingTextInputFormatter(maxLength)
             ]),
-        style: style ?? AppStyles.textRegular,
+        style: style ??
+            AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
         maxLines: maxLines,
         readOnly: readOnly,
         enabled: isEditable,

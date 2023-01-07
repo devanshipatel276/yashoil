@@ -13,7 +13,7 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
   @override
   Widget buildPhoneWidget() {
     return Scaffold(
-      backgroundColor: AppColors.orangeBackGroundColor,
+      backgroundColor: AppColors.whiteAppBarColor,
       body: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 8),
         child: Form(
@@ -78,7 +78,8 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   },
                   readOnly: true,
                   controller: controller.orderDateController,
-                  suffix: loadMaterialIcon(Icons.calendar_month_outlined),
+                  suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                      color: AppColors.orangeBackGroundColor),
                   label: AppString.orderDateKey.tr,
                 ),
               ),
@@ -89,151 +90,9 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                   label: AppString.billNumberKey.tr,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: CustomTextLabel(
-                      textAlign: TextAlign.start,
-                      label: AppString.addOrderDetailsKey.tr,
-                    )),
-                    InkWell(
-                      onTap: () {
-                        showOrderDetailDialog();
-                      },
-                      child: loadMaterialIcon(Icons.add),
-                    )
-                  ],
-                ),
-              ),
-              Visibility(
-                  visible: controller.isShowValidation.value,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    child: CustomTextLabel(
-                      textAlign: TextAlign.start,
-                      style: AppStyles.textRegular
-                          .copyWith(color: AppColors.lightRedColor),
-                      label: AppString.pleaseAddOrderDetailsKey.tr,
-                    ),
-                  )),
-              Visibility(
-                visible: controller.containerDetailList.isNotEmpty,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  padding: const EdgeInsets.all(16),
-                  decoration: MyAppTheme.thinBorderTheme(),
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return containerDetailView(
-                              controller.containerDetailList[index]);
-                        },
-                        itemCount: controller.containerDetailList.length,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                        child: divider(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 33),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextLabel(
-                                textAlign: TextAlign.start,
-                                label: AppString.totalKey.tr,
-                              ),
-                            ),
-                            CustomTextLabel(
-                              label:
-                                  " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20, top: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomTextLabel(
-                        label: AppString.paymentKey.tr,
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    dropDownView(
-                        list: controller.paymentModeList,
-                        selection: controller.selectedPaymentMode),
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: controller.selectedPaymentMode.value ==
-                    AppString.unPaidKey.tr,
-                child: Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: CustomTextFormField(
-                    controller: controller.commentsController,
-                    label: AppString.commentsKey.tr,
-                    maxLines: 5,
-                    contentPadding: const EdgeInsets.only(
-                      top: 20,
-                    ),
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CustomTextLabel(
-                      label: AppString.deliveryStatusKey.tr,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  dropDownView(
-                      list: controller.deliveryStatusList,
-                      selection: controller.selectedDeliveryStatus),
-                ],
-              ),
-              Visibility(
-                visible: controller.selectedDeliveryStatus.value ==
-                    AppString.deliveredKey.tr,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    top: 20,
-                  ),
-                  child: CustomTextFormField(
-                    onTap: () {
-                      openDatePicker(screen.context).then((value) {
-                        if (value != null) {
-                          controller.orderCompleteDateController.text =
-                              dateToString(value);
-                        }
-                      });
-                    },
-                    readOnly: true,
-                    controller: controller.orderCompleteDateController,
-                    suffix: loadMaterialIcon(Icons.calendar_month_outlined),
-                    label: AppString.completedDateKey.tr,
-                    validator: (value) {
-                      if (controller.selectedDeliveryStatus.value ==
-                          AppString.deliveredKey.tr) {
-                        if (value != null && value.isEmpty) {
-                          return AppString.pleaseEnterOrderCompletedDateKey.tr;
-                        }
-                      }
-                    },
-                  ),
-                ),
-              ),
+              addOrderView(),
+              paymentView(),
+              deliveryView(),
               Container(
                 width: 120.0,
                 margin: const EdgeInsets.fromLTRB(0.0, 32.0, 0.0, 14.0),
@@ -241,9 +100,8 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
                     padding: const EdgeInsets.only(
                         left: 0, right: 0, top: 16, bottom: 16),
                     text: AppString.saveKey.tr,
-                    textStyle: AppStyles.textMedium.copyWith(
-                      color: AppColors.redTextColor,
-                    ),
+                    textStyle: AppStyles.textMedium,
+                    backgroundColor: AppColors.orangeBackGroundColor,
                     onClick: () {
                       if (controller.formKey.currentState!.validate() &&
                           !controller.checkOrderDetailValidation()) {
@@ -258,15 +116,12 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
     );
   }
 
-  @override
-  String getTag() => (AddOrderController).toString();
-
   Widget dropDownView(
       {required List<String> list, required RxString selection}) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.whiteBackGroundColor,
-          border: Border.all(color: AppColors.whiteAppBarColor),
+          color: AppColors.whiteAppBarColor,
+          border: Border.all(color: AppColors.orangeBackGroundColor),
           borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.all(4),
       child: DropdownButton(
@@ -430,13 +285,102 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
             ));
   }
 
+  Widget addOrderView() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 20),
+          child: Row(
+            children: [
+              Expanded(
+                  child: CustomTextLabel(
+                textAlign: TextAlign.start,
+                label: AppString.addOrderDetailsKey.tr,
+                style: AppStyles.textRegular
+                    .copyWith(color: AppColors.orangeTextColor),
+              )),
+              InkWell(
+                onTap: () {
+                  showOrderDetailDialog();
+                },
+                child: loadMaterialIcon(Icons.add,
+                    color: AppColors.orangeBackGroundColor),
+              )
+            ],
+          ),
+        ),
+        Visibility(
+            visible: controller.isShowValidation.value,
+            child: Container(
+              margin: const EdgeInsets.only(top: 4),
+              child: CustomTextLabel(
+                textAlign: TextAlign.start,
+                style: AppStyles.textRegular
+                    .copyWith(color: AppColors.lightRedColor),
+                label: AppString.pleaseAddOrderDetailsKey.tr,
+              ),
+            )),
+        Visibility(
+          visible: controller.containerDetailList.isNotEmpty,
+          child: Container(
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.all(16),
+            decoration: MyAppTheme.thinBorderTheme(
+                borderColor: AppColors.orangeBackGroundColor),
+            child: Column(
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return containerDetailView(
+                        controller.containerDetailList[index]);
+                  },
+                  itemCount: controller.containerDetailList.length,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8),
+                  child: divider(color: AppColors.orangeBackGroundColor),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 33),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextLabel(
+                          textAlign: TextAlign.start,
+                          label: AppString.totalKey.tr,
+                          style: AppStyles.textRegular
+                              .copyWith(color: AppColors.orangeTextColor),
+                        ),
+                      ),
+                      CustomTextLabel(
+                        style: AppStyles.textRegular
+                            .copyWith(color: AppColors.orangeTextColor),
+                        label:
+                            " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget containerDetailView(LocalContainerDetailModel containerDetailModel) {
     return Row(children: [
       Expanded(
           child: CustomTextLabel(
               textAlign: TextAlign.start,
+              style: AppStyles.textRegular
+                  .copyWith(color: AppColors.orangeTextColor),
               label: getContainerName(containerDetailModel.type))),
       CustomTextLabel(
+          style:
+              AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
           label:
               "${containerDetailModel.quantity} x ${containerDetailModel.price}"),
       GestureDetector(
@@ -445,9 +389,105 @@ class AddOrderPage extends BaseGetResponsiveView<AddOrderController> {
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: loadMaterialIcon(Icons.delete, size: 18),
+          child: loadMaterialIcon(Icons.delete,
+              size: 18, color: AppColors.orangeBackGroundColor),
         ),
       ),
     ]);
   }
+
+  Widget paymentView() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 20, top: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: CustomTextLabel(
+                    label: AppString.paymentKey.tr,
+                    textAlign: TextAlign.start,
+                    style: AppStyles.textRegular
+                        .copyWith(color: AppColors.orangeTextColor)),
+              ),
+              dropDownView(
+                  list: controller.paymentModeList,
+                  selection: controller.selectedPaymentMode),
+            ],
+          ),
+        ),
+        Visibility(
+          visible:
+              controller.selectedPaymentMode.value == AppString.unPaidKey.tr,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: CustomTextFormField(
+              controller: controller.commentsController,
+              label: AppString.commentsKey.tr,
+              maxLines: 5,
+              contentPadding: const EdgeInsets.only(
+                top: 20,
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget deliveryView() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: CustomTextLabel(
+                  label: AppString.deliveryStatusKey.tr,
+                  textAlign: TextAlign.start,
+                  style: AppStyles.textRegular
+                      .copyWith(color: AppColors.orangeTextColor)),
+            ),
+            dropDownView(
+                list: controller.deliveryStatusList,
+                selection: controller.selectedDeliveryStatus),
+          ],
+        ),
+        Visibility(
+          visible: controller.selectedDeliveryStatus.value ==
+              AppString.deliveredKey.tr,
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: 20,
+            ),
+            child: CustomTextFormField(
+              onTap: () {
+                openDatePicker(screen.context).then((value) {
+                  if (value != null) {
+                    controller.orderCompleteDateController.text =
+                        dateToString(value);
+                  }
+                });
+              },
+              readOnly: true,
+              controller: controller.orderCompleteDateController,
+              suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                  color: AppColors.orangeBackGroundColor),
+              label: AppString.completedDateKey.tr,
+              validator: (value) {
+                if (controller.selectedDeliveryStatus.value ==
+                    AppString.deliveredKey.tr) {
+                  if (value != null && value.isEmpty) {
+                    return AppString.pleaseEnterOrderCompletedDateKey.tr;
+                  }
+                }
+              },
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  @override
+  String getTag() => (AddOrderController).toString();
 }

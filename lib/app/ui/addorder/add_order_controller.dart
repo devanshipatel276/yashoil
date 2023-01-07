@@ -28,7 +28,6 @@ class AddOrderController extends BaseGetxController {
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
   late LocalContainerDetailModel containerDetailModel;
   RxBool isShowValidation = false.obs;
-  bool isAddFlow = true;
   RxList<LocalContainerDetailModel> containerDetailList =
       <LocalContainerDetailModel>[].obs;
 
@@ -56,14 +55,7 @@ class AddOrderController extends BaseGetxController {
   @override
   void onInit() async {
     super.onInit();
-    isAddFlow = Get.arguments == null;
-
-    if (isAddFlow) {
-      handleAddOrderFlow();
-    } else {
-      toolBarTitle.value = AppString.editOrderKey.tr;
-      handleEditOrderFlow(Get.arguments);
-    }
+    handleAddOrderFlow();
   }
 
   MainController? getParentController() {
@@ -101,28 +93,6 @@ class AddOrderController extends BaseGetxController {
     return isShowValidation.value = containerDetailList.isEmpty;
   }
 
-  void handleEditOrderFlow(String path) async {
-    var orderDetail = await FireBaseDB.getOrderDetails(path);
-
-    customerNameController.text = orderDetail?.customerName ?? "";
-    customerAddressController.text = orderDetail?.customerAddress ?? "";
-    customerNumberController.text = orderDetail?.customerMobileNumber ?? "";
-    orderDateController.text = orderDetail?.orderDate ?? "";
-    billNumberController.text = orderDetail?.billNumber ?? "";
-    commentsController.text = orderDetail?.comments ?? "";
-    orderCompleteDateController.text = orderDetail?.orderCompleteDate ?? "";
-    selectedPaymentMode.value =
-        orderDetail?.paymentStatus ?? AppString.unPaidKey.tr;
-    selectedDeliveryStatus.value =
-        orderDetail?.deliveryStatus ?? AppString.pendingKey.tr;
-    orderDetail?.containerList?.forEach((element) {
-      containerDetailList.add(LocalContainerDetailModel(
-          price: element.price ?? "",
-          type: getContainerType(element.type!)!,
-          quantity: element.quantity ?? ""));
-    });
-  }
-
   void handleAddOrderFlow() {
     orderDateController.text = dateToString(DateTime.now());
     containerDetailModel = LocalContainerDetailModel(
@@ -151,21 +121,15 @@ class AddOrderController extends BaseGetxController {
         orderCompleteDate: orderCompleteDateController.text,
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
-        key: isAddFlow ? null : Get.arguments,
+        key: null,
         totalQuantity: getTotalAmount()[1],
         billNumber: billNumberController.text,
         deliveryStatus: selectedDeliveryStatus.value,
         containerList: containerList);
 
-    if (isAddFlow) {
-      FireBaseDB.addOrderDetails(orderDetail, () {
-        goBack();
-      });
-    } else {
-      FireBaseDB.updateOrderDetails(orderDetail, () {
-        goBack();
-      });
-    }
+    FireBaseDB.addOrderDetails(orderDetail, () {
+      goBack();
+    });
   }
 
   @override

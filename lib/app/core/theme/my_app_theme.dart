@@ -163,30 +163,33 @@ abstract class MyAppTheme {
         horizontal: 20,
         vertical: 3,
       ),
-      fillColor: fillColor,
+      fillColor: fillColor ?? AppColors.whiteBackGroundColor,
       prefixStyle: AppStyles.textRegular,
-      hintStyle: labelStyle ?? AppStyles.textRegular,
-      labelStyle: labelStyle ?? AppStyles.textRegular,
+      hintStyle: labelStyle ??
+          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
+      labelStyle: labelStyle ??
+          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
       enabledBorder: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryWhiteColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
       ),
       focusedBorder: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryWhiteColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
       ),
       border: 8.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryWhiteColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
       ),
-      focusColor: borderColor ?? AppColors.primaryWhiteColor,
-      hoverColor: borderColor ?? AppColors.primaryWhiteColor,
+      focusColor: borderColor ?? AppColors.primaryOrangeColor,
+      hoverColor: borderColor ?? AppColors.primaryOrangeColor,
       errorStyle: errorStyle ??
           AppStyles.textRegular.copyWith(color: AppColors.lightRedTextColor),
-      iconColor: borderColor ?? AppColors.primaryWhiteColor,
+      iconColor: borderColor ?? AppColors.primaryOrangeColor,
       alignLabelWithHint: true,
       floatingLabelBehavior: FloatingLabelBehavior.always,
-      floatingLabelStyle: labelStyle ?? AppStyles.textRegular,
+      floatingLabelStyle: labelStyle ??
+          AppStyles.textRegular.copyWith(color: AppColors.orangeTextColor),
       errorBorder: 8.outlineInputBorder(
         borderSide:
             1.5.borderSide(color: errorBorderColor ?? AppColors.redErrorColor),
@@ -197,7 +200,7 @@ abstract class MyAppTheme {
       ),
       disabledBorder: 4.outlineInputBorder(
         borderSide:
-            1.5.borderSide(color: borderColor ?? AppColors.primaryWhiteColor),
+            1.5.borderSide(color: borderColor ?? AppColors.primaryOrangeColor),
       ),
     );
   }

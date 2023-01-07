@@ -24,7 +24,6 @@ class OrderListController extends BaseGetxController {
 
   @override
   void update([List<Object>? ids, bool condition = true]) async {
-    // TODO: implement update
     super.update(ids, condition);
     orderList.value = await FireBaseDB.getOrders();
   }

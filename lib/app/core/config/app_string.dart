@@ -42,6 +42,8 @@ class AppString extends Translations {
           receivedAmountKey: "Received Amount",
           priceKey: "Price",
           pleaseEnterPriceKey: "Please Enter Price",
+          editKey: "Edit",
+          saveKey: "Save",
           pleaseEnterQuantityKey: "Please Enter Quantity",
           onlineKey: "Online",
           cashKey: "Cash",
@@ -60,7 +62,6 @@ class AppString extends Translations {
           yashKey: "Yash",
           inProgressKey: "in Progress",
           addOrderDetailsKey: "Add Order Details",
-          saveKey: "Save",
           typeKey: "Type",
           deliveredKey: "Delivered",
           pendingKey: "Pending",
@@ -152,4 +153,5 @@ class AppString extends Translations {
   static const String commentsKey = "commentsKey";
   static const String orderAddedKey = "orderAddedKey";
   static const String inProgressKey = "inProgressKey";
+  static const String editKey = "editKey";
 }

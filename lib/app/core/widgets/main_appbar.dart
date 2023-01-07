@@ -18,14 +18,31 @@ class MainAppBar extends GetResponsiveView {
         child: Column(
           children: [
             AppBar(
-                title: controller.toolBarModel.value.isTitleVisible
-                    ? CustomTextLabel(
-                        label: '${controller.toolBarModel.value.title} ')
-                    : (controller.toolBarModel.value.isLogoVisible
-                        ? showLogo()
-                        : null),
+                title:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  controller.toolBarModel.value.isTitleVisible
+                      ? Expanded(
+                          child: CustomTextLabel(
+                              label: '${controller.toolBarModel.value.title} '),
+                        )
+                      : (controller.toolBarModel.value.isLogoVisible)
+                          ? showLogo()
+                          : Container(),
+                  Visibility(
+                    visible:
+                        controller.toolBarModel.value.endTitle.isNotNullOrEmpty,
+                    child: GestureDetector(
+                      onTap: controller.toolBarModel.value.endTitleClick,
+                      child: CustomTextLabel(
+                          label: '${controller.toolBarModel.value.endTitle} '),
+                    ),
+                  )
+                ]),
                 leading: getLeading()),
-            divider(color: AppColors.whiteBackGroundColor.withOpacity(0.5))
+            Visibility(
+                visible: controller.toolBarModel.value.isTitleVisible,
+                child: divider(
+                    color: AppColors.whiteBackGroundColor.withOpacity(0.5)))
           ],
         )));
   }

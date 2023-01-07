@@ -9,6 +9,7 @@ class ToolBarModel {
   bool isBackVisible;
   bool isCrossVisible;
   String title;
+  String endTitle;
   BaseGetxController? currentController;
 
   /// you can also add more as per your need like below
@@ -18,6 +19,7 @@ class ToolBarModel {
   Function()? onBackOrClose;
   Color appBarColor;
   Function()? onDrawerIconClick;
+  Function()? endTitleClick;
 
   ToolBarModel(
       {this.isToolBarVisible = false,
@@ -29,6 +31,8 @@ class ToolBarModel {
       this.appBarColor = AppColors.orangeAppBarColor,
       this.currentController,
       String? title,
+      this.endTitle = "",
+      this.endTitleClick,
       this.onBackOrClose,
       this.onDrawerIconClick})
       : title = title ?? AppString.appName.tr;
@@ -41,6 +45,7 @@ class ToolBarModel {
     bool? isCrossVisible,
     BaseGetxController? currentController,
     Function()? onBackOrClose,
+    Function()? endTitleClick,
     Function()? onDrawerIconClick,
     Color? appBarColor,
   }) {
@@ -53,6 +58,8 @@ class ToolBarModel {
     model.appBarColor = appBarColor ?? this.appBarColor;
     model.currentController = currentController;
     model.onDrawerIconClick = onDrawerIconClick;
+    model.endTitle = endTitle ?? "";
+    model.endTitleClick = endTitleClick ?? this.endTitleClick;
     model.onBackOrClose = onBackOrClose;
     return model;
   }

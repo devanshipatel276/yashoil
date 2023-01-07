@@ -29,24 +29,6 @@ class OrderDetailController extends BaseGetxController {
   RxList<LocalContainerDetailModel> containerDetailList =
       <LocalContainerDetailModel>[].obs;
 
-  //dropdown and radio list
-  final deliveryStatusList = [
-    AppString.deliveredKey.tr,
-    AppString.pendingKey.tr
-  ];
-  final paymentModeList = [
-    AppString.cashKey.tr,
-    AppString.onlineKey.tr,
-    AppString.unPaidKey.tr
-  ];
-  final orderDetailList = [
-    AppString.fiveLtrKey.tr,
-    AppString.fifteenKgTinKey.tr,
-    AppString.fifteenKgPlasticKey.tr,
-    AppString.fifteenLtrPlasticKey.tr,
-    AppString.fifteenLtrTinKey.tr
-  ];
-
   @override
   void onControllerReady() {}
 
@@ -67,6 +49,12 @@ class OrderDetailController extends BaseGetxController {
         isToolBarVisible: true,
         isTitleVisible: true,
         title: AppString.orderDetailsKey.tr,
+        endTitle: AppString.editKey.tr,
+        endTitleClick: () {
+          toNamed(AppPages.editOrder, arguments: Get.arguments)?.then((value) {
+            if (value != null) {}
+          });
+        },
         isBackVisible: true);
   }
 

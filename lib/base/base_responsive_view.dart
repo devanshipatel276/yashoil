@@ -43,7 +43,9 @@ abstract class BaseGetResponsiveView<T extends BaseGetxController>
           color: controller.mainController.toolBarModel.value.appBarColor,
           child: Column(
             children: [
-              MainAppBar(),
+              Visibility(
+                  visible: controller.isShowInternalAppBar.value,
+                  child: MainAppBar()),
               Expanded(child: buildPhoneWidget()),
             ],
           ),

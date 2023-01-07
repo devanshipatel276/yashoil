@@ -1,10 +1,9 @@
-
 import 'exports.dart';
 
 abstract class Extensions {}
 
 extension BorderRadiusExt on num {
-  BorderRadius get borderRadius => BorderRadius.circular(this.r);
+  BorderRadius get borderRadius => BorderRadius.circular(toDouble());
 
   InputBorder outlineInputBorder({
     BorderSide borderSide = BorderSide.none,
@@ -21,7 +20,7 @@ extension BorderRadiusExt on num {
   }) =>
       BorderSide(
         color: color ?? Colors.white,
-        width: this.toDouble(),
+        width: toDouble(),
         style: style ?? BorderStyle.solid,
       );
 }

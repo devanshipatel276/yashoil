@@ -58,6 +58,7 @@ class AppString extends Translations {
           paymentStatusKey: "Payment Status",
           darshanKey: "Darshan",
           yashKey: "Yash",
+          inProgressKey: "in Progress",
           addOrderDetailsKey: "Add Order Details",
           saveKey: "Save",
           typeKey: "Type",
@@ -150,4 +151,5 @@ class AppString extends Translations {
   static const String paymentKey = "paymentKey";
   static const String commentsKey = "commentsKey";
   static const String orderAddedKey = "orderAddedKey";
+  static const String inProgressKey = "inProgressKey";
 }

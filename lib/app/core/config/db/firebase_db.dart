@@ -85,9 +85,29 @@ abstract class FireBaseDB {
         .get()
         .then((event) {
       showLoader(value: false);
-      if (event.data() != null) {
+      if (event.exists && event.data() != null) {
         return OrderDetailModel.fromJson(event.data()!);
       }
+      return null;
+    });
+  }
+
+  static Future<List<OrderDetailModel>> getOrders() async {
+    showLoader(value: true);
+    var list = <OrderDetailModel>[];
+    return await _firebaseDataBaseInstance
+        .collection(AppConstant.orderPath)
+        .get()
+        .then((event) {
+      if (event.docs.isNotEmpty) {
+        for (var element in event.docs) {
+          if (element.exists) {
+            list.add(OrderDetailModel.fromJson(element.data()));
+          }
+        }
+      }
+      showLoader(value: false);
+      return list;
     });
   }
 

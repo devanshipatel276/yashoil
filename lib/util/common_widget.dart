@@ -23,8 +23,11 @@ void showLoader({required bool value}) {
   }
 }
 
-Widget loadMaterialIcon(IconData icons,
-    {double? size, Color? color = AppColors.whiteBackGroundColor}) {
+Widget loadMaterialIcon(
+  IconData icons, {
+  double? size,
+  Color? color = AppColors.whiteBackGroundColor,
+}) {
   return Icon(
     icons,
     size: size,

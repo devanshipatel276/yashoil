@@ -120,6 +120,7 @@ class CustomTextFormField extends StatelessWidget {
         obscureText: obscureText!,
         decoration: InputDecoration(
           enabled: enabled,
+          floatingLabelStyle: style,
           // counterText: '',
           suffixIconConstraints: suffixIconConstraints,
           prefixIconConstraints: prefixIconConstraints,

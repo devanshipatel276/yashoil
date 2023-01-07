@@ -1,5 +1,3 @@
-import 'package:loader_overlay/loader_overlay.dart';
-
 import '../app/ui/main_controller.dart';
 import '../service/api/api_manager.dart';
 import '../util/exports.dart';
@@ -9,11 +7,17 @@ abstract class BaseGetxController extends FullLifeCycleController {
   /// here you can define common things that you want in all controller
   /// like apiManager
   ApiManager apiManager = Get.find<ApiManager>(tag: (ApiManager).toString());
+  var toolBarModel = ToolBarModel().obs;
+  var specificToolBarModel = ToolBarModel().obs;
+  var tabletToolBarModel = ToolBarModel().obs;
+  var safeAreaColor = AppColors.transparent.obs;
+  var isShowInternalAppBar = true.obs;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   MainController mainController =
       Get.find<MainController>(tag: (MainController).toString());
 
-  bool shouldObserveLifeCycle = true;
+  bool shouldObserveLifecycle = true;
 
   void onControllerInit() {}
 
@@ -29,7 +33,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
 
   void onPageDetached() {}
 
-  ToolBarModel? setUpToolbar();
+  getParentController() {}
+
+  ToolBarModel? setUpToolbar() {
+    return null;
+  }
 
   void updateToolBar({ToolBarModel? toolBarModel}) {
     ToolBarModel model;
@@ -60,46 +68,20 @@ abstract class BaseGetxController extends FullLifeCycleController {
   @override
   void onReady() {
     super.onReady();
+    shouldObserveLifecycle = true;
     updateToolBar();
     onControllerReady();
   }
 
-  void showLoader({required bool value}) {
-    /// we have to add here code to show and hide loader
-    hideKeyboard();
-    if (value) {
-      Get.context?.loaderOverlay.show();
-    } else {
-      Get.context?.loaderOverlay.hide();
-    }
-  }
-
-  void showSnackBar({required String value}) {
-    /// here we show snackbar
-
-    hideKeyboard();
-    Get.snackbar("", value,
-        messageText: Text(value,
-            softWrap: true,
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.start,
-            style: AppStyles.mediumStyle
-                .copyWith(fontSize: 16, color: AppColors.white)),
-        backgroundColor: AppColors.black,
-        // maxWidth: screen.width < 500 ? screen.width : 500,
-        margin: const EdgeInsets.all(0),
-        isDismissible: true,
-        padding:
-            const EdgeInsets.only(left: 10, right: 10, top: 12, bottom: 15),
-        snackStyle: SnackStyle.GROUNDED,
-        snackPosition: SnackPosition.BOTTOM,
-        titleText: const SizedBox());
+  @override
+  void update([List<Object>? ids, bool condition = true]) {
+    super.update(ids, condition);
+    updateToolBar();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (shouldObserveLifeCycle) {
+    if (shouldObserveLifecycle) {
       switch (state) {
         case AppLifecycleState.paused:
           {
@@ -134,17 +116,13 @@ abstract class BaseGetxController extends FullLifeCycleController {
     return Future.value(canPop);
   }
 
-  void hideKeyboard() {
-    FocusManager.instance.primaryFocus?.unfocus();
-  }
-
   /// below are some extensions on GetNavigation
   /// please only use this methods to do navigation
   /// (if the method you want is not available here only then you can use Get. methods)
 
   void _afterNavigation() {
     hideKeyboard();
-    shouldObserveLifeCycle = true;
+    shouldObserveLifecycle = true;
     updateToolBar();
     onPageResumed();
   }
@@ -152,7 +130,7 @@ abstract class BaseGetxController extends FullLifeCycleController {
   void _beforeNavigation() {
     hideKeyboard();
     onPagePaused();
-    shouldObserveLifeCycle = false;
+    shouldObserveLifecycle = false;
   }
 
   Future<V?>? toNamed<V>(String page,
@@ -160,15 +138,21 @@ abstract class BaseGetxController extends FullLifeCycleController {
       int? id,
       bool preventDuplicates = true,
       Map<String, String>? parameters}) async {
-    // add onPause too
     _beforeNavigation();
     V? pageResult = await Get.toNamed<V>(page,
         arguments: arguments,
         id: id,
         preventDuplicates: preventDuplicates,
         parameters: parameters);
-    _afterNavigation();
-    return Future.value(pageResult);
+    if (pageResult != null) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    } else {
+      await Future.delayed(Get.defaultTransitionDuration).then((value) {
+        _afterNavigation();
+        return Future.value(pageResult);
+      });
+    }
   }
 
   Future<V?>? to<V>(
@@ -200,8 +184,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
         preventDuplicates: preventDuplicates,
         popGesture: popGesture,
         gestureWidth: gestureWidth);
-    _afterNavigation();
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? offNamed<V>(
@@ -225,8 +212,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
       {int? id}) async {
     _beforeNavigation();
     V? pageResult = await Get.offUntil<V>(page, predicate, id: id);
-    _afterNavigation();
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? offNamedUntil<V>(
@@ -239,8 +229,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
     _beforeNavigation();
     V? pageResult = await Get.offNamedUntil<V>(page, predicate,
         id: id, parameters: parameters, arguments: arguments);
-    _afterNavigation();
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? offAndToNamed<V>(
@@ -253,8 +246,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
     _beforeNavigation();
     V? pageResult = await Get.offAndToNamed<V>(page,
         arguments: arguments, id: id, result: result);
-    _afterNavigation();
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? offAllNamed<V>(
@@ -270,8 +266,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
         arguments: arguments,
         id: id,
         parameters: parameters);
-    _afterNavigation();
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? off<V>(
@@ -304,9 +303,11 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-    _afterNavigation();
-
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 
   Future<V?>? offAll<V>(
@@ -339,8 +340,10 @@ abstract class BaseGetxController extends FullLifeCycleController {
         duration: duration,
         gestureWidth: gestureWidth);
 
-    _afterNavigation();
-
-    return Future.value(pageResult);
+    Future.delayed(Get.defaultTransitionDuration).then((value) {
+      _afterNavigation();
+      return Future.value(pageResult);
+    });
+    return null;
   }
 }

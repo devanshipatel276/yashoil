@@ -9,3 +9,9 @@ enum ContainerType {
 
   const ContainerType(this.type);
 }
+
+enum OrderStatus {
+  pending,
+  delivered,
+  inProgress;
+}

@@ -29,6 +29,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/ic_key.svg
   String get icKey => 'assets/svg/ic_key.svg';
 
+  /// File path: assets/svg/ic_phone.svg
+  String get icPhone => 'assets/svg/ic_phone.svg';
+
   /// File path: assets/svg/ic_user.svg
   String get icUser => 'assets/svg/ic_user.svg';
 }

@@ -1,4 +1,3 @@
-
 import '../util/exports.dart';
 import 'base_controller.dart';
 
@@ -12,14 +11,6 @@ abstract class BaseGetView<T extends BaseGetxController> extends GetView<T> {
   @override
   T get controller {
     return Get.find<T>(tag: getTag());
-  }
-
-  void showLoader({required bool value}) {
-    controller.showLoader(value: value);
-  }
-
-  void showSnackbar({required String value}) {
-    controller.showSnackBar(value: value);
   }
 
   C getController<C extends GetxController>({String? tag}) {

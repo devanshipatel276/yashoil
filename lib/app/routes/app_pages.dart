@@ -1,4 +1,7 @@
+import 'package:yash_oil/app/ui/orderdetail/order_detail_page.dart';
+
 import '../../../util/exports.dart';
+import '../ui/orderdetail/order_detail_binding.dart';
 
 class AppPages {
   AppPages._();
@@ -9,6 +12,7 @@ class AppPages {
   static const menu = '/menu';
   static const addOrder = '/add_order';
   static const editOrder = '/edit_order';
+  static const orderDetail = '/order_detail';
 
   static final routes = [
     ...SplashPageRoutes.routes,
@@ -17,6 +21,7 @@ class AppPages {
     ...MenuPageRoutes.routes,
     ...AddOrderPageRoutes.routes,
     ...EditOrderPageRoutes.routes,
+    ...OrderDetailPageRoutes.routes,
   ];
 }
 
@@ -88,6 +93,18 @@ class EditOrderPageRoutes {
       name: AppPages.editOrder,
       page: EditOrderPage.new,
       binding: EditOrderBinding(),
+    ),
+  ];
+}
+
+class OrderDetailPageRoutes {
+  OrderDetailPageRoutes._();
+
+  static final routes = [
+    basePage(
+      name: AppPages.orderDetail,
+      page: OrderDetailPage.new,
+      binding: OrderDetailBinding(),
     ),
   ];
 }

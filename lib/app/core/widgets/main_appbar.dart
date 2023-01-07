@@ -14,16 +14,20 @@ class MainAppBar extends GetResponsiveView {
   @override
   Widget phone() {
     return Obx(() => Visibility(
-          visible: controller.toolBarModel.value.isToolBarVisible,
-          child: AppBar(
-              title: controller.toolBarModel.value.isTitleVisible
-                  ? CustomTextLabel(
-                      label: '${controller.toolBarModel.value.title} ')
-                  : (controller.toolBarModel.value.isLogoVisible
-                      ? showLogo()
-                      : null),
-              leading: getLeading()),
-        ));
+        visible: controller.toolBarModel.value.isToolBarVisible,
+        child: Column(
+          children: [
+            AppBar(
+                title: controller.toolBarModel.value.isTitleVisible
+                    ? CustomTextLabel(
+                        label: '${controller.toolBarModel.value.title} ')
+                    : (controller.toolBarModel.value.isLogoVisible
+                        ? showLogo()
+                        : null),
+                leading: getLeading()),
+            divider(color: AppColors.whiteBackGroundColor.withOpacity(0.5))
+          ],
+        )));
   }
 
   Widget? getLeading() {

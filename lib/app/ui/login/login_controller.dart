@@ -8,10 +8,8 @@ import '../../../util/toolbar_model.dart';
 class LoginController extends BaseGetxController {
   final formKey = GlobalKey<FormState>();
   final isObscureText = true.obs;
-  TextEditingController emailController =
-      TextEditingController(text: "darshan504patel@gmail.com");
-  TextEditingController passwordController =
-      TextEditingController(text: "Darshan@123");
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController passwordController = TextEditingController(text: "");
 
   @override
   void onControllerReady() {}

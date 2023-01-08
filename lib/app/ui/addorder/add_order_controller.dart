@@ -10,7 +10,7 @@ import '../../model/order_detail_model.dart';
 
 class AddOrderController extends BaseGetxController {
   //variable keys and controllers
-  TextEditingController orderCompleteDateController = TextEditingController();
+  TextEditingController orderPaymentDateController = TextEditingController();
   TextEditingController orderDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
   TextEditingController customerAddressController = TextEditingController();
@@ -118,7 +118,7 @@ class AddOrderController extends BaseGetxController {
         customerMobileNumber: customerNumberController.text,
         orderDate: orderDateController.text,
         paymentStatus: selectedPaymentMode.value,
-        orderCompleteDate: orderCompleteDateController.text,
+        paymentDate: orderPaymentDateController.text,
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
         key: null,

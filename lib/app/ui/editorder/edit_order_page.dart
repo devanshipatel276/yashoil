@@ -426,6 +426,36 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
         ),
         Visibility(
           visible:
+              controller.selectedPaymentMode.value != AppString.unPaidKey.tr,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: CustomTextFormField(
+              onTap: () {
+                openDatePicker(screen.context).then((value) {
+                  if (value != null) {
+                    controller.orderPaymentDateController.text =
+                        dateToString(value);
+                  }
+                });
+              },
+              readOnly: true,
+              controller: controller.orderPaymentDateController,
+              suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                  color: AppColors.brownBackGroundColor),
+              label: AppString.paymentDateKey.tr,
+              validator: (value) {
+                if (controller.selectedPaymentMode.value !=
+                    AppString.unPaidKey.tr) {
+                  if (value != null && value.isEmpty) {
+                    return AppString.pleaseEnterOrderPaymentDateKey.tr;
+                  }
+                }
+              },
+            ),
+          ),
+        ),
+        Visibility(
+          visible:
               controller.selectedPaymentMode.value == AppString.unPaidKey.tr,
           child: Container(
             margin: const EdgeInsets.only(bottom: 20),
@@ -460,38 +490,6 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                 selection: controller.selectedDeliveryStatus),
           ],
         ),
-        Visibility(
-          visible: controller.selectedDeliveryStatus.value ==
-              AppString.deliveredKey.tr,
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: 20,
-            ),
-            child: CustomTextFormField(
-              onTap: () {
-                openDatePicker(screen.context).then((value) {
-                  if (value != null) {
-                    controller.orderCompleteDateController.text =
-                        dateToString(value);
-                  }
-                });
-              },
-              readOnly: true,
-              controller: controller.orderCompleteDateController,
-              suffix: loadMaterialIcon(Icons.calendar_month_outlined,
-                  color: AppColors.brownBackGroundColor),
-              label: AppString.completedDateKey.tr,
-              validator: (value) {
-                if (controller.selectedDeliveryStatus.value ==
-                    AppString.deliveredKey.tr) {
-                  if (value != null && value.isEmpty) {
-                    return AppString.pleaseEnterOrderCompletedDateKey.tr;
-                  }
-                }
-              },
-            ),
-          ),
-        )
       ],
     );
   }

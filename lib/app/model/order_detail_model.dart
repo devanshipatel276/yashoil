@@ -6,7 +6,7 @@ class OrderDetailModel {
   String? customerAddress;
   String? customerMobileNumber;
   String? orderDate;
-  String? orderCompleteDate;
+  String? paymentDate;
   String? billNumber;
   String? comments;
   String? paymentStatus;
@@ -26,7 +26,7 @@ class OrderDetailModel {
       required this.containerList,
       required this.totalAmount,
       required this.totalQuantity,
-      this.orderCompleteDate,
+      this.paymentDate,
       this.userMail,
       this.key,
       this.billNumber,
@@ -43,7 +43,7 @@ class OrderDetailModel {
     comments = json["comments"];
     paymentStatus = json["payment_status"];
     deliveryStatus = json["delivery_status"];
-    orderCompleteDate = json["order_complete_date"];
+    paymentDate = json["payment_date"];
     totalAmount = json["total_amount"];
     totalQuantity = json["total_quantity"];
     if (json['container_list'] != null) {
@@ -65,7 +65,7 @@ class OrderDetailModel {
     data["customer_address"] = customerAddress;
     data["customer_mobile_number"] = customerMobileNumber;
     data["order_date"] = orderDate;
-    data["order_complete_date"] = orderCompleteDate;
+    data["payment_date"] = paymentDate;
     data["bill_number"] = billNumber;
     data["comments"] = comments;
     data["payment_status"] = paymentStatus;

@@ -105,7 +105,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                       title: getOrderStatus(
                                   controller.orderList[index].deliveryStatus) ==
                               OrderStatus.delivered
-                          ? controller.orderList[index].orderCompleteDate
+                          ? controller.orderList[index].paymentDate
                           : controller.orderList[index].orderDate),
                   Row(
                     children: [

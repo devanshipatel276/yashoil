@@ -16,11 +16,13 @@ class AppString extends Translations {
           loginDescriptionKey:
               "Access yash oil business by logging in to your account",
           pleaseEnterEmailIdKey: "Please enter email id",
+          filterOptionKey: "Filter Option",
           invalidEmailIdKey: "Please enter valid email id",
           pleaseEnterPasswordKey: "Please enter password",
           passwordShouldHaveKey:
               "password should have one special one upper character one lower character and 7 minimum characters",
           passwordKey: "Password",
+          removeFilterKey: "Remove Filter",
           userNotFoundKey: "User doesn't found!",
           passwordNotCorrectKey: "Please enter correct password",
           logOutKey: "Log Out",
@@ -42,6 +44,7 @@ class AppString extends Translations {
           pleaseEnterOrderPaymentDateKey: "Please enter order payment date",
           billNumberKey: "Bill Number",
           totalAmountKey: "Total Amount",
+          orderTakeByKey: "Order Taken By",
           receivedAmountKey: "Received Amount",
           priceKey: "Price",
           pleaseEnterPriceKey: "Please Enter Price",
@@ -62,6 +65,7 @@ class AppString extends Translations {
           customerMobileNumberKey: "Customer Mobile Number",
           deliveryStatusKey: "Delivery Status",
           paymentModeKey: "Payment Mode",
+          filterByPaymentKey: "Filter By Payment",
           submittedDateKey: "Submitted Date",
           orderFromKey: "Order From",
           paymentStatusKey: "Payment Status",
@@ -79,8 +83,10 @@ class AppString extends Translations {
           fifteenLtrPlasticKey: "15 ltr plastic",
           fifteenLtrTinKey: "15 ltr tin",
           onlineKey: "Online",
+          filterByOrderStatusKey: "Filter By Order Status",
           unPaidKey: "UnPaid",
-          commentsKey: "Comments"
+          commentsKey: "Comments",
+          filterByOrderTakenByKey: "Filter By Order Taken By"
         },
       };
 
@@ -167,5 +173,11 @@ class AppString extends Translations {
   static const String deleteOrderKey = "deleteOrderKey";
   static const String deleteKey = "deleteKey";
   static const String paymentDateKey = "paymentDateKey";
+  static const String orderTakeByKey = "orderTakeByKey";
+  static const String filterOptionKey = "filterOptionKey";
+  static const String filterByPaymentKey = "filterByPaymentKey";
+  static const String filterByOrderStatusKey = "filterByOrderStatusKey";
+  static const String filterByOrderTakenByKey = "filterByOrderTakenByKey";
   static const String deleteOrderDescriptionKey = "deleteOrderDescriptionKey";
+  static const String removeFilterKey = "removeFilterKey";
 }

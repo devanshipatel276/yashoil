@@ -130,6 +130,27 @@ abstract class FireBaseDB {
     });
   }
 
+  static Future<List<OrderDetailModel>> getOrderByFilter(
+      dynamic key, dynamic value) async {
+    showLoader(value: true);
+    var list = <OrderDetailModel>[];
+    return await _firebaseDataBaseInstance
+        .collection(AppConstant.orderPath)
+        .where(key, isEqualTo: value)
+        .get()
+        .then((event) {
+      if (event.docs.isNotEmpty) {
+        for (var element in event.docs) {
+          if (element.exists) {
+            list.add(OrderDetailModel.fromJson(element.data()));
+          }
+        }
+      }
+      showLoader(value: false);
+      return list;
+    });
+  }
+
   static void logout() async {
     SharedPref.setValue(PrefsKey.isLoggedIn, false);
     SharedPref.setValue(PrefsKey.userEmail, "");

@@ -173,7 +173,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                 data: Theme.of(context).copyWith(
                     inputDecorationTheme: MyAppTheme.inputDecorationTheme(
                   fillColor: AppColors.transparent,
-                  errorBorderColor: AppColors.redBackGroundColor,
+                  errorBorderColor: AppColors.brownBackGroundColor,
                   labelStyle: AppStyles.textRegular
                       .copyWith(color: AppColors.blackTextColor),
                   borderColor: AppColors.blackBackGroundColor,
@@ -228,7 +228,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             errorStyle: AppStyles.textRegular
-                                .copyWith(color: AppColors.redTextColor),
+                                .copyWith(color: AppColors.brownTextColor),
                             label: AppString.quantityKey.tr,
                             style: AppStyles.textRegular
                                 .copyWith(color: AppColors.blackTextColor),
@@ -249,7 +249,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           errorStyle: AppStyles.textRegular
-                              .copyWith(color: AppColors.redTextColor),
+                              .copyWith(color: AppColors.brownTextColor),
                           style: AppStyles.textRegular
                               .copyWith(color: AppColors.blackTextColor),
                           fillColor: Colors.transparent,
@@ -357,7 +357,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                       Expanded(
                         child: CustomTextLabel(
                           textAlign: TextAlign.start,
-                          label: AppString.totalKey.tr,
+                          label: AppString.totalAmountKey.tr,
                           style: AppStyles.textRegular
                               .copyWith(color: AppColors.brownTextColor),
                         ),
@@ -365,8 +365,7 @@ class EditOrderPage extends BaseGetResponsiveView<EditOrderController> {
                       CustomTextLabel(
                         style: AppStyles.textRegular
                             .copyWith(color: AppColors.brownTextColor),
-                        label:
-                            " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
+                        label: controller.getTotalAmount()[0],
                       ),
                     ],
                   ),

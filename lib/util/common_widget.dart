@@ -239,10 +239,12 @@ showOrderDetailDialog(
                         1.5.borderSide(color: AppColors.blackBackGroundColor),
                   ),
                   errorBorder: 8.outlineInputBorder(
-                    borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
+                    borderSide:
+                        1.5.borderSide(color: AppColors.brownErrorColor),
                   ),
                   focusedErrorBorder: 8.outlineInputBorder(
-                    borderSide: 1.5.borderSide(color: AppColors.redErrorColor),
+                    borderSide:
+                        1.5.borderSide(color: AppColors.brownErrorColor),
                   ),
                   disabledBorder: 4.outlineInputBorder(
                     borderSide:

@@ -13,10 +13,10 @@ abstract class MyAppTheme {
     onSecondary: AppColors.secondaryPurpleColor,
     onSecondaryContainer: AppColors.secondaryPurpleColor,
     secondaryContainer: AppColors.secondaryPurpleColor,
-    error: AppColors.redErrorColor,
-    onError: AppColors.redErrorColor,
-    errorContainer: AppColors.redErrorColor,
-    onErrorContainer: AppColors.redErrorColor,
+    error: AppColors.brownErrorColor,
+    onError: AppColors.brownErrorColor,
+    errorContainer: AppColors.brownErrorColor,
+    onErrorContainer: AppColors.brownErrorColor,
     background: AppColors.whiteBackGroundColor,
     onBackground: AppColors.whiteBackGroundColor,
     surface: AppColors.transparent,
@@ -184,19 +184,19 @@ abstract class MyAppTheme {
       focusColor: borderColor ?? AppColors.primaryBrownColor,
       hoverColor: borderColor ?? AppColors.primaryBrownColor,
       errorStyle: errorStyle ??
-          AppStyles.textRegular.copyWith(color: AppColors.lightRedTextColor),
+          AppStyles.textRegular.copyWith(color: AppColors.lightBrownTextColor),
       iconColor: borderColor ?? AppColors.primaryBrownColor,
       alignLabelWithHint: true,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       floatingLabelStyle: labelStyle ??
           AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
       errorBorder: 8.outlineInputBorder(
-        borderSide:
-            1.5.borderSide(color: errorBorderColor ?? AppColors.redErrorColor),
+        borderSide: 1.5
+            .borderSide(color: errorBorderColor ?? AppColors.brownErrorColor),
       ),
       focusedErrorBorder: 8.outlineInputBorder(
-        borderSide:
-            1.5.borderSide(color: errorBorderColor ?? AppColors.redErrorColor),
+        borderSide: 1.5
+            .borderSide(color: errorBorderColor ?? AppColors.brownErrorColor),
       ),
       disabledBorder: 4.outlineInputBorder(
         borderSide:

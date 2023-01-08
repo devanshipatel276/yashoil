@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:yash_oil/app/ui/orderdetail/order_detail_controller.dart';
 
 import '../../../util/exports.dart';
@@ -20,7 +21,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
           data: Theme.of(screen.context).copyWith(
               inputDecorationTheme: MyAppTheme.inputDecorationTheme(
             fillColor: AppColors.whiteBackGroundColor,
-            errorBorderColor: AppColors.redBackGroundColor,
+            errorBorderColor: AppColors.brownBackGroundColor,
             labelStyle:
                 AppStyles.textRegular.copyWith(color: AppColors.brownTextColor),
             borderColor: AppColors.brownBackGroundColor,
@@ -67,6 +68,15 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                 Container(
                   margin: const EdgeInsets.only(top: 20),
                   child: CustomTextFormField(
+                    onTap: () async {
+                      var url =
+                          "${AppConstant.countryCode} ${controller.customerNumberController.text}";
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: url,
+                      );
+                      await launchUrl(launchUri);
+                    },
                     readOnly: true,
                     fillColor: AppColors.whiteBackGroundColor,
                     style: AppStyles.textRegular
@@ -128,7 +138,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0, bottom: 8),
-                          child: divider(),
+                          child: divider(color: AppColors.brownBackGroundColor),
                         ),
                         Row(
                           children: [
@@ -137,14 +147,13 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                                 style: AppStyles.textRegular
                                     .copyWith(color: AppColors.brownTextColor),
                                 textAlign: TextAlign.start,
-                                label: AppString.totalKey.tr,
+                                label: AppString.totalAmountKey.tr,
                               ),
                             ),
                             CustomTextLabel(
                               style: AppStyles.textRegular
                                   .copyWith(color: AppColors.brownTextColor),
-                              label:
-                                  " ${controller.getTotalAmount()[1]} x ${controller.getTotalAmount()[0]}",
+                              label: " ${controller.getTotalAmount()[0]}",
                             ),
                           ],
                         )

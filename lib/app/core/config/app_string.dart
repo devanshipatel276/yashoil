@@ -39,7 +39,7 @@ class AppString extends Translations {
           pleaseAddOrderDetailsKey: "Please add order details",
           pleaseEnterOrderCompletedDateKey: "Please enter order completed date",
           billNumberKey: "Bill Number",
-          totalKey: "Total",
+          totalAmountKey: "Total Amount",
           receivedAmountKey: "Received Amount",
           priceKey: "Price",
           pleaseEnterPriceKey: "Please Enter Price",
@@ -53,6 +53,10 @@ class AppString extends Translations {
           submittedKey: "Submitted",
           editOrderKey: "Edit Order",
           quantityKey: "Quantity",
+          deleteOrderKey: "Delete Order",
+          deleteKey: "Delete",
+          deleteOrderDescriptionKey:
+              "Are you sure you want to delete this order?",
           customerMobileNumberKey: "Customer Mobile Number",
           deliveryStatusKey: "Delivery Status",
           paymentModeKey: "Payment Mode",
@@ -117,7 +121,7 @@ class AppString extends Translations {
       "pleaseEnterOrderCompletedDateKey";
 
   static const String billNumberKey = "billNumberKey";
-  static const String totalKey = "totalAmountKey";
+  static const String totalAmountKey = "totalAmountKey";
   static const String receivedAmountKey = "receivedAmountKey";
   static const String priceKey = "priceKey";
   static const String pleaseEnterPriceKey = "pleaseEnterPriceKey";
@@ -156,4 +160,7 @@ class AppString extends Translations {
   static const String inProgressKey = "inProgressKey";
   static const String editKey = "editKey";
   static const String orderNotAvailableKey = "orderNotAvailableKey";
+  static const String deleteOrderKey = "deleteOrderKey";
+  static const String deleteKey = "deleteKey";
+  static const String deleteOrderDescriptionKey = "deleteOrderDescriptionKey";
 }

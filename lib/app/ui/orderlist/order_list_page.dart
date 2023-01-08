@@ -1,5 +1,3 @@
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../../util/exports.dart';
 import '../../enums/enums_utils.dart';
 import 'order_list_controller.dart';
@@ -90,15 +88,6 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                   iconTitleView(
                       path: Assets.svg.icPhone,
                       isSvg: true,
-                      onTap: () async {
-                        var url =
-                            "${AppConstant.countryCode} ${controller.orderList[index].customerMobileNumber}";
-                        final Uri launchUri = Uri(
-                          scheme: 'tel',
-                          path: url,
-                        );
-                        await launchUrl(launchUri);
-                      },
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
                       title:

@@ -78,7 +78,6 @@ abstract class FireBaseDB {
   static Future<void> updateOrderDetails(
       OrderDetailModel orderDetailModel, Function() onSave) async {
     showLoader(value: true);
-    orderDetailModel.userMail = SharedPref.getString(PrefsKey.userEmail);
     await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)
         .doc(orderDetailModel.key)
@@ -104,11 +103,19 @@ abstract class FireBaseDB {
     });
   }
 
+  static void deleteOrder(String path) async {
+    await _firebaseDataBaseInstance
+        .collection(AppConstant.orderPath)
+        .doc(path)
+        .delete();
+  }
+
   static Future<List<OrderDetailModel>> getOrders() async {
     showLoader(value: true);
     var list = <OrderDetailModel>[];
     return await _firebaseDataBaseInstance
         .collection(AppConstant.orderPath)
+        .orderBy("bill_number", descending: true)
         .get()
         .then((event) {
       if (event.docs.isNotEmpty) {

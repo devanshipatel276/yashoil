@@ -59,6 +59,7 @@ abstract class AppColors {
 
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color brownColor = Color(0xFF842D2D);
+  static const Color lightBrownColor = Color(0xD7842D2D);
   static const Color blackColor = Color(0xFF000000);
   static const Color yellowColor = Color(0xFFFFB300);
   static const Color darkYellowColor = Color(0xFFC08806);
@@ -84,12 +85,13 @@ abstract class AppColors {
   //text colors
   static const Color whiteTextColor = whiteColor;
   static const Color blackTextColor = blackColor;
-  static const Color redTextColor = redColor;
   static const Color brownTextColor = brownColor;
   static const Color purpleTextColor = mediumPurpleColor;
   static const Color grayTextColor = ultraDarkGrayColor;
   static const Color lightGrayTextColor = darkGrayColor;
-  static const Color lightRedTextColor = lightRedColor;
+  static const Color lightBrownTextColor = lightBrownColor;
+
+  // lightRedColor;
   static const Color dialogTextColor = CupertinoColors.activeBlue;
 
   //appbar colors
@@ -116,7 +118,6 @@ abstract class AppColors {
   static const Color grayBackGroundColor = ultraDarkGrayColor;
   static const Color blackBackGroundColor = blackColor;
   static const Color yellowBackGroundColor = yellowColor;
-  static const Color redBackGroundColor = redColor;
   static const Color ultraLightPurpleBackGroundColor = ultraLightPurpleColor;
 
   //primary,secondary colors
@@ -127,7 +128,7 @@ abstract class AppColors {
   static const Color secondaryLightPurpleColor = ultraLightPurpleColor;
 
   static const Color transparent = Colors.transparent;
-  static const Color redErrorColor = lightRedColor;
+  static const Color brownErrorColor = lightBrownColor;
   static const Color lyricsColor = yellowColor;
   static const Color inactiveDotColor = Colors.white54;
 }

@@ -29,13 +29,8 @@ class MainAppBar extends GetResponsiveView {
                 replacement: Container(
                   width: 30,
                 ),
-                visible:
-                    controller.toolBarModel.value.endTitle.isNotNullOrEmpty,
-                child: GestureDetector(
-                  onTap: controller.toolBarModel.value.endTitleClick,
-                  child: CustomTextLabel(
-                      label: '${controller.toolBarModel.value.endTitle} '),
-                ),
+                visible: controller.toolBarModel.value.endView != null,
+                child: controller.toolBarModel.value.endView ?? Container(),
               )
             ]),
             leading: getLeading())));

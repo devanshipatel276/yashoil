@@ -54,15 +54,42 @@ class OrderDetailController extends BaseGetxController {
           goBack(result: orderDetail);
         },
         title: AppString.orderDetailsKey.tr,
-        endTitle: AppString.editKey.tr,
-        endTitleClick: () {
-          toNamed(AppPages.editOrder, arguments: Get.arguments)?.then((value) {
-            if (value != null) {
-              orderDetail = value;
-              setValue();
-            }
-          });
-        },
+        endView: Row(
+          children: [
+            GestureDetector(
+              onTap: () {
+                openAlertDialog(Get.context!,
+                    title: AppString.deleteOrderKey.tr,
+                    subTitle: AppString.deleteOrderDescriptionKey.tr,
+                    cancelLabel: AppString.cancelBtnKey.tr,
+                    successLabel: AppString.deleteKey.tr, onSuccess: () {
+                  FireBaseDB.deleteOrder(Get.arguments);
+                  goBack();
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: loadMaterialIcon(Icons.delete,
+                    color: AppColors.whiteBackGroundColor),
+              ),
+            ),
+            GestureDetector(
+                onTap: () {
+                  toNamed(AppPages.editOrder, arguments: Get.arguments)
+                      ?.then((value) {
+                    if (value != null) {
+                      orderDetail = value;
+                      setValue();
+                    }
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  child: loadMaterialIcon(Icons.edit,
+                      color: AppColors.whiteBackGroundColor),
+                )),
+          ],
+        ),
         isBackVisible: true);
   }
 

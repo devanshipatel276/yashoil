@@ -108,7 +108,7 @@ class LoginPage extends BaseGetResponsiveView<LoginController> {
                                 left: 0, right: 0, top: 16, bottom: 16),
                             text: AppString.logInKey.tr,
                             textStyle: AppStyles.textMedium.copyWith(
-                              color: AppColors.redTextColor,
+                              color: AppColors.brownTextColor,
                             ),
                             onClick: () {
                               if (controller.formKey.currentState!.validate()) {

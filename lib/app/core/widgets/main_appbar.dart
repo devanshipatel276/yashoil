@@ -23,7 +23,13 @@ class MainAppBar extends GetResponsiveView {
                           label: '${controller.toolBarModel.value.title} '),
                     )
                   : (controller.toolBarModel.value.isLogoVisible)
-                      ? showLogo()
+                      ? Expanded(
+                          child: Row(children: [
+                            Expanded(child: Container()),
+                            showLogo(),
+                            Expanded(child: Container()),
+                          ]),
+                        )
                       : Container(),
               Visibility(
                 replacement: Container(

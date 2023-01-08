@@ -10,6 +10,7 @@ class OrderDetailModel {
   String? billNumber;
   String? comments;
   String? paymentStatus;
+  String? orderCompletedDate;
   List<ContainerDetailModel>? containerList;
   String? deliveryStatus;
   String? totalAmount;
@@ -21,6 +22,7 @@ class OrderDetailModel {
       required this.customerAddress,
       required this.customerMobileNumber,
       required this.orderDate,
+      required this.orderCompletedDate,
       required this.paymentStatus,
       required this.deliveryStatus,
       required this.containerList,
@@ -46,6 +48,7 @@ class OrderDetailModel {
     paymentDate = json["payment_date"];
     totalAmount = json["total_amount"];
     totalQuantity = json["total_quantity"];
+    orderCompletedDate = json["order_complete_date"];
     if (json['container_list'] != null) {
       containerList = <ContainerDetailModel>[];
       json['container_list'].forEach((v) {
@@ -67,6 +70,7 @@ class OrderDetailModel {
     data["order_date"] = orderDate;
     data["payment_date"] = paymentDate;
     data["bill_number"] = billNumber;
+    data["order_complete_date"] = orderCompletedDate;
     data["comments"] = comments;
     data["payment_status"] = paymentStatus;
     data["delivery_status"] = deliveryStatus;

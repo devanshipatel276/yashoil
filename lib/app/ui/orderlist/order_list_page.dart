@@ -102,11 +102,15 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                       color:
                           getColor(controller.orderList[index].deliveryStatus),
                       isSvg: false,
-                      title: getOrderStatus(
-                                  controller.orderList[index].deliveryStatus) ==
-                              OrderStatus.delivered
+                      title: getPaymentStatus(
+                                  controller.orderList[index].paymentStatus) !=
+                              PaymentStatus.unPaid
                           ? controller.orderList[index].paymentDate
-                          : controller.orderList[index].orderDate),
+                          : getOrderStatus(controller
+                                      .orderList[index].deliveryStatus) ==
+                                  OrderStatus.delivered
+                              ? controller.orderList[index].orderCompletedDate
+                              : controller.orderList[index].orderDate),
                   Row(
                     children: [
                       Expanded(
@@ -218,7 +222,7 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
     } else if (user == AppConstant.yashEmail) {
       return AppColors.blueBackGroundColor;
     } else {
-      return AppColors.brownBackGroundColor;
+      return AppColors.whiteBackGroundColor;
     }
   }
 

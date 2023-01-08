@@ -8,6 +8,7 @@ import '../../enums/enums_utils.dart';
 import '../../model/container_detail_model.dart';
 
 class OrderDetailController extends BaseGetxController {
+  TextEditingController orderCompleteDateController = TextEditingController();
   TextEditingController orderPaymentDateController = TextEditingController();
   TextEditingController orderDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
@@ -102,6 +103,7 @@ class OrderDetailController extends BaseGetxController {
     customerNameController.text = orderDetail?.customerName ?? "";
     customerAddressController.text = orderDetail?.customerAddress ?? "";
     customerNumberController.text = orderDetail?.customerMobileNumber ?? "";
+    orderCompleteDateController.text = orderDetail?.orderCompletedDate ?? "";
     orderDateController.text = orderDetail?.orderDate ?? "";
     billNumberController.text = orderDetail?.billNumber ?? "";
     commentsController.text = orderDetail?.comments ?? "";

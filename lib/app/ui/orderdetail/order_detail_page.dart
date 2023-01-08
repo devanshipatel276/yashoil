@@ -129,6 +129,7 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                     child: Column(
                       children: [
                         ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return containerDetailView(
@@ -218,6 +219,23 @@ class OrderDetailPage extends BaseGetResponsiveView<OrderDetailController> {
                         textAlign: TextAlign.start,
                       ),
                     ],
+                  ),
+                ),
+                Visibility(
+                  visible: controller.selectedDeliveryStatus.value ==
+                      AppString.deliveredKey.tr,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: CustomTextFormField(
+                      readOnly: true,
+                      fillColor: AppColors.whiteBackGroundColor,
+                      style: AppStyles.textRegular
+                          .copyWith(color: AppColors.brownTextColor),
+                      controller: controller.orderCompleteDateController,
+                      suffix: loadMaterialIcon(Icons.calendar_month_outlined,
+                          color: AppColors.brownBackGroundColor),
+                      label: AppString.completedDateKey.tr,
+                    ),
                   ),
                 ),
                 Visibility(

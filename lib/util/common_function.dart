@@ -85,3 +85,15 @@ OrderStatus? getOrderStatus(String? status) {
     return null;
   }
 }
+
+PaymentStatus? getPaymentStatus(String? status) {
+  if (status == AppString.onlineKey.tr) {
+    return PaymentStatus.online;
+  } else if (status == AppString.cashKey.tr) {
+    return PaymentStatus.cash;
+  } else if (status == AppString.unPaidKey.tr) {
+    return PaymentStatus.unPaid;
+  } else {
+    return null;
+  }
+}

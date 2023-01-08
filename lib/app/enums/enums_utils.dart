@@ -15,3 +15,9 @@ enum OrderStatus {
   delivered,
   inProgress;
 }
+
+enum PaymentStatus {
+  online,
+  cash,
+  unPaid;
+}

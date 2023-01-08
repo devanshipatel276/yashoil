@@ -10,6 +10,7 @@ import '../../model/order_detail_model.dart';
 
 class EditOrderController extends BaseGetxController {
   TextEditingController orderPaymentDateController = TextEditingController();
+  TextEditingController orderCompleteDateController = TextEditingController();
   TextEditingController orderDateController = TextEditingController();
   TextEditingController customerNameController = TextEditingController();
   TextEditingController customerAddressController = TextEditingController();
@@ -108,6 +109,7 @@ class EditOrderController extends BaseGetxController {
     customerNameController.text = orderDetail?.customerName ?? "";
     customerAddressController.text = orderDetail?.customerAddress ?? "";
     customerNumberController.text = orderDetail?.customerMobileNumber ?? "";
+    orderCompleteDateController.text = orderDetail?.orderCompletedDate ?? "";
     orderDateController.text = orderDetail?.orderDate ?? "";
     billNumberController.text = orderDetail?.billNumber ?? "";
     commentsController.text = orderDetail?.comments ?? "";
@@ -153,6 +155,7 @@ class EditOrderController extends BaseGetxController {
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
         key: Get.arguments,
+        orderCompletedDate: orderCompleteDateController.text,
         totalQuantity: getTotalAmount()[1],
         billNumber: billNumberController.text,
         deliveryStatus: selectedDeliveryStatus.value,

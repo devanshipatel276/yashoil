@@ -51,6 +51,14 @@ class OrderListController extends BaseGetxController {
         appBarColor: AppColors.brownBackGroundColor,
         isToolBarVisible: true,
         isLogoVisible: true,
-        isDrawerRequired: true);
+        isDrawerRequired: true,
+        endView: GestureDetector(
+            onTap: () {},
+            child: Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: loadMaterialIcon(Icons.filter_alt,
+                  color: AppColors.whiteBackGroundColor),
+            )));
   }
 }

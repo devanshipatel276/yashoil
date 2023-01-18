@@ -143,9 +143,14 @@ class EditOrderController extends BaseGetxController {
   }
 
   void saveDetails() {
-    if (orderList.firstWhereOrNull(
-            (element) => element.billNumber == billNumberController.text) ==
-        null) {
+    if (orderList
+                .firstWhereOrNull((element) =>
+                    element.billNumber == billNumberController.text)
+                ?.billNumber ==
+            orderDetailModel?.billNumber ||
+        orderList.firstWhereOrNull(
+                (element) => element.billNumber == billNumberController.text) ==
+            null) {
       //conversion from one type to another tye
       var containerList = <ContainerDetailModel>[];
       for (var element in containerDetailList) {

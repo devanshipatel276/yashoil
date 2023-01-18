@@ -27,6 +27,7 @@ class OrderDetailController extends BaseGetxController {
   Rx<ContainerType> selected = ContainerType.fiveLtr.obs;
   late LocalContainerDetailModel containerDetailModel;
   RxBool isShowValidation = false.obs;
+  RxBool isEditable = false.obs;
   bool isAddFlow = true;
   RxList<LocalContainerDetailModel> containerDetailList =
       <LocalContainerDetailModel>[].obs;
@@ -43,6 +44,9 @@ class OrderDetailController extends BaseGetxController {
   void onInit() {
     super.onInit();
     handleEditOrderFlow(Get.arguments);
+    isEditable.listen((p0) {
+      updateToolBar();
+    });
   }
 
   @override
@@ -57,32 +61,37 @@ class OrderDetailController extends BaseGetxController {
         title: AppString.orderDetailsKey.tr,
         endView: Row(
           children: [
-            GestureDetector(
-              onTap: () {
-                openAlertDialog(Get.context!,
-                    title: AppString.deleteOrderKey.tr,
-                    subTitle: AppString.deleteOrderDescriptionKey.tr,
-                    cancelLabel: AppString.cancelBtnKey.tr,
-                    successLabel: AppString.deleteKey.tr, onSuccess: () {
-                  FireBaseDB.deleteOrder(Get.arguments);
-                  goBack();
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: loadMaterialIcon(Icons.delete,
-                    color: AppColors.whiteBackGroundColor),
-              ),
-            ),
-            GestureDetector(
-                onTap: () {
-                  toNamed(AppPages.editOrder, arguments: Get.arguments);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                  child: loadMaterialIcon(Icons.edit,
-                      color: AppColors.whiteBackGroundColor),
+            Visibility(
+                visible: isEditable.value,
+                child: GestureDetector(
+                  onTap: () {
+                    openAlertDialog(Get.context!,
+                        title: AppString.deleteOrderKey.tr,
+                        subTitle: AppString.deleteOrderDescriptionKey.tr,
+                        cancelLabel: AppString.cancelBtnKey.tr,
+                        successLabel: AppString.deleteKey.tr, onSuccess: () {
+                      FireBaseDB.deleteOrder(Get.arguments);
+                      goBack();
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: loadMaterialIcon(Icons.delete,
+                        color: AppColors.whiteBackGroundColor),
+                  ),
                 )),
+            Visibility(
+              visible: isEditable.value,
+              child: GestureDetector(
+                  onTap: () {
+                    toNamed(AppPages.editOrder, arguments: Get.arguments);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: loadMaterialIcon(Icons.edit,
+                        color: AppColors.whiteBackGroundColor),
+                  )),
+            ),
           ],
         ),
         isBackVisible: true);
@@ -90,6 +99,8 @@ class OrderDetailController extends BaseGetxController {
 
   void handleEditOrderFlow(String path) async {
     orderDetail = await FireBaseDB.getOrderDetails(path);
+    isEditable.value = (orderDetail?.paymentStatus == AppString.unPaidKey.tr) ||
+        (orderDetail?.deliveryStatus == AppString.pendingKey.tr);
     setValue();
   }
 

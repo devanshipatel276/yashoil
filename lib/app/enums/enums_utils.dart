@@ -13,7 +13,6 @@ enum ContainerType {
 enum OrderStatus {
   pending,
   delivered,
-  inProgress;
 }
 
 enum PaymentStatus {

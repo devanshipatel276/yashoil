@@ -76,13 +76,7 @@ class OrderDetailController extends BaseGetxController {
             ),
             GestureDetector(
                 onTap: () {
-                  toNamed(AppPages.editOrder, arguments: Get.arguments)
-                      ?.then((value) {
-                    if (value != null) {
-                      orderDetail = value;
-                      setValue();
-                    }
-                  });
+                  toNamed(AppPages.editOrder, arguments: Get.arguments);
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -97,6 +91,12 @@ class OrderDetailController extends BaseGetxController {
   void handleEditOrderFlow(String path) async {
     orderDetail = await FireBaseDB.getOrderDetails(path);
     setValue();
+  }
+
+  @override
+  void update([List<Object>? ids, bool condition = true]) {
+    super.update(ids, condition);
+    handleEditOrderFlow(Get.arguments);
   }
 
   void setValue() {

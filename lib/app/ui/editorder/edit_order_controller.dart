@@ -1,5 +1,7 @@
 import 'package:yash_oil/app/enums/enums_utils.dart';
 import 'package:yash_oil/app/ui/main_controller.dart';
+import 'package:yash_oil/app/ui/orderdetail/order_detail_controller.dart';
+import 'package:yash_oil/app/ui/orderlist/order_list_controller.dart';
 
 import '../../../base/base_controller.dart';
 import '../../../util/date_utils.dart';
@@ -30,6 +32,7 @@ class EditOrderController extends BaseGetxController {
   RxBool isShowValidation = false.obs;
   RxList<LocalContainerDetailModel> containerDetailList =
       <LocalContainerDetailModel>[].obs;
+  late OrderDetailModel? orderDetailModel;
 
   //dropdown and radio list
   final deliveryStatusList = [
@@ -104,21 +107,23 @@ class EditOrderController extends BaseGetxController {
   }
 
   void handleEditOrderFlow() async {
-    var orderDetail = await FireBaseDB.getOrderDetails(Get.arguments);
+    orderDetailModel = await FireBaseDB.getOrderDetails(Get.arguments);
 
-    customerNameController.text = orderDetail?.customerName ?? "";
-    customerAddressController.text = orderDetail?.customerAddress ?? "";
-    customerNumberController.text = orderDetail?.customerMobileNumber ?? "";
-    orderCompleteDateController.text = orderDetail?.orderCompletedDate ?? "";
-    orderDateController.text = orderDetail?.orderDate ?? "";
-    billNumberController.text = orderDetail?.billNumber ?? "";
-    commentsController.text = orderDetail?.comments ?? "";
-    orderPaymentDateController.text = orderDetail?.paymentDate ?? "";
+    customerNameController.text = orderDetailModel?.customerName ?? "";
+    customerAddressController.text = orderDetailModel?.customerAddress ?? "";
+    customerNumberController.text =
+        orderDetailModel?.customerMobileNumber ?? "";
+    orderCompleteDateController.text =
+        orderDetailModel?.orderCompletedDate ?? "";
+    orderDateController.text = orderDetailModel?.orderDate ?? "";
+    billNumberController.text = orderDetailModel?.billNumber ?? "";
+    commentsController.text = orderDetailModel?.comments ?? "";
+    orderPaymentDateController.text = orderDetailModel?.paymentDate ?? "";
     selectedPaymentMode.value =
-        orderDetail?.paymentStatus ?? AppString.unPaidKey.tr;
+        orderDetailModel?.paymentStatus ?? AppString.unPaidKey.tr;
     selectedDeliveryStatus.value =
-        orderDetail?.deliveryStatus ?? AppString.pendingKey.tr;
-    orderDetail?.containerList?.forEach((element) {
+        orderDetailModel?.deliveryStatus ?? AppString.pendingKey.tr;
+    orderDetailModel?.containerList?.forEach((element) {
       containerDetailList.add(LocalContainerDetailModel(
           price: element.price ?? "",
           type: getContainerType(element.type!)!,
@@ -155,6 +160,7 @@ class EditOrderController extends BaseGetxController {
         comments: commentsController.text,
         totalAmount: getTotalAmount()[0],
         key: Get.arguments,
+        userMail: orderDetailModel?.userMail,
         orderCompletedDate: orderCompleteDateController.text,
         totalQuantity: getTotalAmount()[1],
         billNumber: billNumberController.text,
@@ -162,7 +168,11 @@ class EditOrderController extends BaseGetxController {
         containerList: containerList);
 
     FireBaseDB.updateOrderDetails(orderDetail, () {
-      goBack(result: orderDetail);
+      Get.find<OrderDetailController>(tag: (OrderDetailController).toString())
+          .update();
+      Get.find<OrderListController>(tag: (OrderListController).toString())
+          .update();
+      goBack();
     });
   }
 }

@@ -19,14 +19,8 @@ class OrderListPage extends BaseGetResponsiveView<OrderListController> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                       onTap: () {
-                        controller
-                            .toNamed(AppPages.orderDetail,
-                                arguments: controller.orderList[index].key)
-                            ?.then((value) {
-                          if (value != null) {
-                            controller.orderList[index] = value;
-                          }
-                        });
+                        controller.toNamed(AppPages.orderDetail,
+                            arguments: controller.orderList[index].key);
                       },
                       child: listItem(index));
                 },

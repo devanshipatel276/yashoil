@@ -67,8 +67,6 @@ String getOrderString(OrderStatus status) {
     return AppString.pendingKey.tr;
   } else if (status == OrderStatus.delivered) {
     return AppString.deliveredKey.tr;
-  } else if (status == OrderStatus.inProgress) {
-    return AppString.inProgressKey.tr;
   } else {
     return "";
   }
@@ -79,8 +77,6 @@ OrderStatus? getOrderStatus(String? status) {
     return OrderStatus.pending;
   } else if (status == AppString.deliveredKey.tr) {
     return OrderStatus.delivered;
-  } else if (status == AppString.inProgressKey.tr) {
-    return OrderStatus.inProgress;
   } else {
     return null;
   }

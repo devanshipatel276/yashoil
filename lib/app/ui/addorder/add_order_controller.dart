@@ -22,7 +22,7 @@ class AddOrderController extends BaseGetxController {
   TextEditingController quantityController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final dialogFormKey = GlobalKey<FormState>();
-
+  var orderList = <OrderDetailModel>[];
   final RxString selectedDeliveryStatus = AppString.pendingKey.tr.obs;
   RxString selectedPaymentMode = AppString.unPaidKey.tr.obs;
   RxString toolBarTitle = AppString.addOrderDetailsKey.tr.obs;
@@ -57,6 +57,7 @@ class AddOrderController extends BaseGetxController {
   void onInit() async {
     super.onInit();
     handleAddOrderFlow();
+    orderList = await FireBaseDB.getOrders();
   }
 
   MainController? getParentController() {
@@ -104,35 +105,41 @@ class AddOrderController extends BaseGetxController {
   }
 
   void saveDetails() {
-    //conversion from one type to another tye
-    var containerList = <ContainerDetailModel>[];
-    for (var element in containerDetailList) {
-      containerList.add(ContainerDetailModel(
-          price: element.price,
-          type: getContainerIndex(element.type),
-          quantity: element.quantity));
+    if (orderList.firstWhereOrNull(
+            (element) => element.billNumber == billNumberController.text) ==
+        null) {
+      var containerList = <ContainerDetailModel>[];
+      for (var element in containerDetailList) {
+        containerList.add(ContainerDetailModel(
+            price: element.price,
+            type: getContainerIndex(element.type),
+            quantity: element.quantity));
+      }
+
+      var orderDetail = OrderDetailModel(
+          customerName: customerNameController.text,
+          customerAddress: customerAddressController.text,
+          customerMobileNumber: customerNumberController.text,
+          orderDate: orderDateController.text,
+          paymentStatus: selectedPaymentMode.value,
+          paymentDate: orderPaymentDateController.text,
+          orderCompletedDate: orderCompleteDateController.text,
+          comments: commentsController.text,
+          totalAmount: getTotalAmount()[0],
+          key: null,
+          totalQuantity: getTotalAmount()[1],
+          billNumber: billNumberController.text,
+          deliveryStatus: selectedDeliveryStatus.value,
+          containerList: containerList);
+
+      FireBaseDB.addOrderDetails(orderDetail, () {
+        // goBack();
+        offNamedUntil(AppPages.dashboard, (Route<dynamic> route) => false);
+      });
+    } else {
+      showSnackBar(message: AppString.billNumberExistKey.tr);
     }
-
-    var orderDetail = OrderDetailModel(
-        customerName: customerNameController.text,
-        customerAddress: customerAddressController.text,
-        customerMobileNumber: customerNumberController.text,
-        orderDate: orderDateController.text,
-        paymentStatus: selectedPaymentMode.value,
-        paymentDate: orderPaymentDateController.text,
-        orderCompletedDate: orderCompleteDateController.text,
-        comments: commentsController.text,
-        totalAmount: getTotalAmount()[0],
-        key: null,
-        totalQuantity: getTotalAmount()[1],
-        billNumber: billNumberController.text,
-        deliveryStatus: selectedDeliveryStatus.value,
-        containerList: containerList);
-
-    FireBaseDB.addOrderDetails(orderDetail, () {
-      // goBack();
-      offNamedUntil(AppPages.dashboard, (Route<dynamic> route) => false);
-    });
+    //conversion from one type to another tye
   }
 
   @override

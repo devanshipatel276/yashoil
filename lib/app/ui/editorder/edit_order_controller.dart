@@ -23,6 +23,7 @@ class EditOrderController extends BaseGetxController {
   TextEditingController quantityController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final dialogFormKey = GlobalKey<FormState>();
+  var orderList = <OrderDetailModel>[];
 
   final RxString selectedDeliveryStatus = AppString.pendingKey.tr.obs;
   RxString selectedPaymentMode = AppString.unPaidKey.tr.obs;
@@ -53,9 +54,10 @@ class EditOrderController extends BaseGetxController {
   ];
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     handleEditOrderFlow();
+    orderList = await FireBaseDB.getOrders();
   }
 
   @override
@@ -141,38 +143,44 @@ class EditOrderController extends BaseGetxController {
   }
 
   void saveDetails() {
-    //conversion from one type to another tye
-    var containerList = <ContainerDetailModel>[];
-    for (var element in containerDetailList) {
-      containerList.add(ContainerDetailModel(
-          price: element.price,
-          type: getContainerIndex(element.type),
-          quantity: element.quantity));
+    if (orderList.firstWhereOrNull(
+            (element) => element.billNumber == billNumberController.text) ==
+        null) {
+      //conversion from one type to another tye
+      var containerList = <ContainerDetailModel>[];
+      for (var element in containerDetailList) {
+        containerList.add(ContainerDetailModel(
+            price: element.price,
+            type: getContainerIndex(element.type),
+            quantity: element.quantity));
+      }
+
+      var orderDetail = OrderDetailModel(
+          customerName: customerNameController.text,
+          customerAddress: customerAddressController.text,
+          customerMobileNumber: customerNumberController.text,
+          orderDate: orderDateController.text,
+          paymentStatus: selectedPaymentMode.value,
+          paymentDate: orderPaymentDateController.text,
+          comments: commentsController.text,
+          totalAmount: getTotalAmount()[0],
+          key: Get.arguments,
+          userMail: orderDetailModel?.userMail,
+          orderCompletedDate: orderCompleteDateController.text,
+          totalQuantity: getTotalAmount()[1],
+          billNumber: billNumberController.text,
+          deliveryStatus: selectedDeliveryStatus.value,
+          containerList: containerList);
+
+      FireBaseDB.updateOrderDetails(orderDetail, () {
+        Get.find<OrderDetailController>(tag: (OrderDetailController).toString())
+            .update();
+        Get.find<OrderListController>(tag: (OrderListController).toString())
+            .update();
+        goBack();
+      });
+    } else {
+      showSnackBar(message: AppString.billNumberExistKey.tr);
     }
-
-    var orderDetail = OrderDetailModel(
-        customerName: customerNameController.text,
-        customerAddress: customerAddressController.text,
-        customerMobileNumber: customerNumberController.text,
-        orderDate: orderDateController.text,
-        paymentStatus: selectedPaymentMode.value,
-        paymentDate: orderPaymentDateController.text,
-        comments: commentsController.text,
-        totalAmount: getTotalAmount()[0],
-        key: Get.arguments,
-        userMail: orderDetailModel?.userMail,
-        orderCompletedDate: orderCompleteDateController.text,
-        totalQuantity: getTotalAmount()[1],
-        billNumber: billNumberController.text,
-        deliveryStatus: selectedDeliveryStatus.value,
-        containerList: containerList);
-
-    FireBaseDB.updateOrderDetails(orderDetail, () {
-      Get.find<OrderDetailController>(tag: (OrderDetailController).toString())
-          .update();
-      Get.find<OrderListController>(tag: (OrderListController).toString())
-          .update();
-      goBack();
-    });
   }
 }

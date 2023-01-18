@@ -62,6 +62,8 @@ class AppString extends Translations {
           deleteKey: "Delete",
           deleteOrderDescriptionKey:
               "Are you sure you want to delete this order?",
+          billNumberExistKey:
+              "Please add another bill number as this bill number already exist",
           customerMobileNumberKey: "Customer Mobile Number",
           deliveryStatusKey: "Delivery Status",
           paymentModeKey: "Payment Mode",
@@ -180,4 +182,5 @@ class AppString extends Translations {
   static const String filterByOrderTakenByKey = "filterByOrderTakenByKey";
   static const String deleteOrderDescriptionKey = "deleteOrderDescriptionKey";
   static const String removeFilterKey = "removeFilterKey";
+  static const String billNumberExistKey = "billNumberExistKey";
 }
